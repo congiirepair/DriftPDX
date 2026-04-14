@@ -901,17 +901,17 @@
 
     body[data-role="spectator"] #view-qualifying > .hero .hero-logo-shell {
       margin: 0;
-      max-width: 340px;
-      width: 340px;
+      max-width: min(420px, 100%);
+      width: 100%;
       min-height: 72px;
-      overflow: hidden;
+      overflow: visible;
       justify-content: flex-start;
     }
 
     body[data-role="spectator"] #view-qualifying > .hero .hero-logo {
-      width: 360px;
-      max-width: none;
-      transform: scale(1.22);
+      width: min(420px, 100%);
+      max-width: 100%;
+      transform: none;
       transform-origin: left center;
     }
 
@@ -943,18 +943,18 @@
     body[data-role="admin"] #view-registration > .hero .hero-logo-shell,
     body[data-role="admin"] #view-qualifying > .hero .hero-logo-shell {
       margin: 0 0 10px;
-      max-width: 340px;
-      width: 340px;
+      max-width: min(420px, 100%);
+      width: 100%;
       min-height: 72px;
-      overflow: hidden;
+      overflow: visible;
       justify-content: flex-start;
     }
 
     body[data-role="admin"] #view-registration > .hero .hero-logo,
     body[data-role="admin"] #view-qualifying > .hero .hero-logo {
-      width: 360px;
-      max-width: none;
-      transform: scale(1.22);
+      width: min(420px, 100%);
+      max-width: 100%;
+      transform: none;
       transform-origin: left center;
     }
 
@@ -7004,6 +7004,44 @@
         0 0 0 2px rgba(255, 79, 159, 0.10),
         0 0 0 4px rgba(53, 242, 208, 0.06) !important;
     }
+
+    .read-only-text,
+    .read-only-score,
+    .best-score,
+    .mobile-score-card,
+    .qualifying-results-simple li,
+    .qualifying-live-stat,
+    .qualifying-side-column > .panel {
+      color: var(--text) !important;
+    }
+
+    .read-only-score,
+    .best-score,
+    .mobile-score-card {
+      background: linear-gradient(180deg, rgba(18, 22, 33, 0.98), rgba(10, 12, 20, 0.95)) !important;
+      border: 1px solid var(--line) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 10px 24px rgba(0,0,0,0.18) !important;
+    }
+
+    .mobile-score-card span,
+    .mobile-score-card strong,
+    .qualifying-results-simple li span,
+    .qualifying-results-simple li strong,
+    .standings-row-main,
+    .standings-row-score {
+      color: inherit !important;
+    }
+
+    .qualifying-results-simple li {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)) !important;
+      border: 1px solid rgba(255,255,255,0.08) !important;
+      border-radius: 14px !important;
+      padding: 12px 14px !important;
+    }
+
+    .qualifying-results-simple li.is-dimmed {
+      opacity: 0.62;
+    }
   </style>
 </head>
   <body data-role="spectator" data-site-admin="false" data-theme="light">
@@ -7035,7 +7073,6 @@
           <a class="mode-tab spectator-only" data-target="home">Home</a>
           <a class="mode-tab spectator-only" data-target="self-register">Register</a>
           <a class="mode-tab spectator-only" data-target="queue">Event Page</a>
-          <a class="mode-tab spectator-only" data-target="simulation">Live Demo</a>
           <a class="mode-tab" data-target="qualifying">Qualifying</a>
           <a class="mode-tab" data-target="bracket">Competition</a>
           <a class="mode-tab" data-target="results">Results</a>
@@ -12621,7 +12658,7 @@
     }
 
     function getActiveViewName() {
-      const views = ["registration", "home", "self-register", "self-register-display", "queue", "simulation", "qualifying", "results", "website-admin", "bracket"];
+      const views = ["registration", "home", "self-register", "self-register-display", "queue", "qualifying", "results", "website-admin", "bracket"];
       return views.find((viewName) => document.getElementById(`view-${viewName}`)?.classList.contains("is-active")) || "qualifying";
     }
 
@@ -12639,7 +12676,7 @@
       if (role !== "spectator" && viewName === "home") return fallbackView;
       if (role !== "spectator" && viewName === "self-register") return fallbackView;
       if (role !== "spectator" && role !== "admin" && viewName === "queue") return fallbackView;
-      if (role !== "spectator" && viewName === "simulation") return fallbackView;
+      if (viewName === "simulation") return fallbackView;
       if (role !== "admin" && viewName === "self-register-display") return fallbackView;
       return viewName;
     }
@@ -17034,8 +17071,8 @@
       if (viewName === "queue" && currentRole !== "spectator" && currentRole !== "admin") {
         viewName = "qualifying";
       }
-      if (viewName === "simulation" && currentRole !== "spectator") {
-        viewName = currentRole === "admin" ? "registration" : "qualifying";
+      if (viewName === "simulation") {
+        viewName = currentRole === "spectator" ? "home" : currentRole === "admin" ? "registration" : "qualifying";
       }
       if (viewName === "self-register-display" && currentRole !== "admin") {
         viewName = currentRole === "spectator" ? "self-register" : "qualifying";
