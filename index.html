@@ -1490,8 +1490,10 @@
         radial-gradient(circle at bottom right, rgba(244, 70, 166, 0.08), transparent 24%);
     }
 
-    body:not([data-theme="dark"]) .hero-logo {
-      filter: drop-shadow(0 8px 24px rgba(255,79,159,0.16));
+    body:not([data-theme="dark"]) .hero-logo,
+    body:not([data-theme="dark"]) .bracket-stage-logo,
+    body:not([data-theme="dark"]) .bracket-header-logo {
+      filter: brightness(0) drop-shadow(0 8px 24px rgba(255,79,159,0.16));
       mix-blend-mode: normal;
       opacity: 0.98;
     }
@@ -2269,6 +2271,55 @@
     body:not([data-theme="dark"]) .hero-meta-pill {
       border-width: 2px;
       box-shadow: 0 10px 22px rgba(104, 63, 21, 0.10);
+    }
+
+    body:not([data-theme="dark"]) .hero-stat,
+    body:not([data-theme="dark"]) .slot-button,
+    body:not([data-theme="dark"]) .driver-button,
+    body:not([data-theme="dark"]) .final-battle-card,
+    body:not([data-theme="dark"]) .main-battle-slot {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 240, 236, 0.97));
+      color: #161c28;
+      border-color: rgba(0, 0, 0, 0.16);
+      box-shadow:
+        0 14px 30px rgba(22, 29, 43, 0.12),
+        inset 0 1px 0 rgba(255,255,255,0.78);
+    }
+
+    body:not([data-theme="dark"]) .hero-stat strong,
+    body:not([data-theme="dark"]) .slot-button,
+    body:not([data-theme="dark"]) .driver-button strong,
+    body:not([data-theme="dark"]) .final-battle-card strong,
+    body:not([data-theme="dark"]) .final-vs {
+      color: #161c28;
+    }
+
+    body:not([data-theme="dark"]) .hero-stat-label,
+    body:not([data-theme="dark"]) .slot-team,
+    body:not([data-theme="dark"]) .driver-button small,
+    body:not([data-theme="dark"]) .battle-flow-meta,
+    body:not([data-theme="dark"]) .battle-flow-label,
+    body:not([data-theme="dark"]) .summary-card span {
+      color: #5e687d;
+    }
+
+    body:not([data-theme="dark"]) .hero-stat-emphasis,
+    body:not([data-theme="dark"]) .hero-stat-emphasis strong,
+    body:not([data-theme="dark"]) .hero-stat-emphasis .hero-stat-label {
+      color: #fff;
+    }
+
+    body:not([data-theme="dark"]) .slot-button.empty,
+    body:not([data-theme="dark"]) .driver-button.empty {
+      background: linear-gradient(180deg, rgba(249, 247, 243, 0.98), rgba(236, 233, 226, 0.96));
+      color: #6c7383;
+      border-color: rgba(0, 0, 0, 0.14);
+      box-shadow: none;
+    }
+
+    body:not([data-theme="dark"]) .final-battle-head {
+      border-bottom-color: rgba(0, 0, 0, 0.12);
     }
 
     .button-row, .competition-actions {
