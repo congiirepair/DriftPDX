@@ -744,7 +744,30 @@
       height: 100vh;
       overflow: hidden;
     }
+    body.queue-fullscreen {
+      height: 100vh;
+      overflow: hidden;
+    }
+    body.queue-page:not([data-theme="dark"]) {
+      background-color: #07090d;
+      background-image:
+        linear-gradient(180deg, rgba(6, 8, 13, 0.78), rgba(4, 6, 12, 0.93)),
+        radial-gradient(circle at 16% 12%, rgba(255, 79, 159, 0.12), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(53, 242, 208, 0.08), transparent 26%),
+        linear-gradient(135deg, rgba(255,255,255,0.03), transparent 34%),
+        var(--brand-track-background-image);
+      background-size: cover, auto, auto, cover;
+      background-position: center center, top left, top left, center center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    }
     body.qualifying-fullscreen .page-shell {
+      width: 100vw;
+      max-width: 100%;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+    body.queue-fullscreen .page-shell {
       width: 100vw;
       max-width: 100%;
       height: 100vh;
@@ -755,11 +778,30 @@
     body.qualifying-fullscreen .qualifying-layout {
       background: transparent;
     }
+    body.queue-fullscreen #view-queue.is-active,
+    body.queue-fullscreen .public-event-layout,
+    body.queue-fullscreen .public-event-main,
+    body.queue-fullscreen .public-event-side,
+    body.queue-fullscreen .public-event-broadcast-shell,
+    body.queue-fullscreen .public-event-broadcast {
+      background: transparent;
+    }
     body.qualifying-fullscreen .main-topbar,
     body.qualifying-fullscreen #view-qualifying > .hero {
       display: none;
     }
+    body.queue-fullscreen .main-topbar,
+    body.queue-fullscreen #view-queue > .hero {
+      display: none;
+    }
     body.qualifying-fullscreen #view-qualifying.is-active {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      width: 100vw;
+      padding: 10px;
+    }
+    body.queue-fullscreen #view-queue.is-active {
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -772,6 +814,87 @@
       min-height: 0;
       gap: 12px;
       grid-template-columns: minmax(0, 1.85fr) minmax(220px, 0.72fr);
+    }
+    body.queue-fullscreen .public-event-layout {
+      flex: 1;
+      margin: 0;
+      min-height: 0;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.72fr) minmax(320px, 0.88fr);
+      align-items: stretch;
+    }
+    body.queue-fullscreen .public-event-main,
+    body.queue-fullscreen .public-event-side {
+      min-height: 0;
+      align-content: stretch;
+    }
+    body.queue-fullscreen .public-event-main > .panel,
+    body.queue-fullscreen .public-event-side > .panel,
+    body.queue-fullscreen .public-event-broadcast-shell {
+      min-height: 0;
+      height: 100%;
+    }
+    body.queue-fullscreen .public-event-broadcast-grid {
+      grid-template-columns: minmax(0, 1.3fr) minmax(360px, 0.9fr);
+      min-height: 100%;
+    }
+    body.queue-fullscreen .public-event-main {
+      grid-template-rows: minmax(0, 1.25fr) auto auto;
+    }
+    body.queue-fullscreen .public-event-side {
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+    body.queue-fullscreen .panel {
+      padding: 14px;
+    }
+    body.queue-fullscreen .panel-header {
+      margin-bottom: 10px;
+    }
+    body.queue-fullscreen .panel-header h2 {
+      font-size: 1.85rem;
+    }
+    body.queue-fullscreen .public-event-announcer-title {
+      font-size: clamp(2.6rem, 4.5vw, 4.6rem);
+      max-width: 11.5ch;
+    }
+    body.queue-fullscreen .public-event-stage-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.35rem);
+    }
+    body.queue-fullscreen .public-event-standings-list {
+      gap: 10px;
+    }
+    body.queue-fullscreen .public-event-standing {
+      padding: 14px 16px;
+    }
+    body.queue-fullscreen .public-event-standing strong,
+    body.queue-fullscreen .public-event-standing-score {
+      font-size: 1.2rem;
+    }
+    body.queue-fullscreen .public-event-stat-grid,
+    body.queue-fullscreen .public-event-spotlight-grid,
+    body.queue-fullscreen .public-event-roster-grid {
+      gap: 12px;
+    }
+    body.queue-fullscreen .public-event-card strong,
+    body.queue-fullscreen .public-event-spotlight strong,
+    body.queue-fullscreen .public-event-statline strong {
+      font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+    }
+    #view-queue:fullscreen {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(180deg, rgba(8, 10, 12, 0.86), rgba(8, 10, 12, 0.94)),
+        radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 24%),
+        linear-gradient(135deg, rgba(255,255,255,0.03), transparent 34%),
+        var(--brand-track-background-image);
+      background-size: cover, auto, auto, cover;
+      background-position: center center, top left, top left, center center;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    }
+    #view-queue:fullscreen::backdrop {
+      background:
+        linear-gradient(180deg, rgba(8, 10, 12, 0.9), rgba(8, 10, 12, 0.96)),
+        var(--brand-track-background-image) center center / cover no-repeat;
     }
     body.qualifying-fullscreen .qualifying-layout > .panel,
     body.qualifying-fullscreen .qualifying-side-column > .panel {
@@ -6792,6 +6915,38 @@
       z-index: 1;
     }
 
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] #view-queue > .hero {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(236,236,236,0.97)),
+        radial-gradient(circle at 88% 18%, rgba(0,0,0,0.08), transparent 22%);
+      box-shadow: var(--panel-shadow);
+    }
+
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] #view-queue > .hero::before {
+      background:
+        linear-gradient(120deg, rgba(25, 191, 174, 0.06), transparent 42%),
+        radial-gradient(circle at bottom right, rgba(244, 70, 166, 0.06), transparent 24%);
+    }
+
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] .public-event-announcer {
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.92), rgba(247,247,247,0.76)),
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(0,0,0,0.08)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
+    }
+
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] .public-event-track-panel,
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] .public-event-finals-stage,
+    body.queue-page:not([data-theme="dark"])[data-role="spectator"] .broadcast-match-card {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,241,241,0.96)),
+        var(--panel);
+      border-color: rgba(0, 0, 0, 0.12);
+      box-shadow: var(--panel-shadow);
+    }
+
     body[data-theme="dark"] .public-event-announcer {
       background:
         linear-gradient(118deg, rgba(8,10,12,0.9), rgba(8,10,12,0.72)),
@@ -7431,6 +7586,7 @@
             <button class="button button-accent" type="button" data-queue-jump="qualifying">Open Qualifying</button>
             <button class="button button-secondary" type="button" data-queue-jump="bracket">Open Competition</button>
             <button class="button button-secondary" type="button" data-queue-jump="results">Open Results</button>
+            <button id="fullscreenQueueBtn" class="button button-secondary" type="button">Fullscreen Event Page</button>
           </div>
         </div>
         <div id="queueHeroStats" class="hero-card hero-card-grid"></div>
@@ -12039,6 +12195,7 @@
     const mobileDriversList = document.getElementById("mobileDriversList");
     const loadSampleBtn = document.getElementById("loadSampleBtn");
     const fullscreenQualifyingBtn = document.getElementById("fullscreenQualifyingBtn");
+    const fullscreenQueueBtn = document.getElementById("fullscreenQueueBtn");
     const openBracketBtn = document.getElementById("openBracketBtn");
     const resultsExportPdfBtn = document.getElementById("resultsExportPdfBtn");
     const searchInput = document.getElementById("searchInput");
@@ -16915,6 +17072,34 @@
     fullscreenQualifyingBtn?.addEventListener("click", toggleQualifyingFullscreen);
     document.addEventListener("fullscreenchange", syncQualifyingFullscreenState);
 
+    async function toggleQueueFullscreen() {
+      if (window.innerWidth <= 720) return;
+      const queueView = document.getElementById("view-queue");
+      if (!queueView) return;
+
+      try {
+        if (document.fullscreenElement === queueView) {
+          await document.exitFullscreen();
+        } else {
+          await queueView.requestFullscreen();
+        }
+      } catch (error) {
+        console.warn("Queue fullscreen toggle failed", error);
+      }
+    }
+
+    function syncQueueFullscreenState() {
+      const queueView = document.getElementById("view-queue");
+      const isFullscreen = document.fullscreenElement === queueView;
+      document.body.classList.toggle("queue-fullscreen", isFullscreen);
+      if (fullscreenQueueBtn) {
+        fullscreenQueueBtn.textContent = isFullscreen ? "Exit Fullscreen" : "Fullscreen Event Page";
+      }
+    }
+
+    fullscreenQueueBtn?.addEventListener("click", toggleQueueFullscreen);
+    document.addEventListener("fullscreenchange", syncQueueFullscreenState);
+
     async function toggleSelfRegisterDisplayFullscreen() {
       if (window.innerWidth <= 720) return;
       const displayView = document.getElementById("view-self-register-display");
@@ -16988,7 +17173,8 @@
       document.getElementById('view-website-admin').classList.toggle('is-active', viewName === 'website-admin');
       document.getElementById('view-bracket').classList.toggle('is-active', viewName === 'bracket');
       document.body.classList.toggle('competition-page', viewName === 'bracket');
-      if (viewName !== 'bracket' && viewName !== 'qualifying' && viewName !== 'self-register-display' && document.fullscreenElement) {
+      document.body.classList.toggle('queue-page', viewName === 'queue');
+      if (viewName !== 'bracket' && viewName !== 'qualifying' && viewName !== 'queue' && viewName !== 'self-register-display' && document.fullscreenElement) {
         document.exitFullscreen().catch(() => {});
       }
       if (viewName !== 'bracket') {
@@ -16996,6 +17182,9 @@
       }
       if (viewName !== 'qualifying') {
         document.body.classList.remove('qualifying-fullscreen');
+      }
+      if (viewName !== 'queue') {
+        document.body.classList.remove('queue-fullscreen');
       }
       if (viewName !== 'self-register-display') {
         document.body.classList.remove('self-register-display-fullscreen');
