@@ -1249,7 +1249,7 @@ const ROUTABLE_VIEWS = new Set(["registration", "self-register", "self-register-
       if (!resultsPdfLogoDataUrlPromise) {
         resultsPdfLogoDataUrlPromise = (async () => {
           try {
-            const response = await fetch("./assets/prodigy-rc-logo-transparent.png", { cache: "force-cache" });
+            const response = await fetch("./assets/driftpdx-brandmark.png", { cache: "force-cache" });
             if (!response.ok) throw new Error(`Logo request failed with ${response.status}`);
             const blob = await response.blob();
             return await blobToDataUrl(blob);
@@ -1284,7 +1284,7 @@ const ROUTABLE_VIEWS = new Set(["registration", "self-register", "self-register-
         return `${label}: #${driver.seed} ${driver.name} | Qual ${formatScore(driver.bestScore ?? null)}${teamText}`;
       };
 
-      addLine("PRODIGY RC DRIFT ARENA");
+      addLine("DRIFT PDX");
       addLine("COMPETITION RESULTS");
       addSeparator();
       addLine(`Event: ${eventMeta.name || "Event Results"}`);
@@ -4520,7 +4520,7 @@ const ROUTABLE_VIEWS = new Set(["registration", "self-register", "self-register-
             <h3>${escapeHtml(eventName)}</h3>
             <span class="simulation-status-pill ready">${escapeHtml(eventDate)}</span>
           </div>
-          <p class="simulation-summary-copy">This tab gives spectators a clean “what this event feels like live” preview without needing the event to be fully underway.</p>
+          <p class="simulation-summary-copy">This tab gives spectators a clean ï¿½what this event feels like liveï¿½ preview without needing the event to be fully underway.</p>
           <div class="simulation-summary-meta">
             <span class="simulation-chip">Live Roster ${liveRosterCount || 24}</span>
             <span class="simulation-chip">Pending ${pendingCount || 3}</span>
