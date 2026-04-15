@@ -13095,6 +13095,16 @@
         switchView("qualifying");
         return;
       }
+      const judgeShouldUseBracketView = currentRole.startsWith("j")
+        && shouldUseJudgeBracketView(currentRole, qualifyingFlow, appDrivers, tournamentState, activeEventMeta);
+      if (judgeShouldUseBracketView && getActiveViewName() !== "bracket") {
+        deferredInteractiveRenderPending = false;
+        if (document.activeElement?.classList?.contains("score-input") && typeof document.activeElement.blur === "function") {
+          document.activeElement.blur();
+        }
+        switchView("bracket");
+        return;
+      }
       if (isJudgeEditingScoreInput()) {
         deferredInteractiveRenderPending = true;
         return;
@@ -14264,6 +14274,9 @@
       if (!currentRole?.startsWith("j")) return false;
       const preferredView = getDefaultViewForRole(currentRole);
       if (getActiveViewName() === preferredView) return false;
+      if (preferredView === "bracket" && document.activeElement?.classList?.contains("score-input") && typeof document.activeElement.blur === "function") {
+        document.activeElement.blur();
+      }
       switchView(preferredView);
       return true;
     }
