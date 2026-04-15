@@ -332,8 +332,8 @@
 
     body[data-theme="dark"] .main-bracket-panel {
       background:
-        linear-gradient(180deg, rgba(12, 14, 18, 0.88), rgba(8, 10, 14, 0.92)),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.16)),
+        linear-gradient(180deg, rgba(12, 14, 18, 0.72), rgba(8, 10, 14, 0.78)),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
@@ -1347,9 +1347,11 @@
       overflow-x: auto;
       padding: 24px clamp(12px, 2vw, 32px);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.18), rgba(0,0,0,0.03)),
-        radial-gradient(circle at top right, rgba(0, 0, 0, 0.05), transparent 26%),
-        rgba(250, 246, 239, 0.88);
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.04)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.14), transparent 24%),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     body.competition-page:not(.bracket-fullscreen) .bracket-header-bar {
@@ -4278,13 +4280,14 @@
       border: 2px solid #000;
       border-radius: calc(var(--radius-panel) + 2px);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(242,242,242,0.9)),
-        linear-gradient(180deg, rgba(255,255,255,0.2), rgba(0,0,0,0.08)),
+        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(242,242,242,0.74)),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.05)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
       box-shadow: var(--panel-shadow);
       overflow: visible;
+      backdrop-filter: blur(3px);
     }
 
     .main-bracket-panel::before {
@@ -4295,10 +4298,10 @@
       background-repeat: no-repeat;
       background-position: center 56%;
       background-size: min(880px, 84%);
-      opacity: 0.12;
+      opacity: 0.08;
       pointer-events: none;
       z-index: 0;
-      filter: grayscale(1) contrast(1.08) brightness(0.42);
+      filter: grayscale(1) contrast(1.02) brightness(0.56);
       mix-blend-mode: multiply;
     }
 
@@ -4428,7 +4431,7 @@
     .center-stage-stack:has(.placement-center) {
       min-height: 100%;
       align-self: stretch;
-      grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-rows: minmax(0, 1.18fr) minmax(0, 0.82fr);
     }
 
     .center-stage-stack .main-battle.center {
@@ -4442,10 +4445,20 @@
       align-content: start;
     }
 
+    .center-stage-stack:has(.placement-center) .final-center .final-battle-card {
+      width: min(100%, 340px);
+      min-height: 100%;
+    }
+
     .center-stage-stack:has(.placement-center) .placement-center {
       align-self: end;
       min-height: 100%;
       align-content: end;
+    }
+
+    .center-stage-stack:has(.placement-center) .placement-center .third-place-card {
+      width: min(100%, 296px);
+      min-height: 100%;
     }
     .main-board-side { display: grid; gap: var(--main-board-gap, 18px); }
     .main-board-side.left { grid-auto-flow: column; justify-content: start; }
@@ -4708,13 +4721,13 @@
       border: 1px solid var(--line-strong);
       border-radius: 24px;
       background: linear-gradient(180deg, rgba(18, 22, 33, 0.99), rgba(10, 12, 20, 0.96));
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.34);
       overflow: hidden;
     }
 
     .third-place-card {
       width: var(--third-card-width, 230px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.2);
     }
 
     .final-battle-head {
@@ -4726,7 +4739,13 @@
       text-align: center;
     }
 
-    .final-battle-body { padding: var(--final-body-padding, 16px); display: grid; gap: var(--final-body-gap, 8px); }
+    .final-battle-body {
+      padding: var(--final-body-padding, 16px);
+      display: grid;
+      gap: var(--final-body-gap, 8px);
+      align-content: center;
+      min-height: 100%;
+    }
 
     .final-vs {
       padding: 8px 0 2px;
@@ -7664,16 +7683,6 @@
         <section class="public-event-main">
           <section class="public-event-broadcast-shell">
             <div id="publicEventBroadcast" class="public-event-broadcast"></div>
-          </section>
-          <section class="panel">
-            <div class="panel-header compact">
-              <div>
-                <p class="section-kicker">Live Spotlight</p>
-                <h2>What's Happening Now</h2>
-              </div>
-              <span id="queuePageStatus" class="status-pill active">Live</span>
-            </div>
-            <div id="publicEventSpotlight" class="public-event-spotlight-grid"></div>
           </section>
           <section class="panel">
             <div class="panel-header compact">
@@ -12220,10 +12229,8 @@
     const queueHeroTitle = document.getElementById("queueHeroTitle");
     const queueHeroCopy = document.getElementById("queueHeroCopy");
     const queueHeroStats = document.getElementById("queueHeroStats");
-    const queuePageStatus = document.getElementById("queuePageStatus");
     const publicEventLayout = document.getElementById("publicEventLayout");
     const publicEventBroadcast = document.getElementById("publicEventBroadcast");
-    const publicEventSpotlight = document.getElementById("publicEventSpotlight");
     const publicEventRoster = document.getElementById("publicEventRoster");
     const publicEventStandings = document.getElementById("publicEventStandings");
     const publicEventSummary = document.getElementById("publicEventSummary");
@@ -14914,11 +14921,10 @@
     }
 
     function renderQueueViewV2() {
-      if (!publicEventLayout || !publicEventBroadcast || !publicEventSpotlight || !publicEventRoster || !publicEventStandings || !publicEventSummary) return;
+      if (!publicEventLayout || !publicEventBroadcast || !publicEventRoster || !publicEventStandings || !publicEventSummary) return;
       if (!activeEventMeta) {
         publicEventLayout.classList.remove("is-finals");
         publicEventBroadcast.innerHTML = "";
-        publicEventSpotlight.innerHTML = "";
         publicEventRoster.innerHTML = "";
         publicEventStandings.innerHTML = "";
         publicEventSummary.innerHTML = "";
@@ -14985,10 +14991,6 @@
       if (queueHeroCopy) {
         queueHeroCopy.textContent = broadcastState.announcerCopy;
       }
-      if (queuePageStatus) {
-        queuePageStatus.textContent = lifecycle.label;
-        queuePageStatus.className = `status-pill ${lifecycle.tone}`;
-      }
       if (queueHeroStats) {
         queueHeroStats.innerHTML = `
           <div class="hero-stat">
@@ -15015,90 +15017,6 @@
         <div class="public-event-broadcast-grid is-single">
           ${broadcastState.broadcastPanelMarkup}
         </div>
-      `;
-
-      const primaryLabel = broadcastState.activeBattleTitle ? "Up Now" : currentDriver?.name ? "Now Qualifying" : results.championName ? "Champion" : "Live Focus";
-      const primaryTitle = broadcastState.activeBattleTitle || currentDriver?.name || (results.championName ? `#${results.championSeed || "-"} ${results.championName}` : lifecycle.label);
-      const primaryCopy = broadcastState.activeBattleTitle
-        ? `${broadcastState.activeBattle?.title || "Live battle"} | ${broadcastState.activeBattle?.meta || "Bracket flow is live."}`
-        : currentDriver?.name
-          ? `Reg #${currentDriver.reg || currentDriver.signUpPosition || "-"} is on course with live averages updating in real time.`
-          : results.championName
-            ? `Champion locked for ${activeEventMeta.name}. Saved results and full archive views are ready.`
-            : "The live queue will appear here as soon as the next phase starts.";
-      const primaryStats = broadcastState.activeBattleTitle
-        ? [
-            { label: "Stage", value: broadcastState.activeBattle?.title || "Live" },
-            { label: "Lead", value: buildPublicEventSeedLabel(broadcastState.activeBattle?.match?.left) },
-            { label: "Chase", value: buildPublicEventSeedLabel(broadcastState.activeBattle?.match?.right) },
-          ]
-        : currentDriver?.name
-          ? [
-              { label: "Run 1", value: formatScore(currentRun1) },
-              { label: "Run 2", value: formatScore(currentRun2) },
-              { label: "Best", value: formatScore(currentBest) },
-            ]
-          : [
-              { label: "Roster", value: `${registeredDrivers.length}` },
-              { label: "Qualified", value: `${context.plan.qualifiedCount || 0}` },
-              { label: "Status", value: lifecycle.label },
-            ];
-
-      const secondaryLabel = nextDriver?.name ? "On Deck" : broadcastState.queuedBattleTitle ? "Next Battle" : "Top Seed";
-      const secondaryTitle = nextDriver?.name || broadcastState.queuedBattleTitle || (results.topQualifierName ? `#${results.topQualifierSeed || "-"} ${results.topQualifierName}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed} ${rankedDrivers[0].name}` : "Stand By");
-      const secondaryCopy = nextDriver?.name
-        ? `Next driver to stage. ${buildPublicEventBestScoreLabel(nextDriver)}${nextDriver.chassis ? ` | ${nextDriver.chassis}` : ""}`
-        : broadcastState.queuedBattleTitle
-          ? `${broadcastState.queuedBattleAfterCurrent?.title || "Queued battle"} | ${broadcastState.queuedBattleAfterCurrent?.meta || "Waiting for bracket progress."}`
-          : results.topQualifierScore !== null
-            ? `Top qualifying mark is ${formatScore(results.topQualifierScore)}.`
-            : rankedDrivers[0]
-              ? `Current top qualifier with best score ${formatScore(rankedDrivers[0].bestScore)}.`
-              : "The next lane assignment will appear here.";
-      const secondaryStats = nextDriver?.name
-        ? [
-            { label: "Reg", value: `#${nextDriver.reg || nextDriver.signUpPosition || "-"}` },
-            { label: "Team", value: nextDriver.teamName || "Independent" },
-            { label: "Best", value: formatScore(getBestScore(getRunAverage(nextDriver, 1), getRunAverage(nextDriver, 2))) },
-          ]
-        : broadcastState.queuedBattleTitle
-          ? [
-              { label: "Queue", value: broadcastState.queuedBattleAfterCurrent?.title || "Next" },
-              { label: "Page", value: broadcastState.queuedBattleAfterCurrent?.bracketKey === "lower" ? "Lower" : "Main" },
-              { label: "Status", value: "Queued" },
-            ]
-          : [
-              { label: "Seed", value: results.topQualifierName ? `#${results.topQualifierSeed || "-"}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed}` : "-" },
-              { label: "Entries", value: `${registeredDrivers.length}` },
-              { label: "Best", value: results.topQualifierScore !== null ? formatScore(results.topQualifierScore) : rankedDrivers[0] ? formatScore(rankedDrivers[0].bestScore) : "Waiting" },
-            ];
-
-      publicEventSpotlight.innerHTML = `
-        <article class="public-event-spotlight public-event-spotlight-primary">
-          <span>${escapeHtml(primaryLabel)}</span>
-          <strong>${escapeHtml(primaryTitle)}</strong>
-          <p class="public-event-spotlight-copy">${escapeHtml(primaryCopy)}</p>
-          ${renderPublicEventPillGrid(primaryStats, "public-event-spotlight-stats")}
-        </article>
-        <article class="public-event-spotlight public-event-spotlight-secondary">
-          <span>${escapeHtml(secondaryLabel)}</span>
-          <strong>${escapeHtml(secondaryTitle)}</strong>
-          <p class="public-event-spotlight-copy">${escapeHtml(secondaryCopy)}</p>
-          ${renderPublicEventPillGrid(secondaryStats, "public-event-spotlight-stats")}
-        </article>
-        <article class="public-event-spotlight public-event-spotlight-tertiary">
-          <span>${escapeHtml(results.championName ? "Event Locked" : battleStats.totalBattles ? "Bracket Progress" : "Qualifying Plan")}</span>
-          <strong>${escapeHtml(results.championName ? `#${results.championSeed || "-"} ${results.championName}` : battleStats.totalBattles ? `${battleStats.completedBattles}/${battleStats.totalBattles} Battles` : `${context.plan.qualifiedCount || 0} Advancing`)}</strong>
-          <p class="public-event-spotlight-copy">${escapeHtml(results.championName
-            ? `Runner-up: ${results.runnerUpName ? `#${results.runnerUpSeed || "-"} ${results.runnerUpName}` : "Waiting"}.`
-            : battleStats.totalBattles
-              ? `${context.plan.description || "Bracket flow is live."}`
-              : `${context.plan.description || "Waiting for the first scores to lock the field."}`)}</p>
-          ${renderPublicEventPillGrid([
-            { label: "Top Qualifier", value: results.topQualifierName ? `#${results.topQualifierSeed || "-"} ${results.topQualifierName}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed} ${rankedDrivers[0].name}` : "Open" },
-            { label: "Average Best", value: results.averageBestScore !== null ? formatScore(results.averageBestScore) : "Waiting" },
-          ], "public-event-spotlight-stats")}
-        </article>
       `;
 
       const rosterCards = sortPublicEventRoster(registeredDrivers, context).slice(0, 12);
