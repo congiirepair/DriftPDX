@@ -54,7 +54,7 @@
       --radius-card: 18px;
       --radius-button: 14px;
       --brand-track-background-image: url("./assets/driftpdxbackground.png");
-      --brand-watermark-image: url("./assets/driftpdx-rose-banner.png");
+      --brand-watermark-image: url("./assets/Drift PDX Rose Banner Stickers-01.png");
       --font-graffiti: 'Ethnocentric', 'Orbitron', 'Inter', sans-serif;
       --font-sans: 'Inter', sans-serif;
     }
@@ -2366,6 +2366,21 @@
         linear-gradient(90deg, var(--accent-green-dark), var(--accent-green) 36%, rgba(196, 255, 220, 0.96) 62%, var(--accent-green-dark) 100%);
       opacity: 0.92;
       pointer-events: none;
+    }
+
+    body[data-theme="dark"] .panel::before,
+    body[data-theme="dark"] .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 8px;
+      background:
+        linear-gradient(90deg, var(--accent-green-dark), var(--accent-green) 36%, rgba(196, 255, 220, 0.88) 62%, var(--accent-green-dark) 100%);
+      opacity: 0.88;
+      pointer-events: none;
+      box-shadow: 0 0 18px rgba(39, 213, 108, 0.14);
     }
 
     body:not([data-theme="dark"]) .panel::after {
@@ -6540,6 +6555,15 @@
       background: linear-gradient(90deg, #000000, #777777, #efefef);
     }
 
+    body[data-theme="dark"] .command-center-card::before,
+    body[data-theme="dark"] .public-event-card::before,
+    body[data-theme="dark"] .public-event-spotlight::before,
+    body[data-theme="dark"] .public-event-statline::before,
+    body[data-theme="dark"] .self-register-profile-card::before {
+      background: linear-gradient(90deg, var(--accent-green-dark), var(--accent-green) 38%, rgba(196, 255, 220, 0.84) 64%, var(--accent-green-dark) 100%);
+      box-shadow: 0 0 16px rgba(39, 213, 108, 0.14);
+    }
+
     .command-center-card span,
     .public-event-card span,
     .public-event-spotlight span,
@@ -6957,6 +6981,11 @@
       inset: 0 0 auto 0;
       height: 5px;
       background: linear-gradient(90deg, #000000, #666666, #efefef);
+    }
+
+    body[data-theme="dark"] .broadcast-match-card::before {
+      background: linear-gradient(90deg, var(--accent-green-dark), var(--accent-green) 38%, rgba(196, 255, 220, 0.84) 64%, var(--accent-green-dark) 100%);
+      box-shadow: 0 0 16px rgba(39, 213, 108, 0.14);
     }
 
     .broadcast-match-card > * {
@@ -7453,7 +7482,7 @@
     <div id="view-registration" class="view-section is-active">
       <header class="hero">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Registration</p>
           <h1>Driver Sign-Up</h1>
           <div class="hero-actions">
@@ -7614,7 +7643,7 @@
     <div id="view-home" class="view-section">
       <header class="hero hero-simple spectator-only">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Drift PDX Sync</p>
           <h1 id="landingHeroTitle"><span class="landing-brand-wordmark" aria-label="Drift PDX Sync">Drift PDX Sync</span></h1>
           <p id="landingHeroCopy" class="hero-copy">Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event platform.</p>
@@ -7692,7 +7721,7 @@
     <div id="view-self-register" class="view-section">
       <header class="hero">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Driver Check-In</p>
           <h1>Self Registration</h1>
           <p class="hero-copy">Pre-register from home, then verify your location at the venue to complete check-in before event admin moves you into the live roster.</p>
@@ -7823,7 +7852,7 @@
     <div id="view-simulation" class="view-section">
       <header class="hero hero-simple spectator-only">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Spectator Preview</p>
           <h1>Live Event Simulation</h1>
           <p class="hero-copy">This screen shows a polished example of how registration, qualifying, competition, and results look when the event is running live.</p>
@@ -7890,7 +7919,7 @@
     <div id="view-queue" class="view-section">
       <header class="hero hero-simple">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Public Event Page</p>
           <h1 id="queueHeroTitle">Live Event</h1>
           <p id="queueHeroCopy" class="hero-copy">Follow the live queue, current qualifying driver, next battle, and the top standings from one public event page.</p>
@@ -7947,7 +7976,7 @@
     <div id="view-qualifying" class="view-section">
       <header class="hero hero-simple">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <div class="spectator-qualifying-title spectator-only">
             <p class="eyebrow">Live Event</p>
             <h1>Qualifying Standings</h1>
@@ -8045,7 +8074,7 @@
     <div id="view-results" class="view-section">
       <header class="hero hero-simple">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Results</p>
           <h1>Past Events</h1>
           <p class="hero-copy">
@@ -8079,7 +8108,7 @@
     <div id="view-website-admin" class="view-section">
       <header class="hero">
         <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" /></div>
+        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Website Admin</p>
           <h1>Website Admin Panel</h1>
           <p class="hero-copy">
@@ -8200,7 +8229,7 @@
       <!-- Fixed Fullscreen Toolbar -->
       <div class="bracket-header-bar">
         <div id="bracketHeaderLogoSlot">
-              <img class="bracket-header-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" />
+              <img class="bracket-header-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" />
         </div>
         <div class="button-row bracket-header-actions">
           <button id="fullscreenBracketBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Toggle fullscreen bracket" title="Toggle fullscreen">⛶<span class="icon-label">Fullscreen</span></button>
@@ -8243,7 +8272,7 @@
               <div class="bracket-header-center">
                 <p class="section-kicker">Play-In</p>
                 <h2 class="main-board-title">Lower Bracket</h2>
-                <img class="bracket-stage-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" />
+                <img class="bracket-stage-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" />
               </div>
               <div id="lowerBracketNextBattle" class="bracket-flow-slot right"></div>
             </div>
@@ -8262,7 +8291,7 @@
               <div class="bracket-header-center">
                 <p class="section-kicker">Main Event</p>
                 <h2 id="mainBracketTitle" class="main-board-title">Main Competition</h2>
-                <img class="bracket-stage-logo" src="./assets/driftpdx-rose-banner.png" alt="Drift PDX rose banner logo" />
+                <img class="bracket-stage-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png" alt="Drift PDX rose banner logo" />
               </div>
               <div id="mainBracketNextBattle" class="bracket-flow-slot right"></div>
             </div>
@@ -8445,8 +8474,8 @@
         venueName: "Your Drift Arena",
         venueLabelPlaceholder: "Your Drift Arena",
         eventNamePlaceholder: "Spring Drift Championship",
-    logoPrimary: "./assets/driftpdx-rose-banner.png",
-    logoInverted: "./assets/driftpdx-rose-banner.png",
+    logoPrimary: "./assets/Drift PDX Rose Banner Stickers-01.png",
+    logoInverted: "./assets/Drift PDX Rose Banner Stickers-01.png",
     logoAlt: "Drift PDX rose banner logo",
         backgroundImage: "./assets/driftpdxbackground.png",
         shopUrl: "",
@@ -10108,7 +10137,7 @@
       if (!resultsPdfLogoDataUrlPromise) {
         resultsPdfLogoDataUrlPromise = (async () => {
           try {
-            const response = await fetch(CLIENT_BRANDING.logoPrimary || "./assets/driftpdx-rose-banner.png", { cache: "force-cache" });
+            const response = await fetch(CLIENT_BRANDING.logoPrimary || "./assets/Drift PDX Rose Banner Stickers-01.png", { cache: "force-cache" });
             if (!response.ok) throw new Error(`Logo request failed with ${response.status}`);
             const blob = await response.blob();
             return await blobToDataUrl(blob);
@@ -12542,7 +12571,7 @@
 
     function applyClientBranding() {
       const root = document.documentElement;
-      const primaryLogo = CLIENT_BRANDING.logoPrimary || "./assets/driftpdx-rose-banner.png";
+      const primaryLogo = CLIENT_BRANDING.logoPrimary || "./assets/Drift PDX Rose Banner Stickers-01.png";
       const invertedLogo = CLIENT_BRANDING.logoInverted || primaryLogo;
       const logoAlt = CLIENT_BRANDING.logoAlt || CLIENT_BRANDING.venueName || "Track logo";
       const backgroundImage = CLIENT_BRANDING.backgroundImage || "./assets/driftpdxbackground.png";
