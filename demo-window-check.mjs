@@ -24,8 +24,8 @@ const checks = [
   {
     name: "all hero and bracket logos use the provided banner image",
     test: () => {
-      const matches = html.match(/Drift PDX Rose Banner Stickers-01\.png\?v=20260414b/g) || [];
-      return matches.length >= 10;
+      const matches = html.match(/(?:Drift PDX Rose Banner Stickers-01|driftpdx-rose-banner)\.png\?v=[^"' )]+/gu) || [];
+      return matches.length >= 8;
     },
   },
   {

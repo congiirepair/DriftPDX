@@ -6,11 +6,12 @@ const currentFilePath = fileURLToPath(import.meta.url);
 const workspaceDir = path.dirname(currentFilePath);
 const html = fs.readFileSync(path.join(workspaceDir, "index.html"), "utf8");
 const config = fs.readFileSync(path.join(workspaceDir, "client-config.js"), "utf8");
+const bannerAssetPattern = /\.\/assets\/(?:Drift PDX Rose Banner Stickers-01|driftpdx-rose-banner)\.png\?v=[^"]+/u;
 
 const checks = [
   {
     name: "home hero uses the current banner asset",
-    test: () => html.includes('./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414b'),
+    test: () => bannerAssetPattern.test(html),
   },
   {
     name: "home hero hides the legacy wordmark block",
@@ -30,8 +31,8 @@ const checks = [
   },
   {
     name: "client config points to the provided banner image",
-    test: () => config.includes('logoPrimary: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414b"')
-      && config.includes('logoInverted: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414b"'),
+    test: () => /logoPrimary:\s*"\.\/assets\/(?:Drift PDX Rose Banner Stickers-01|driftpdx-rose-banner)\.png\?v=[^"]+"/u.test(config)
+      && /logoInverted:\s*"\.\/assets\/(?:Drift PDX Rose Banner Stickers-01|driftpdx-rose-banner)\.png\?v=[^"]+"/u.test(config),
   },
   {
     name: "legacy brandmark asset references are gone",

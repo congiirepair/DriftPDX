@@ -48,13 +48,13 @@
       --connector-stub: 10px;
       --connector-bridge: 14px;
       --connector-thickness: 3px;
-    --final-card-width: 360px;
-    --third-card-width: 320px;
+    --final-card-width: 300px;
+    --third-card-width: 280px;
       --radius-panel: 24px;
       --radius-card: 18px;
       --radius-button: 14px;
       --brand-track-background-image: url("./assets/driftpdxbackground-custom.png");
-      --brand-watermark-image: url("./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c");
+      --brand-watermark-image: url("./assets/driftpdx-rose-banner.png?v=20260414e");
       --font-graffiti: 'Ethnocentric', 'Orbitron', 'Inter', sans-serif;
       --font-sans: 'Inter', sans-serif;
     }
@@ -731,12 +731,44 @@
       background: transparent;
     }
     body.bracket-fullscreen .bracket-header-bar { display: none; }
+    body.bracket-fullscreen #view-bracket.is-active {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+      padding: 0;
+      min-height: 0;
+    }
     body.bracket-fullscreen .bracket-workspace {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
       padding-top: 12px;
       height: 100vh;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.04)),
         transparent;
+    }
+    body.bracket-fullscreen .competition-bracket-page.is-active,
+    #view-bracket:fullscreen .competition-bracket-page.is-active {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    body.bracket-fullscreen .main-bracket-panel,
+    #view-bracket:fullscreen .main-bracket-panel {
+      flex: 1 1 auto;
+      min-height: 0;
+      margin-top: 0;
+    }
+    body.bracket-fullscreen .main-bracket-board,
+    #view-bracket:fullscreen .main-bracket-board {
+      flex: 1 1 auto;
+      min-height: 0;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: auto;
     }
     #view-bracket:fullscreen,
     #view-qualifying:fullscreen {
@@ -1386,6 +1418,17 @@
     .bracket-inline-actions .button {
       min-height: 40px;
       padding-inline: 14px;
+    }
+
+    .bracket-zoom-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .bracket-zoom-group .button {
+      min-width: 0;
     }
 
     body.bracket-fullscreen .bracket-inline-actions {
@@ -4116,8 +4159,14 @@
     .bracket-header-center {
       display: grid;
       justify-items: center;
-      gap: 10px;
+      gap: 6px;
       text-align: center;
+    }
+
+    .bracket-header-center .section-kicker {
+      margin-bottom: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
     }
 
     .bracket-flow-slot {
@@ -4437,44 +4486,51 @@
       color: var(--text-soft);
     }
 
-    .bracket-stage-logo {
-      display: block;
-      width: min(360px, 46vw);
-      margin: 12px auto 0;
-      opacity: 0.96;
-      filter: none;
-      mix-blend-mode: normal;
-    }
+    .bracket-stage-logo { display: none; }
 
     .main-board-title {
-      font-size: clamp(2.2rem, 4.2vw, 4.1rem);
+      max-width: min(12ch, 100%);
+      font-size: clamp(1.2rem, 2.35vw, 2.1rem);
+      line-height: 0.94;
+      text-wrap: balance;
+      overflow-wrap: anywhere;
       color: #000;
     }
 
     .main-bracket-board {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
+      align-items: flex-start;
       overflow-x: auto;
       overflow-y: visible;
-      padding-inline: 12px;
+      padding-inline: 4px;
       padding-bottom: 8px;
       width: 100%;
     }
 
     .main-board-canvas {
+      position: relative;
       display: block;
+      flex: 0 0 auto;
       width: max-content;
-      min-width: min(100%, 1460px);
+      min-width: max-content;
       margin-inline: auto;
-      transform-origin: top center;
+      zoom: var(--board-zoom, 1);
+    }
+
+    .main-board-scale-shell {
+      position: static;
+      inset: auto;
+      width: max-content;
+      transform: none;
+      transform-origin: top left;
+      will-change: auto;
     }
 
     .main-bracket-board.is-fitted {
       align-items: flex-start;
-    }
-
-    .main-bracket-board.is-fitted .main-board-canvas {
-      transform: scale(var(--board-scale, 1));
+      justify-content: flex-start;
+      overflow-x: auto;
     }
 
     .competition-subtabs {
@@ -4532,7 +4588,7 @@
     }
 
     .center-stage-stack:has(.placement-center) .final-center .final-battle-card {
-      width: min(100%, 380px);
+      width: min(100%, var(--final-card-width, 300px));
     }
 
     .center-stage-stack:has(.placement-center) .placement-center {
@@ -4544,7 +4600,7 @@
     }
 
     .center-stage-stack:has(.placement-center) .placement-center .third-place-card {
-      width: min(100%, 330px);
+      width: min(100%, var(--third-card-width, 280px));
     }
     .main-board-side { display: grid; gap: var(--main-board-gap, 18px); }
     .main-board-side.left { grid-auto-flow: column; justify-content: start; }
@@ -5131,6 +5187,49 @@
       gap: 24px;
     }
 
+    #view-home .panel {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      border-color: rgba(255, 255, 255, 0.34);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.46), rgba(255,255,255,0.18)),
+        linear-gradient(135deg, rgba(255,255,255,0.30), rgba(255,255,255,0.10) 48%, rgba(255,255,255,0.03)),
+        rgba(245, 248, 252, 0.18);
+      box-shadow:
+        0 24px 48px rgba(18, 28, 40, 0.14),
+        inset 0 1px 0 rgba(255,255,255,0.78),
+        inset 0 -1px 0 rgba(255,255,255,0.18);
+      backdrop-filter: blur(24px) saturate(1.16);
+      -webkit-backdrop-filter: blur(24px) saturate(1.16);
+    }
+
+    #view-home .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 18px auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+      pointer-events: none;
+      opacity: 0.95;
+    }
+
+    #view-home .panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -42px -56px auto;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, rgba(255,255,255,0.34), transparent 72%);
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    #view-home .panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .landing-feature-grid,
     .landing-benefit-grid,
     .landing-action-grid {
@@ -5189,6 +5288,45 @@
       gap: 14px;
     }
 
+    #view-home .command-center-card,
+    #view-home .landing-podium-card,
+    #view-home .landing-statline {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.52), rgba(255,255,255,0.18)),
+        linear-gradient(135deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08));
+      box-shadow:
+        0 16px 28px rgba(18, 28, 40, 0.1),
+        inset 0 1px 0 rgba(255,255,255,0.76);
+      backdrop-filter: blur(18px) saturate(1.12);
+      -webkit-backdrop-filter: blur(18px) saturate(1.12);
+    }
+
+    #view-home .command-center-card::after,
+    #view-home .landing-podium-card::after,
+    #view-home .landing-statline::after {
+      content: "";
+      position: absolute;
+      inset: -28px -20px auto auto;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.34), rgba(255,255,255,0.08) 42%, transparent 72%);
+      pointer-events: none;
+      opacity: 0.84;
+    }
+
+    #view-home .command-center-card > *,
+    #view-home .landing-podium-card > *,
+    #view-home .landing-statline > * {
+      position: relative;
+      z-index: 1;
+    }
+
     .landing-side-card .button {
       width: 100%;
     }
@@ -5197,14 +5335,14 @@
       display: flex;
       justify-content: space-between;
       gap: 16px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 14px 16px;
+      border-bottom: 0;
+      border-radius: 16px;
       font-weight: 700;
     }
 
     .landing-statline:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
+      padding-bottom: 14px;
     }
 
     .landing-statline strong {
@@ -5220,6 +5358,41 @@
       border-bottom-color: rgba(255, 255, 255, 0.1);
     }
 
+    body[data-theme="dark"] #view-home .panel {
+      border-color: rgba(255,255,255,0.18);
+      background:
+        linear-gradient(180deg, rgba(24, 30, 40, 0.5), rgba(10, 14, 22, 0.58)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04) 44%, rgba(255,255,255,0.01)),
+        rgba(10, 12, 18, 0.24);
+      box-shadow:
+        0 28px 54px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255,255,255,0.22),
+        inset 0 -1px 0 rgba(255,255,255,0.06);
+    }
+
+    body[data-theme="dark"] #view-home .panel::before {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.46), transparent);
+    }
+
+    body[data-theme="dark"] #view-home .panel::after {
+      background:
+        radial-gradient(circle, rgba(53,242,208,0.16), transparent 68%),
+        radial-gradient(circle at 34% 34%, rgba(255,79,159,0.1), transparent 56%);
+      opacity: 0.9;
+    }
+
+    body[data-theme="dark"] #view-home .command-center-card,
+    body[data-theme="dark"] #view-home .landing-podium-card,
+    body[data-theme="dark"] #view-home .landing-statline {
+      border-color: rgba(255,255,255,0.18);
+      background:
+        linear-gradient(180deg, rgba(28, 34, 46, 0.46), rgba(12, 16, 24, 0.58)),
+        linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      box-shadow:
+        0 18px 30px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+
     .hidden { display: none !important; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -5233,12 +5406,78 @@
       }
     }
 
+    @media (max-width: 1680px) {
+      :root {
+        --bracket-round-width: 150px;
+        --slot-height: 38px;
+        --seed-chip-width: 34px;
+        --seed-font-size: 0.96rem;
+        --slot-font-size: 0.84rem;
+        --slot-team-font-size: 0.52rem;
+        --slot-padding-x: 9px;
+        --match-stack-gap: 8px;
+        --empty-slot-font-size: 0.74rem;
+        --connector-stub: 9px;
+        --connector-bridge: 12px;
+        --connector-thickness: 3px;
+        --main-board-gap: 10px;
+        --center-stage-gap: 12px;
+        --final-card-width: 210px;
+        --third-card-width: 194px;
+        --final-head-padding-y: 9px;
+        --final-head-padding-x: 10px;
+        --final-head-font-size: 0.98rem;
+        --final-body-padding: 9px;
+        --final-body-gap: 6px;
+        --final-vs-font-size: 0.94rem;
+      }
+    }
+
+    @media (max-width: 1440px) {
+      :root {
+        --bracket-round-width: 128px;
+        --slot-height: 30px;
+        --seed-chip-width: 26px;
+        --seed-font-size: 0.82rem;
+        --slot-font-size: 0.76rem;
+        --slot-team-font-size: 0.5rem;
+        --slot-padding-x: 7px;
+        --match-stack-gap: 7px;
+        --empty-slot-font-size: 0.62rem;
+        --connector-stub: 7px;
+        --connector-bridge: 10px;
+        --connector-thickness: 2px;
+        --main-board-gap: 8px;
+        --center-stage-gap: 10px;
+        --final-card-width: 156px;
+        --third-card-width: 148px;
+        --final-head-padding-y: 7px;
+        --final-head-padding-x: 8px;
+        --final-head-font-size: 0.86rem;
+        --final-body-padding: 8px;
+        --final-body-gap: 5px;
+        --final-vs-font-size: 0.88rem;
+      }
+
+      .main-bracket-panel {
+        padding-inline: 4px;
+      }
+
+      .main-bracket-board {
+        padding-inline: 0;
+      }
+
+      .main-board-round-labels {
+        margin-bottom: 10px;
+      }
+    }
+
     @media (max-width: 1180px) {
       .hero, .layout, .qualifying-layout, .qualifying-support-grid { grid-template-columns: 1fr; }
       .landing-grid { grid-template-columns: 1fr; }
       .qualifying-side-column { position: static; }
       .rounds-board { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
-      .main-board-canvas { min-width: 1080px; }
+      .main-board-canvas { min-width: 0; }
       .bracket-header-layout { grid-template-columns: 1fr; }
       .bracket-flow-slot,
       .bracket-flow-slot.right { justify-content: center; }
@@ -5388,19 +5627,24 @@
       }
       .main-topbar .mode-tabs {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 8px;
         width: 100%;
       }
       .main-topbar .mode-tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
         min-width: 0;
-        min-height: 44px;
-        padding: 10px 8px;
-        font-size: 0.74rem;
-        line-height: 1.15;
+        min-height: 48px;
+        padding: 11px 10px;
+        font-size: 0.76rem;
+        line-height: 1.2;
         text-align: center;
         white-space: normal;
+        text-wrap: balance;
+        overflow-wrap: anywhere;
       }
       .main-topbar .mode-tab.is-active {
         color: #000 !important;
@@ -5684,12 +5928,17 @@
       .bracket-header-center {
         gap: 6px;
       }
+      .bracket-header-center .section-kicker {
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+      }
       .bracket-stage-logo {
         display: none;
       }
       .main-board-title {
-        font-size: clamp(1.75rem, 8vw, 2.6rem);
-        line-height: 0.96;
+        max-width: min(12ch, 100%);
+        font-size: clamp(1.2rem, 5.5vw, 1.9rem);
+        line-height: 0.94;
       }
       .battle-flow-card {
         padding: 10px;
@@ -7458,6 +7707,20 @@
       }
     }
 
+    @media (max-width: 420px) {
+      .main-topbar .mode-tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .bracket-zoom-group {
+        width: 100%;
+      }
+
+      .bracket-zoom-group .button {
+        flex: 1 1 0;
+      }
+    }
+
   </style>
 </head>
   <body data-role="spectator" data-site-admin="false" data-theme="light">
@@ -8249,10 +8512,13 @@
       <!-- Fixed Fullscreen Toolbar -->
       <div class="bracket-header-bar">
         <div id="bracketHeaderLogoSlot">
-              <img class="bracket-header-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c" alt="Drift PDX rose banner logo" />
+              <img class="bracket-header-logo" src="./assets/driftpdx-rose-banner.png?v=20260414e" alt="Drift PDX rose banner logo" />
         </div>
         <div class="button-row bracket-header-actions">
           <button id="fullscreenBracketBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Toggle fullscreen bracket" title="Toggle fullscreen">⛶<span class="icon-label">Fullscreen</span></button>
+          <button id="bracketZoomOutBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Zoom out bracket" title="Zoom out bracket">－<span class="icon-label">Zoom Out</span></button>
+          <button id="bracketZoomResetBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Reset bracket zoom" title="Reset bracket zoom">100%<span class="icon-label">Reset Zoom</span></button>
+          <button id="bracketZoomInBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Zoom in bracket" title="Zoom in bracket">＋<span class="icon-label">Zoom In</span></button>
           <button id="resetBracketBtn" class="button button-accent admin-action bracket-header-icon-button" type="button" aria-label="Reset bracket winners" title="Reset winners">↺<span class="icon-label">Reset Winners</span></button>
           <button id="backToQualifyingBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Back to qualifying" title="Back to qualifying">←<span class="icon-label">Back to Qualifying</span></button>
         </div>
@@ -8265,6 +8531,11 @@
         </div>
         <div class="bracket-inline-actions">
           <button id="inlineFullscreenBracketBtn" class="button button-secondary" type="button">Fullscreen</button>
+          <div class="bracket-zoom-group" aria-label="Bracket zoom controls">
+            <button id="inlineBracketZoomOutBtn" class="button button-secondary" type="button">Zoom Out</button>
+            <button id="inlineBracketZoomResetBtn" class="button button-secondary" type="button">100%</button>
+            <button id="inlineBracketZoomInBtn" class="button button-secondary" type="button">Zoom In</button>
+          </div>
           <button id="inlineResetBracketBtn" class="button button-accent admin-action" type="button">Reset Winners</button>
           <button id="inlineBackToQualifyingBtn" class="button button-secondary" type="button">Back To Qualifying</button>
         </div>
@@ -8292,7 +8563,7 @@
               <div class="bracket-header-center">
                 <p class="section-kicker">Play-In</p>
                 <h2 class="main-board-title">Lower Bracket</h2>
-                <img class="bracket-stage-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c" alt="Drift PDX rose banner logo" />
+                <img class="bracket-stage-logo" src="./assets/driftpdx-rose-banner.png?v=20260414e" alt="Drift PDX rose banner logo" />
               </div>
               <div id="lowerBracketNextBattle" class="bracket-flow-slot right"></div>
             </div>
@@ -8311,7 +8582,7 @@
               <div class="bracket-header-center">
                 <p class="section-kicker">Main Event</p>
                 <h2 id="mainBracketTitle" class="main-board-title">Main Competition</h2>
-                <img class="bracket-stage-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c" alt="Drift PDX rose banner logo" />
+                <img class="bracket-stage-logo" src="./assets/driftpdx-rose-banner.png?v=20260414e" alt="Drift PDX rose banner logo" />
               </div>
               <div id="mainBracketNextBattle" class="bracket-flow-slot right"></div>
             </div>
@@ -8476,7 +8747,7 @@
   </div>
 
   <!-- APP LOGIC -->
-  <script src="./client-config.js"></script>
+  <script src="./client-config.js?v=20260414e"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -8494,8 +8765,8 @@
         venueName: "Your Drift Arena",
         venueLabelPlaceholder: "Your Drift Arena",
         eventNamePlaceholder: "Spring Drift Championship",
-    logoPrimary: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c",
-    logoInverted: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c",
+    logoPrimary: "./assets/driftpdx-rose-banner.png?v=20260414e",
+    logoInverted: "./assets/driftpdx-rose-banner.png?v=20260414e",
     logoAlt: "Drift PDX rose banner logo",
         backgroundImage: "./assets/driftpdxbackground-custom.png",
         shopUrl: "",
@@ -10157,7 +10428,7 @@
       if (!resultsPdfLogoDataUrlPromise) {
         resultsPdfLogoDataUrlPromise = (async () => {
           try {
-            const response = await fetch(CLIENT_BRANDING.logoPrimary || "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c", { cache: "force-cache" });
+            const response = await fetch(CLIENT_BRANDING.logoPrimary || "./assets/driftpdx-rose-banner.png?v=20260414e", { cache: "force-cache" });
             if (!response.ok) throw new Error(`Logo request failed with ${response.status}`);
             const blob = await response.blob();
             return await blobToDataUrl(blob);
@@ -12555,7 +12826,13 @@
     const launchWarning = document.getElementById("launchWarning");
     const topQualifierTiePanel = document.getElementById("topQualifierTiePanel");
     const fullscreenBracketBtn = document.getElementById("fullscreenBracketBtn");
+    const bracketZoomOutBtn = document.getElementById("bracketZoomOutBtn");
+    const bracketZoomResetBtn = document.getElementById("bracketZoomResetBtn");
+    const bracketZoomInBtn = document.getElementById("bracketZoomInBtn");
     const inlineFullscreenBracketBtn = document.getElementById("inlineFullscreenBracketBtn");
+    const inlineBracketZoomOutBtn = document.getElementById("inlineBracketZoomOutBtn");
+    const inlineBracketZoomResetBtn = document.getElementById("inlineBracketZoomResetBtn");
+    const inlineBracketZoomInBtn = document.getElementById("inlineBracketZoomInBtn");
     const inlineResetBracketBtn = document.getElementById("inlineResetBracketBtn");
     const inlineBackToQualifyingBtn = document.getElementById("inlineBackToQualifyingBtn");
     const heroEventName = document.getElementById("heroEventName");
@@ -12563,6 +12840,11 @@
     const currentEventStatus = document.getElementById("currentEventStatus");
     const eventArchiveList = document.getElementById("eventArchiveList");
     const roleAdminPanel = document.getElementById("roleAdminPanel");
+    const BRACKET_ZOOM_STORAGE_KEY = "driftpdx-bracket-zoom-v1";
+    const BRACKET_ZOOM_MIN = 0.85;
+    const BRACKET_ZOOM_MAX = 1.45;
+    const BRACKET_ZOOM_STEP = 0.1;
+    let bracketZoom = 1;
 
     function getConfiguredWindowBaseUrl() {
       if (typeof window !== "undefined" && window.location.href) return window.location.href;
@@ -12591,7 +12873,7 @@
 
     function applyClientBranding() {
       const root = document.documentElement;
-      const primaryLogo = CLIENT_BRANDING.logoPrimary || "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c";
+      const primaryLogo = CLIENT_BRANDING.logoPrimary || "./assets/driftpdx-rose-banner.png?v=20260414e";
       const invertedLogo = CLIENT_BRANDING.logoInverted || primaryLogo;
       const logoAlt = CLIENT_BRANDING.logoAlt || CLIENT_BRANDING.venueName || "Track logo";
       const backgroundImage = CLIENT_BRANDING.backgroundImage || "./assets/driftpdxbackground.png";
@@ -12640,6 +12922,52 @@
           shopButton.hidden = true;
         }
       }
+    }
+
+    function normalizeBracketZoom(value) {
+      if (!Number.isFinite(value)) return 1;
+      const clamped = Math.min(BRACKET_ZOOM_MAX, Math.max(BRACKET_ZOOM_MIN, value));
+      return Math.round(clamped * 100) / 100;
+    }
+
+    function loadBracketZoomPreference() {
+      try {
+        return normalizeBracketZoom(Number.parseFloat(localStorage.getItem(BRACKET_ZOOM_STORAGE_KEY) || "1"));
+      } catch (_error) {
+        return 1;
+      }
+    }
+
+    function persistBracketZoomPreference() {
+      try {
+        localStorage.setItem(BRACKET_ZOOM_STORAGE_KEY, String(bracketZoom));
+      } catch (_error) {
+        // Ignore storage failures on restricted browsers.
+      }
+    }
+
+    function updateBracketZoomControls() {
+      const zoomPercent = `${Math.round(bracketZoom * 100)}%`;
+      [bracketZoomResetBtn, inlineBracketZoomResetBtn].forEach((button) => {
+        if (!button) return;
+        button.textContent = zoomPercent;
+        button.disabled = Math.abs(bracketZoom - 1) < 0.01;
+      });
+      [bracketZoomOutBtn, inlineBracketZoomOutBtn].forEach((button) => {
+        if (!button) return;
+        button.disabled = bracketZoom <= BRACKET_ZOOM_MIN + 0.01;
+      });
+      [bracketZoomInBtn, inlineBracketZoomInBtn].forEach((button) => {
+        if (!button) return;
+        button.disabled = bracketZoom >= BRACKET_ZOOM_MAX - 0.01;
+      });
+    }
+
+    function setBracketZoom(nextZoom) {
+      bracketZoom = normalizeBracketZoom(nextZoom);
+      persistBracketZoomPreference();
+      fitAllBracketBoards();
+      updateBracketZoomControls();
     }
 
     let registrationDraft = {
@@ -17337,6 +17665,12 @@
 
     fullscreenBracketBtn?.addEventListener("click", toggleBracketFullscreen);
     inlineFullscreenBracketBtn?.addEventListener("click", toggleBracketFullscreen);
+    bracketZoomOutBtn?.addEventListener("click", () => setBracketZoom(bracketZoom - BRACKET_ZOOM_STEP));
+    bracketZoomResetBtn?.addEventListener("click", () => setBracketZoom(1));
+    bracketZoomInBtn?.addEventListener("click", () => setBracketZoom(bracketZoom + BRACKET_ZOOM_STEP));
+    inlineBracketZoomOutBtn?.addEventListener("click", () => setBracketZoom(bracketZoom - BRACKET_ZOOM_STEP));
+    inlineBracketZoomResetBtn?.addEventListener("click", () => setBracketZoom(1));
+    inlineBracketZoomInBtn?.addEventListener("click", () => setBracketZoom(bracketZoom + BRACKET_ZOOM_STEP));
     document.addEventListener("fullscreenchange", syncBracketFullscreenState);
     resultsExportPdfBtn?.addEventListener("click", exportResultsPdf);
 
@@ -18555,9 +18889,12 @@
       window.__driverLayoutResizeTimer = setTimeout(() => {
         renderDriversTable();
         updateQualifyingDensity();
-        fitAllBracketBoards();
+        scheduleBracketRefit();
       }, 120);
     });
+    window.addEventListener("load", scheduleBracketRefit);
+    window.visualViewport?.addEventListener("resize", scheduleBracketRefit);
+    document.fonts?.ready?.then(scheduleBracketRefit).catch(() => {});
 
     // ==========================================
     // BRACKET RENDERER
@@ -19012,9 +19349,10 @@
       const baseMatchHeight = slotHeight * 2 + stackGap;
       const centerWidth = Math.max(finalCardWidth, thirdCardWidth);
       const boardGap = getBracketCssMetric("--main-board-gap", 18);
+      const singleBoardHeight = Math.max(240, baseMatchHeight + 124);
       if (!rounds.length) return "";
       if (rounds.length === 1) {
-        return `<div class="main-board-canvas" style="min-width: 320px;"><div class="main-board-grid" style="grid-template-columns: 1fr;"><div class="center-stage-stack">${renderFinalBattle(bracketKey, 0, rounds[0].matches[0], finalTitle)}</div></div></div>`;
+        return `<div class="main-board-canvas" data-natural-width="320" data-natural-height="${singleBoardHeight}" style="width: 320px; min-width: 320px; height: ${singleBoardHeight}px;"><div class="main-board-scale-shell"><div class="main-board-grid" style="grid-template-columns: 1fr;"><div class="center-stage-stack">${renderFinalBattle(bracketKey, 0, rounds[0].matches[0], finalTitle)}</div></div></div></div>`;
       }
 
       const sideRounds = rounds.slice(0, -1);
@@ -19044,12 +19382,14 @@
       }).join("");
 
       return `
-        <div class="main-board-canvas" style="min-width: ${boardWidth}px;">
-          <div class="main-board-round-labels" style="grid-template-columns: ${gridTemplate};">${labelColumns.map(label => `<div class="main-board-label">${label}</div>`).join("")}</div>
-          <div class="main-board-grid" style="grid-template-columns: ${gridTemplate};">
-            <div class="main-board-side left" style="grid-column: 1 / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${leftMarkup}</div>
-            <div style="grid-column: ${sideRounds.length + 1} / span 1; height: ${boardHeight}px;"><div class="center-stage-stack" style="--center-stage-min-height:${boardHeight}px; --center-stage-final-top:${finalTop}px; --center-stage-third-top:${thirdTop}px;">${renderFinalBattle(bracketKey, rounds.length - 1, finalRound.matches[0], finalTitle)}${thirdPlaceMatch ? renderPlacementBattle("third", thirdPlaceMatch, "3rd Place Battle") : ""}</div></div>
-            <div class="main-board-side right" style="grid-column: ${sideRounds.length + 2} / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${rightMarkup}</div>
+        <div class="main-board-canvas" data-natural-width="${boardWidth}" data-natural-height="${boardHeight}" style="width: ${boardWidth}px; min-width: ${boardWidth}px; height: ${boardHeight}px;">
+          <div class="main-board-scale-shell">
+            <div class="main-board-round-labels" style="grid-template-columns: ${gridTemplate};">${labelColumns.map(label => `<div class="main-board-label">${label}</div>`).join("")}</div>
+            <div class="main-board-grid" style="grid-template-columns: ${gridTemplate};">
+              <div class="main-board-side left" style="grid-column: 1 / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${leftMarkup}</div>
+              <div style="grid-column: ${sideRounds.length + 1} / span 1; height: ${boardHeight}px;"><div class="center-stage-stack" style="--center-stage-min-height:${boardHeight}px; --center-stage-final-top:${finalTop}px; --center-stage-third-top:${thirdTop}px;">${renderFinalBattle(bracketKey, rounds.length - 1, finalRound.matches[0], finalTitle)}${thirdPlaceMatch ? renderPlacementBattle("third", thirdPlaceMatch, "3rd Place Battle") : ""}</div></div>
+              <div class="main-board-side right" style="grid-column: ${sideRounds.length + 2} / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${rightMarkup}</div>
+            </div>
           </div>
         </div>
       `;
@@ -19059,34 +19399,68 @@
       const board = document.getElementById(boardId);
       if (!board) return;
       const canvas = board.querySelector(".main-board-canvas");
+      const scaleShell = board.querySelector(".main-board-scale-shell");
       if (!canvas) {
-        board.style.removeProperty("--board-scale");
         board.style.removeProperty("minHeight");
         board.classList.remove("is-fitted");
         return;
       }
 
+      const naturalWidth = Number(canvas.dataset.naturalWidth);
+      const naturalHeight = Number(canvas.dataset.naturalHeight);
+      const isFullscreenFit = document.body.classList.contains("bracket-fullscreen");
+      board.classList.remove("is-fitted");
+      board.style.removeProperty("minHeight");
+      board.style.setProperty("--board-zoom", "1");
+      canvas.style.zoom = "1";
+      if (scaleShell) {
+        scaleShell.style.transform = "none";
+      }
+      if (Number.isFinite(naturalWidth) && naturalWidth > 0) {
+        canvas.style.width = `${naturalWidth}px`;
+        canvas.style.minWidth = `${naturalWidth}px`;
+      } else {
+        canvas.style.width = "max-content";
+        canvas.style.minWidth = "max-content";
+      }
+      if (Number.isFinite(naturalHeight) && naturalHeight > 0) {
+        canvas.style.height = `${naturalHeight}px`;
+      } else {
+        canvas.style.removeProperty("height");
+      }
+
+      if (!isFullscreenFit || !scaleShell || !Number.isFinite(naturalWidth) || !Number.isFinite(naturalHeight) || naturalWidth <= 0 || naturalHeight <= 0) {
+        canvas.style.zoom = String(bracketZoom);
+        board.style.setProperty("--board-zoom", String(bracketZoom));
+        return;
+      }
+
+      const availableWidth = Math.max(0, board.clientWidth - 12);
+      const availableHeight = Math.max(0, board.clientHeight - 12);
+      if (availableWidth <= 0 || availableHeight <= 0) {
+        return;
+      }
+
+      const fitScale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight);
+      const appliedScale = Math.max(0.25, fitScale * bracketZoom);
+      scaleShell.style.transform = `scale(${appliedScale})`;
+      canvas.style.width = `${Math.round(naturalWidth * appliedScale)}px`;
+      canvas.style.minWidth = `${Math.round(naturalWidth * appliedScale)}px`;
+      canvas.style.height = `${Math.round(naturalHeight * appliedScale)}px`;
+      board.style.minHeight = `${Math.round(naturalHeight * appliedScale)}px`;
       board.classList.add("is-fitted");
-      canvas.style.transform = "scale(1)";
-      const boardRect = board.getBoundingClientRect();
-      const viewportWidth = window.innerWidth || document.documentElement.clientWidth || board.clientWidth || 0;
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || board.clientHeight || 0;
-      const horizontalPadding = 24;
-      const verticalPadding = 24;
-      const availableWidth = Math.max(Math.min(board.clientWidth, viewportWidth - boardRect.left - horizontalPadding), 0);
-      const availableHeight = Math.max(viewportHeight - boardRect.top - verticalPadding, 0);
-      const naturalWidth = canvas.scrollWidth;
-      const naturalHeight = canvas.scrollHeight;
-      const widthScale = naturalWidth > 0 && availableWidth > 0 ? availableWidth / naturalWidth : 1;
-      const heightScale = naturalHeight > 0 && availableHeight > 0 ? availableHeight / naturalHeight : 1;
-      const scale = Math.min(1, widthScale, heightScale);
-      board.style.setProperty("--board-scale", String(scale));
-      board.style.minHeight = `${Math.ceil(naturalHeight * scale)}px`;
     }
 
     function fitAllBracketBoards() {
       fitBracketBoard("lowerBracketBoard");
       fitBracketBoard("bracketBoard");
+    }
+
+    function scheduleBracketRefit() {
+      requestAnimationFrame(() => {
+        fitAllBracketBoards();
+        requestAnimationFrame(fitAllBracketBoards);
+      });
     }
 
     function renderBracket() {
@@ -19134,7 +19508,7 @@
         finalTitle: "Final Battle",
       });
       updateCompetitionBracketPage();
-      requestAnimationFrame(fitAllBracketBoards);
+      scheduleBracketRefit();
     }
 
     function updateCompetitionBracketPage() {
@@ -19213,6 +19587,8 @@
 
     async function bootstrapApp() {
       applyClientBranding();
+      bracketZoom = loadBracketZoomPreference();
+      updateBracketZoomControls();
       syncForcedHostContext();
       initializeTheme();
       await initLocalState();
