@@ -42,9 +42,9 @@
       --slot-padding-x: 18px;
       --match-stack-gap: 12px;
       --empty-slot-font-size: 0.9rem;
-      --connector-stub: 14px;
-      --connector-bridge: 20px;
-      --connector-thickness: 5px;
+      --connector-stub: 10px;
+      --connector-bridge: 14px;
+      --connector-thickness: 3px;
     --final-card-width: 360px;
     --third-card-width: 320px;
       --radius-panel: 24px;
@@ -435,9 +435,7 @@
     body[data-theme="dark"] .main-battle.center .main-battle-slot::before,
     body[data-theme="dark"] .main-battle.center .main-battle-slot::after {
       background: rgba(255, 255, 255, 0.84);
-      box-shadow:
-        0 0 0 3px rgba(10, 10, 10, 0.96),
-        0 0 0 5px rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.42);
     }
 
     body[data-theme="dark"] .main-bracket-panel::before {
@@ -4665,14 +4663,12 @@
       height: var(--connector-thickness, 4px);
       background: rgba(17, 17, 17, 0.9);
       transform: translateY(-50%);
-      border-radius: 0;
-      box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.92),
-        0 0 0 5px rgba(17, 17, 17, 0.08);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.82);
     }
 
-    .main-battle.left .main-battle-slot::after { right: calc((var(--connector-stub, 12px) + 3px) * -1); }
-    .main-battle.right .main-battle-slot::after { left: calc((var(--connector-stub, 12px) + 3px) * -1); }
+    .main-battle.left .main-battle-slot::after { right: calc((var(--connector-stub, 12px) + 6px) * -1); }
+    .main-battle.right .main-battle-slot::after { left: calc((var(--connector-stub, 12px) + 6px) * -1); }
 
     .main-battle.left .main-battle-stack::before,
     .main-battle.right .main-battle-stack::before {
@@ -4682,14 +4678,12 @@
       bottom: calc(var(--slot-height, 40px) / 2);
       width: var(--connector-thickness, 4px);
       background: rgba(17, 17, 17, 0.9);
-      border-radius: 0;
-      box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.92),
-        0 0 0 5px rgba(17, 17, 17, 0.08);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.82);
     }
 
-    .main-battle.left .main-battle-stack::before { right: calc((var(--connector-stub, 12px) + 3px) * -1); }
-    .main-battle.right .main-battle-stack::before { left: calc((var(--connector-stub, 12px) + 3px) * -1); }
+    .main-battle.left .main-battle-stack::before { right: calc((var(--connector-stub, 12px) + 6px) * -1); }
+    .main-battle.right .main-battle-stack::before { left: calc((var(--connector-stub, 12px) + 6px) * -1); }
 
     .main-battle.left .main-battle-stack::after,
     .main-battle.right .main-battle-stack::after {
@@ -4699,14 +4693,12 @@
       width: var(--connector-bridge, 18px);
       height: var(--connector-thickness, 4px);
       background: rgba(17, 17, 17, 0.9);
-      border-radius: 0;
-      box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.92),
-        0 0 0 5px rgba(17, 17, 17, 0.08);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.82);
     }
 
-    .main-battle.left .main-battle-stack::after { right: calc((var(--connector-stub, 12px) + var(--connector-bridge, 18px) + 3px) * -1); }
-    .main-battle.right .main-battle-stack::after { left: calc((var(--connector-stub, 12px) + var(--connector-bridge, 18px) + 3px) * -1); }
+    .main-battle.left .main-battle-stack::after { right: calc((var(--connector-stub, 12px) + var(--connector-bridge, 18px) + 6px) * -1); }
+    .main-battle.right .main-battle-stack::after { left: calc((var(--connector-stub, 12px) + var(--connector-bridge, 18px) + 6px) * -1); }
 
     .main-battle.center .main-battle-slot::before,
     .main-battle.center .main-battle-slot::after {
@@ -4717,14 +4709,12 @@
       height: var(--connector-thickness, 4px);
       background: rgba(17, 17, 17, 0.9);
       transform: translateY(-50%);
-      border-radius: 0;
-      box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.92),
-        0 0 0 5px rgba(17, 17, 17, 0.08);
+      border-radius: 999px;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.82);
     }
 
-    .main-battle.center .main-battle-slot::before { left: calc((var(--connector-bridge, 18px) + 3px) * -1); }
-    .main-battle.center .main-battle-slot::after { right: calc((var(--connector-bridge, 18px) + 3px) * -1); }
+    .main-battle.center .main-battle-slot::before { left: calc((var(--connector-bridge, 18px) + 6px) * -1); }
+    .main-battle.center .main-battle-slot::after { right: calc((var(--connector-bridge, 18px) + 6px) * -1); }
 
     .final-battle-card {
       width: var(--final-card-width, 250px);
