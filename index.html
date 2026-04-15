@@ -28,8 +28,11 @@
       --accent: #ff4f9f;
       --accent-dark: #a931ff;
       --accent-cyan: #35f2d0;
+      --accent-green: #2ad16b;
+      --accent-green-dark: #0d6f3c;
       --accent-warm: #ffb343;
       --accent-glow: 0 0 0 1px rgba(255, 79, 159, 0.36), 0 0 24px rgba(255, 79, 159, 0.20), 0 0 52px rgba(53, 242, 208, 0.12);
+      --accent-green-glow: 0 0 0 1px rgba(42, 209, 107, 0.32), 0 0 18px rgba(42, 209, 107, 0.18);
       --panel-shadow: 0 28px 72px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255,255,255,0.05);
       --card-shadow: 0 18px 42px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255,255,255,0.04);
       --button-shadow: 0 16px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,0.08);
@@ -90,8 +93,11 @@
       --accent: #f446a6;
       --accent-dark: #7f43ff;
       --accent-cyan: #19bfae;
+      --accent-green: #1fb95f;
+      --accent-green-dark: #0e6a3c;
       --accent-warm: #ffaf42;
       --accent-glow: 0 0 0 1px rgba(244, 70, 166, 0.24), 0 12px 28px rgba(127, 67, 255, 0.18);
+      --accent-green-glow: 0 0 0 1px rgba(31, 185, 95, 0.24), 0 10px 22px rgba(31, 185, 95, 0.16);
       --panel-shadow: 0 22px 48px rgba(22, 29, 43, 0.14), inset 0 1px 0 rgba(255,255,255,0.72);
       --card-shadow: 0 16px 36px rgba(22, 29, 43, 0.12), inset 0 1px 0 rgba(255,255,255,0.68);
       --button-shadow: 0 14px 28px rgba(22, 29, 43, 0.12), inset 0 1px 0 rgba(255,255,255,0.72);
@@ -119,7 +125,10 @@
       --accent: #ff4f9f;
       --accent-dark: #9b38ff;
       --accent-cyan: #37e8d0;
+      --accent-green: #27d56c;
+      --accent-green-dark: #0d6b3c;
       --accent-warm: #ffb343;
+      --accent-green-glow: 0 0 0 1px rgba(39, 213, 108, 0.34), 0 0 20px rgba(39, 213, 108, 0.18);
       --panel-shadow: 0 32px 78px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
       --card-shadow: 0 20px 44px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.04);
       --button-shadow: 0 16px 30px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255,255,255,0.08);
@@ -160,10 +169,7 @@
     body[data-theme="dark"] .admin-lock-note {
       background:
         linear-gradient(180deg, rgba(22, 26, 37, 0.78), rgba(11, 13, 22, 0.84)),
-        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
       color: var(--text);
     }
 
@@ -213,8 +219,10 @@
     }
 
     body[data-theme="dark"] .status-pill.active {
-      background: linear-gradient(135deg, rgba(53,242,208,0.24), rgba(255,79,159,0.24));
+      background: linear-gradient(135deg, rgba(39,213,108,0.26), rgba(12,107,60,0.32));
       color: #fff;
+      border-color: rgba(39, 213, 108, 0.24);
+      box-shadow: var(--accent-green-glow);
     }
 
     body[data-theme="dark"] .status-pill.archived,
@@ -338,10 +346,7 @@
     body[data-theme="dark"] .main-bracket-panel {
       background:
         linear-gradient(180deg, rgba(12, 14, 18, 0.52), rgba(6, 8, 12, 0.68)),
-        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
     }
 
     body[data-theme="dark"] .bracket-workspace {
@@ -1622,11 +1627,8 @@
     body:not([data-theme="dark"]) .invite-code-box,
     body:not([data-theme="dark"]) .admin-lock-note {
       background:
-        linear-gradient(180deg, rgba(255, 254, 251, 0.76), rgba(246, 242, 237, 0.82)),
-        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(180deg, rgba(255, 254, 251, 0.84), rgba(246, 242, 237, 0.88)),
+        linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
       color: var(--text);
     }
 
@@ -1637,10 +1639,7 @@
       background:
         radial-gradient(circle at top right, rgba(25, 191, 174, 0.16), transparent 22%),
         radial-gradient(circle at bottom left, rgba(244, 70, 166, 0.14), transparent 30%),
-        linear-gradient(135deg, rgba(252, 250, 246, 0.76), rgba(246, 241, 235, 0.82) 44%, rgba(237, 232, 226, 0.84) 100%),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(135deg, rgba(252, 250, 246, 0.84), rgba(246, 241, 235, 0.88) 44%, rgba(237, 232, 226, 0.90) 100%);
     }
 
     body:not([data-theme="dark"]) .hero::before {
@@ -1707,11 +1706,8 @@
     body:not([data-theme="dark"]) .mobile-driver-card,
     body:not([data-theme="dark"]) .podium-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(245, 241, 235, 0.82)),
-        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(180deg, rgba(255,255,255,0.84), rgba(245, 241, 235, 0.88)),
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
     }
 
     body:not([data-theme="dark"]) .self-register-display-panel,
@@ -1815,10 +1811,7 @@
       background:
         linear-gradient(180deg, rgba(16, 20, 31, 0.78), rgba(9, 12, 20, 0.84)),
         radial-gradient(circle at 84% 18%, rgba(53, 242, 208, 0.12), transparent 22%),
-        radial-gradient(circle at 16% 80%, rgba(255, 79, 159, 0.14), transparent 26%),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        radial-gradient(circle at 16% 80%, rgba(255, 79, 159, 0.14), transparent 26%);
     }
 
     .hero-copy-block { position: relative; z-index: 1; }
@@ -1895,10 +1888,7 @@
     body[data-theme="dark"] .panel {
       background:
         linear-gradient(180deg, rgba(22, 24, 27, 0.76), rgba(14, 16, 18, 0.82)),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04), transparent 22%),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04), transparent 22%);
     }
 
     body[data-theme="dark"] .hero::before {
@@ -2235,8 +2225,10 @@
     }
 
     .qualifying-ready-pill.is-ready {
-      background: #000;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: #fff;
+      border-color: rgba(0, 0, 0, 0.88);
+      box-shadow: var(--accent-green-glow);
     }
 
     .qualifying-ready-pill.just-submitted {
@@ -2879,7 +2871,9 @@
     }
 
     .admin-alert-pill.is-success {
-      background: #e7ffe8;
+      background: linear-gradient(135deg, rgba(42, 209, 107, 0.22), rgba(42, 209, 107, 0.08));
+      border-color: rgba(13, 111, 60, 0.84);
+      color: #0b2b19;
     }
 
     .admin-alert-pill.is-muted {
@@ -3242,8 +3236,9 @@
     }
 
     .judge-lane-status-pill.is-live {
-      background: #000;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: #fff;
+      box-shadow: var(--accent-green-glow);
     }
 
     .judge-lane-status-pill.is-pending {
@@ -4308,10 +4303,7 @@
       border-radius: calc(var(--radius-panel) + 2px);
       background:
         linear-gradient(180deg, rgba(255,255,255,0.24), rgba(228,232,236,0.34)),
-        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02));
       box-shadow: var(--panel-shadow);
       overflow: visible;
       backdrop-filter: blur(7px) saturate(1.06);
@@ -5966,8 +5958,9 @@
 
     .simulation-status-pill.live,
     .simulation-status-pill.ready {
-      background: linear-gradient(135deg, #050505, #3d3d3d);
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: #ffffff;
+      box-shadow: var(--accent-green-glow);
     }
 
     .simulation-status-pill.waiting {
@@ -6511,11 +6504,8 @@
 
     .public-event-announcer {
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.76), rgba(247,247,247,0.52)),
-        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(120deg, rgba(255,255,255,0.80), rgba(247,247,247,0.62)),
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(0,0,0,0.10));
     }
 
     .public-event-track-panel,
@@ -6523,11 +6513,8 @@
       display: grid;
       gap: 14px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(241,241,241,0.56)),
-        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(241,241,241,0.64)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
     }
 
     .public-event-announcer::after,
@@ -6652,8 +6639,10 @@
 
     .broadcast-chip.tone-live,
     .broadcast-match-pill.tone-live {
-      background: linear-gradient(135deg, #111111, #000000);
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-green-dark));
       color: #ffffff;
+      border-color: rgba(7, 40, 24, 0.52);
+      box-shadow: var(--accent-green-glow);
     }
 
     .broadcast-chip.tone-live small,
@@ -6740,8 +6729,8 @@
       border: 1px solid var(--line);
       border-radius: 18px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,244,244,0.94)),
-        var(--panel);
+        linear-gradient(180deg, rgba(255,255,255,0.72), rgba(244,244,244,0.58)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
       box-shadow: 0 12px 30px rgba(5, 8, 16, 0.08);
     }
 
@@ -6787,8 +6776,8 @@
       border-radius: 22px;
       padding: 16px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(240,240,240,0.94)),
-        var(--panel);
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(240,240,240,0.62)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
       overflow: hidden;
     }
 
@@ -7094,44 +7083,32 @@
 
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .public-event-announcer {
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.76), rgba(247,247,247,0.52)),
-        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(120deg, rgba(255,255,255,0.80), rgba(247,247,247,0.62)),
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(0,0,0,0.10));
     }
 
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .public-event-track-panel,
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .public-event-finals-stage,
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .broadcast-match-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(241,241,241,0.56)),
-        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(241,241,241,0.64)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
       border-color: rgba(0, 0, 0, 0.12);
       box-shadow: var(--panel-shadow);
     }
 
     body[data-theme="dark"] .public-event-announcer {
       background:
-        linear-gradient(118deg, rgba(8,10,12,0.68), rgba(8,10,12,0.42)),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.18)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(118deg, rgba(8,10,12,0.74), rgba(8,10,12,0.56)),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.18));
     }
 
     body[data-theme="dark"] .public-event-track-panel,
     body[data-theme="dark"] .public-event-finals-stage,
     body[data-theme="dark"] .broadcast-match-card {
       background:
-        linear-gradient(180deg, rgba(22,24,28,0.72), rgba(10,12,14,0.82)),
-        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
-        var(--brand-track-background-image);
-      background-position: center center;
-      background-size: cover;
+        linear-gradient(180deg, rgba(22,24,28,0.74), rgba(10,12,14,0.84)),
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
       border-color: rgba(255,255,255,0.16);
       box-shadow: 0 18px 36px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.04);
     }
