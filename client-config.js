@@ -1,7 +1,7 @@
 window.RC_DRIFT_CLIENT_CONFIG = {
   platform: {
     productName: "Drift PDX Sync",
-    buildLabel: "Drift PDX Build 2026.04.14.1",
+    buildLabel: "Drift PDX Build 2026.04.15.1",
     browserTitle: "Drift PDX Competition Control",
     demoWindowName: "driftpdx-live-demo-window",
   },
@@ -9,8 +9,8 @@ window.RC_DRIFT_CLIENT_CONFIG = {
     venueName: "Drift PDX",
     venueLabelPlaceholder: "Drift PDX",
     eventNamePlaceholder: "Drift PDX Championship",
-    logoPrimary: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c",
-    logoInverted: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c",
+    logoPrimary: "./assets/driftpdx-rose-banner.png?v=20260414e",
+    logoInverted: "./assets/driftpdx-rose-banner.png?v=20260414e",
     logoAlt: "Drift PDX rose banner logo",
     backgroundImage: "./assets/driftpdxbackground-custom.png",
     shopUrl: "",
@@ -25,9 +25,9 @@ window.RC_DRIFT_CLIENT_CONFIG = {
   },
   landing: {
     heroCopy:
-      "Track {eventName}, jump into live standings and competition, and keep drivers, judges, and spectators synced from one Drift PDX event platform.",
+      "Track {eventName}, jump into live standings and competition, and keep drivers, judges, and spectators synced from one Drift PDX event hub.",
     emptyHeroCopy:
-      "Jump into registration, standings, results, and the live event view from one Drift PDX front door.",
+      "Jump into registration, standings, results, and competition from one Drift PDX front door.",
     whySectionCopy:
       "Drift PDX keeps registration, live qualifying, bracket control, and results in one place so event days run smoother without juggling separate tools.",
     benefits: [
@@ -67,10 +67,10 @@ window.RC_DRIFT_CLIENT_CONFIG = {
   },
   security: {
     legacyPasswords: {
-      admin: "driftpdx_admin_setup",
-      j1: "driftpdx_judge1_setup",
-      j2: "driftpdx_judge2_setup",
-      j3: "driftpdx_judge3_setup",
+      admin: "cheersray",
+      j1: "cheersray",
+      j2: "cheersray",
+      j3: "cheersray",
     },
   },
 };

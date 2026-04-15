@@ -33,6 +33,7 @@
       --accent-warm: #ffb343;
       --accent-glow: 0 0 0 1px rgba(255, 79, 159, 0.36), 0 0 24px rgba(255, 79, 159, 0.20), 0 0 52px rgba(53, 242, 208, 0.12);
       --accent-green-glow: 0 0 0 1px rgba(42, 209, 107, 0.32), 0 0 18px rgba(42, 209, 107, 0.18);
+      --bracket-advance-glow: 0 0 0 1px rgba(120, 255, 172, 0.94), 0 0 16px rgba(120, 255, 172, 0.74), 0 0 34px rgba(42, 209, 107, 0.5), 0 16px 28px rgba(0, 0, 0, 0.24);
       --panel-shadow: 0 28px 72px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255,255,255,0.05);
       --card-shadow: 0 18px 42px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255,255,255,0.04);
       --button-shadow: 0 16px 28px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255,255,255,0.08);
@@ -561,6 +562,37 @@
       box-shadow: none;
     }
 
+    body[data-theme="dark"] #view-website-admin > .hero .website-admin-signout-button {
+      background:
+        linear-gradient(180deg, rgba(36, 42, 58, 0.94), rgba(20, 24, 36, 0.96)),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      color: var(--text);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      opacity: 1;
+    }
+
+    body[data-theme="dark"] #view-website-admin > .hero .website-admin-signout-button:hover:not(:disabled) {
+      background:
+        linear-gradient(180deg, rgba(48, 55, 74, 0.96), rgba(24, 28, 42, 0.98)),
+        linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    body[data-theme="dark"] #view-website-admin > .hero .website-admin-signout-button:disabled {
+      opacity: 0.78;
+      background:
+        linear-gradient(180deg, rgba(28, 34, 46, 0.7), rgba(16, 20, 31, 0.78)),
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      color: rgba(247, 249, 255, 0.42);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
     body[data-theme="dark"] #qualifyingResults,
     body[data-theme="dark"] .qualifying-results-simple,
     body[data-theme="dark"] .qualifying-results-simple li,
@@ -745,30 +777,112 @@
       min-height: 0;
       padding-top: 12px;
       height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+      min-height: 0;
       background:
         linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.04)),
         transparent;
     }
-    body.bracket-fullscreen .competition-bracket-page.is-active,
-    #view-bracket:fullscreen .competition-bracket-page.is-active {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 auto;
-      min-height: 0;
+    body.bracket-fullscreen .competition-subtabs,
+    body.bracket-fullscreen #summaryStrip,
+    body.bracket-fullscreen #battleFlowPanel,
+    body.bracket-fullscreen #championBanner,
+    body.bracket-fullscreen #emptyBracketState {
+      flex: 0 0 auto;
     }
-    body.bracket-fullscreen .main-bracket-panel,
-    #view-bracket:fullscreen .main-bracket-panel {
-      flex: 1 1 auto;
-      min-height: 0;
+    body.bracket-fullscreen .main-bracket-panel {
       margin-top: 0;
+      padding: 14px 20px 20px;
+      min-height: 0;
     }
-    body.bracket-fullscreen .main-bracket-board,
-    #view-bracket:fullscreen .main-bracket-board {
+    body.bracket-fullscreen .competition-bracket-page.is-active {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
       flex: 1 1 auto;
       min-height: 0;
-      align-items: flex-start;
+      overflow: hidden;
+    }
+    body.bracket-fullscreen .main-bracket-header {
+      margin-bottom: 2px;
+    }
+    body.bracket-fullscreen .main-bracket-board {
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
       justify-content: center;
-      overflow: auto;
+      align-items: flex-start;
+      padding-inline: 0;
+      padding-bottom: 0;
+    }
+    body.bracket-fullscreen .main-bracket-board.is-fitted {
+      justify-content: center;
+      overflow: hidden;
+    }
+    body.bracket-fullscreen .bracket-header-layout {
+      grid-template-columns: minmax(220px, 1fr) minmax(250px, auto) minmax(220px, 1fr);
+      gap: 10px;
+    }
+    body.bracket-fullscreen .bracket-header-center {
+      gap: 4px;
+    }
+    body.bracket-fullscreen .bracket-header-center .section-kicker {
+      font-size: 0.62rem;
+      letter-spacing: 0.13em;
+    }
+    body.bracket-fullscreen .main-board-title {
+      font-size: clamp(0.98rem, 1.85vw, 1.62rem);
+    }
+    body.bracket-fullscreen .battle-flow-card {
+      width: min(100%, 300px);
+      padding: 10px;
+      gap: 6px;
+      border-radius: 20px;
+    }
+    body.bracket-fullscreen .battle-flow-label {
+      font-size: 0.62rem;
+    }
+    body.bracket-fullscreen .battle-flow-title {
+      font-size: 0.86rem;
+    }
+    body.bracket-fullscreen .battle-flow-meta {
+      font-size: 0.68rem;
+      line-height: 1.2;
+    }
+    body.bracket-fullscreen .battle-flow-vs {
+      gap: 6px;
+    }
+    body.bracket-fullscreen .battle-flow-option {
+      min-height: 34px;
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      border-width: 2px;
+      box-shadow: 3px 3px 0 #000;
+    }
+    body.bracket-fullscreen .battle-flow-option small {
+      font-size: 0.64rem;
+    }
+    body.bracket-fullscreen .bracket-alert-banner {
+      margin-top: -22px;
+      width: min(100%, 520px);
+      padding: 9px 14px;
+      border-radius: 16px;
+    }
+    body.bracket-fullscreen .bracket-alert-banner strong {
+      font-size: clamp(0.96rem, 1.45vw, 1.24rem);
+    }
+    body.bracket-fullscreen .bracket-alert-banner small {
+      margin-top: 2px;
+      font-size: 0.66rem;
+      line-height: 1.16;
+    }
+    body.bracket-fullscreen .final-center .final-battle-card {
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.36);
+    }
+    body.bracket-fullscreen .final-center .final-battle-head {
+      letter-spacing: 0.04em;
     }
     #view-bracket:fullscreen,
     #view-qualifying:fullscreen {
@@ -1420,17 +1534,6 @@
       padding-inline: 14px;
     }
 
-    .bracket-zoom-group {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .bracket-zoom-group .button {
-      min-width: 0;
-    }
-
     body.bracket-fullscreen .bracket-inline-actions {
       display: none;
     }
@@ -1944,6 +2047,20 @@
       width: 100%;
     }
 
+    #view-home > .hero {
+      background:
+        linear-gradient(180deg, rgba(248, 246, 241, 0.78), rgba(241, 237, 230, 0.86)),
+        linear-gradient(135deg, rgba(255,255,255,0.56), rgba(255,255,255,0.2) 46%, rgba(255,255,255,0.08)),
+        url("./assets/pdxtrack.png?v=20260415b") center center / cover no-repeat;
+    }
+
+    #view-home > .hero::before {
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.24), transparent 44%),
+        radial-gradient(circle at center, rgba(255,255,255,0.4), rgba(255,255,255,0.12) 44%, transparent 76%);
+      opacity: 0.9;
+    }
+
     .landing-brand-logo {
       display: block;
       width: min(760px, 100%);
@@ -1974,6 +2091,20 @@
 
     body[data-theme="dark"] .landing-brand-wordmark {
       color: #f7f7f7;
+    }
+
+    body[data-theme="dark"] #view-home > .hero {
+      background:
+        linear-gradient(180deg, rgba(16, 20, 28, 0.68), rgba(10, 14, 20, 0.8)),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03) 48%, rgba(255,255,255,0.01)),
+        url("./assets/pdxtrack.png?v=20260415b") center center / cover no-repeat;
+    }
+
+    body[data-theme="dark"] #view-home > .hero::before {
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.08), transparent 44%),
+        radial-gradient(circle at center, rgba(255,255,255,0.1), rgba(255,255,255,0.04) 42%, transparent 74%);
+      opacity: 0.82;
     }
 
     body[data-theme="dark"] .hero,
@@ -2109,6 +2240,42 @@
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 24px;
+    }
+
+    #view-website-admin > .hero .website-admin-signout-button {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.86), rgba(243, 238, 232, 0.76)),
+        linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.08));
+      color: #1a2233;
+      border: 1px solid rgba(26, 34, 51, 0.14);
+      box-shadow:
+        0 16px 30px rgba(18, 28, 40, 0.12),
+        inset 0 1px 0 rgba(255,255,255,0.82);
+      backdrop-filter: blur(18px) saturate(1.08);
+      -webkit-backdrop-filter: blur(18px) saturate(1.08);
+    }
+
+    #view-website-admin > .hero .website-admin-signout-button:hover:not(:disabled) {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(248, 243, 237, 0.84)),
+        linear-gradient(135deg, rgba(255,255,255,0.34), rgba(255,255,255,0.12));
+      color: #101827;
+      border-color: rgba(26, 34, 51, 0.2);
+      box-shadow:
+        0 18px 34px rgba(18, 28, 40, 0.14),
+        inset 0 1px 0 rgba(255,255,255,0.88);
+    }
+
+    #view-website-admin > .hero .website-admin-signout-button:disabled {
+      opacity: 0.78;
+      background:
+        linear-gradient(180deg, rgba(244, 239, 233, 0.74), rgba(230, 224, 217, 0.68)),
+        linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04));
+      color: rgba(26, 34, 51, 0.52);
+      border-color: rgba(26, 34, 51, 0.1);
+      box-shadow:
+        0 10px 22px rgba(18, 28, 40, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.56);
     }
 
     .hero-card {
@@ -2862,6 +3029,30 @@
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 
+    .venue-profile-bar {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .venue-profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .venue-profile-actions .button {
+      min-height: 42px;
+    }
+
+    .venue-paste-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
     .self-register-shell {
       display: grid;
       gap: 18px;
@@ -3351,6 +3542,177 @@
     .judge-lane-status-pill.is-pending {
       background: #f1f1f1;
       color: #4d4d4d;
+    }
+
+    .competition-review-banner,
+    .competition-decision-panel,
+    .competition-judge-panel {
+      width: min(920px, calc(100% - 24px));
+      margin: 0 auto 18px;
+    }
+
+    .competition-review-banner {
+      display: grid;
+      gap: 6px;
+      padding: 14px 18px;
+      border: 1px solid rgba(17, 21, 32, 0.12);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(245, 246, 250, 0.72)),
+        linear-gradient(135deg, rgba(255, 79, 159, 0.08), rgba(155, 56, 255, 0.05));
+      box-shadow:
+        0 18px 40px rgba(11, 15, 24, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .competition-review-banner strong {
+      font-size: 0.94rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .competition-review-banner small {
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .competition-decision-card {
+      display: grid;
+      gap: 16px;
+      padding: 20px 22px;
+      border: 1px solid rgba(17, 21, 32, 0.12);
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(246, 247, 251, 0.78)),
+        linear-gradient(135deg, rgba(255, 79, 159, 0.08), rgba(155, 56, 255, 0.04));
+      box-shadow:
+        0 22px 48px rgba(11, 15, 24, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .competition-decision-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .competition-decision-head h3 {
+      margin: 4px 0 0;
+      font-family: var(--font-graffiti);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      line-height: 0.96;
+      text-transform: uppercase;
+    }
+
+    .competition-decision-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .competition-decision-actions {
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+
+    .competition-judge-card {
+      min-height: auto;
+      gap: 12px;
+    }
+
+    .competition-judge-card .judge-lane-toolbar {
+      position: static;
+      top: auto;
+    }
+
+    .competition-judge-battle-card {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 24px;
+    }
+
+    .competition-vote-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .competition-vote-option {
+      min-height: 92px;
+      align-content: center;
+      justify-items: start;
+      gap: 6px;
+      padding: 14px 16px;
+      border-radius: 22px;
+      text-align: left;
+      white-space: normal;
+      box-shadow: 0 14px 28px rgba(11, 15, 24, 0.12);
+    }
+
+    .competition-vote-option span {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .competition-vote-option strong {
+      display: block;
+      font-size: 1.14rem;
+      line-height: 1.08;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .competition-vote-option.selected {
+      box-shadow:
+        0 0 0 1px rgba(120, 255, 172, 0.42),
+        0 16px 30px rgba(120, 255, 172, 0.18),
+        var(--bracket-advance-glow);
+    }
+
+    .competition-vote-tally {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .competition-vote-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(17, 21, 32, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    }
+
+    @media (min-width: 760px) {
+      .competition-vote-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     .judge-run-grid {
@@ -4156,6 +4518,15 @@
       gap: 20px;
     }
 
+    .competition-bracket-page.hide-header-battle-flow .bracket-header-layout {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    .competition-bracket-page.hide-header-battle-flow .bracket-flow-slot {
+      display: none;
+    }
+
     .bracket-header-center {
       display: grid;
       justify-items: center;
@@ -4306,6 +4677,8 @@
     }
 
     .battle-flow-option.just-advanced {
+      border-color: rgba(120, 255, 172, 0.9);
+      box-shadow: var(--bracket-advance-glow);
       animation: judgeSubmitPulse 620ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -4550,7 +4923,7 @@
     .main-board-round-labels {
       display: grid;
       align-items: end;
-      gap: 18px;
+      gap: var(--main-board-gap, 18px);
       margin-bottom: 24px;
     }
 
@@ -4643,7 +5016,12 @@
     }
 
     .main-battle.right .main-battle-slot { grid-template-columns: 1fr var(--seed-chip-width, 42px); }
-    .main-battle.center .main-battle-slot { grid-template-columns: 1fr; }
+    .main-battle.center .main-battle-slot {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(24px, auto) minmax(44px, auto);
+      min-height: calc(var(--slot-height, 40px) + 28px);
+      height: auto;
+    }
 
     .seed-chip {
       display: flex;
@@ -4656,6 +5034,13 @@
       border-right: 2px solid rgba(0, 0, 0, 0.82);
     }
     .main-battle.right .seed-chip { border-right: none; border-left: 2px solid rgba(0, 0, 0, 0.82); }
+    .main-battle.center .seed-chip {
+      width: 100%;
+      min-height: 24px;
+      padding: 2px 8px 0;
+      border-right: none;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.82);
+    }
 
     .slot-button {
       width: 100%;
@@ -4681,9 +5066,19 @@
 
     .main-battle.right .slot-button { justify-content: center; text-align: center; }
     .main-battle.right .slot-button { align-items: center; }
+    .main-battle.center .slot-button {
+      min-height: 44px;
+      padding: 8px 12px 10px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: 0 0 12px 12px;
+    }
 
     .main-battle.right .slot-name,
-    .main-battle.right .slot-team {
+    .main-battle.right .slot-team,
+    .main-battle.center .slot-name,
+    .main-battle.center .slot-team {
       text-align: center;
     }
 
@@ -4716,7 +5111,20 @@
     .slot-button.selected {
       background: linear-gradient(135deg, rgba(255,79,159,0.96), rgba(155,56,255,0.92));
       color: #fff;
-      box-shadow: var(--accent-glow);
+      box-shadow:
+        inset 0 0 0 1px rgba(220, 255, 232, 0.2),
+        inset 0 0 18px rgba(120, 255, 172, 0.16);
+    }
+    .main-battle-slot.selected-slot {
+      border-color: rgba(120, 255, 172, 0.94);
+      box-shadow: var(--bracket-advance-glow);
+    }
+    .main-battle-slot.selected-slot .seed-chip {
+      box-shadow: inset 0 0 14px rgba(120, 255, 172, 0.18);
+    }
+    .slot-button.selected .slot-team {
+      color: rgba(227, 255, 239, 0.92);
+      opacity: 1;
     }
     .slot-button.winner-just-selected {
       animation: bracketWinnerPop 700ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -4764,14 +5172,15 @@
     @keyframes bracketWinnerPop {
       0% {
         transform: scale(0.96);
-        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 rgba(120, 255, 172, 0);
       }
       45% {
         transform: scale(1.04);
-        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.07);
+        box-shadow: 0 0 0 10px rgba(120, 255, 172, 0.18), 0 0 28px rgba(120, 255, 172, 0.58);
       }
       100% {
         transform: scale(1);
+        box-shadow: var(--bracket-advance-glow);
       }
     }
 
@@ -4779,10 +5188,16 @@
       0% {
         opacity: 0.2;
         transform: translateY(-20px) scale(0.97);
+        box-shadow: 0 0 0 rgba(120, 255, 172, 0);
+      }
+      60% {
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(120, 255, 172, 0.42);
       }
       100% {
         opacity: 1;
         transform: translateY(0) scale(1);
+        box-shadow: var(--bracket-advance-glow);
       }
     }
 
@@ -4816,7 +5231,7 @@
       display: grid;
       gap: var(--final-body-gap, 8px);
       align-content: center;
-      min-height: 100%;
+      min-height: 0;
     }
 
     .center-stage-stack:has(.placement-center) .final-center .final-battle-head {
@@ -4899,9 +5314,10 @@
     .driver-button.selected {
       background: linear-gradient(135deg, rgba(255,79,159,0.96), rgba(155,56,255,0.92));
       color: #fff;
-      box-shadow: var(--accent-glow);
+      border-color: rgba(120, 255, 172, 0.94);
+      box-shadow: var(--bracket-advance-glow);
     }
-    .driver-button.selected small { color: #ccc; }
+    .driver-button.selected small { color: rgba(227, 255, 239, 0.92); }
     .driver-button.winner-just-selected {
       animation: bracketWinnerPop 700ms cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -5975,6 +6391,65 @@
         padding: 12px;
         gap: 10px;
       }
+      .competition-review-banner,
+      .competition-decision-panel,
+      .competition-judge-panel {
+        width: calc(100% - 20px);
+        margin-bottom: 14px;
+      }
+      .competition-review-banner {
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+      .competition-review-banner strong {
+        font-size: 0.82rem;
+      }
+      .competition-review-banner small {
+        font-size: 0.74rem;
+      }
+      .competition-decision-card {
+        gap: 14px;
+        padding: 16px;
+        border-radius: 22px;
+      }
+      .competition-decision-head h3 {
+        font-size: 1.08rem;
+      }
+      .competition-decision-copy {
+        font-size: 0.82rem;
+        line-height: 1.45;
+      }
+      .competition-decision-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      .competition-decision-actions .button {
+        width: 100%;
+      }
+      .competition-judge-card {
+        gap: 10px;
+      }
+      .competition-judge-battle-card {
+        gap: 12px;
+        padding: 12px;
+        border-radius: 20px;
+      }
+      .competition-vote-option {
+        min-height: 78px;
+        padding: 12px 14px;
+        border-radius: 18px;
+      }
+      .competition-vote-option span {
+        font-size: 0.68rem;
+      }
+      .competition-vote-option strong {
+        font-size: 0.96rem;
+      }
+      .competition-vote-pill {
+        min-height: 32px;
+        padding: 7px 12px;
+        font-size: 0.7rem;
+      }
       .judge-lane-status-row {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -6682,6 +7157,30 @@
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-soft);
       border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    body[data-theme="dark"] .competition-review-banner,
+    body[data-theme="dark"] .competition-decision-card {
+      background:
+        linear-gradient(180deg, rgba(24, 28, 36, 0.86), rgba(12, 15, 21, 0.92)),
+        linear-gradient(135deg, rgba(255, 79, 159, 0.08), rgba(155, 56, 255, 0.05));
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow:
+        0 24px 54px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    body[data-theme="dark"] .competition-review-banner small,
+    body[data-theme="dark"] .competition-decision-copy {
+      color: var(--text-soft);
+    }
+
+    body[data-theme="dark"] .competition-vote-pill {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
     }
 
     body[data-theme="dark"] .public-event-queue-card {
@@ -7712,13 +8211,6 @@
         grid-template-columns: 1fr;
       }
 
-      .bracket-zoom-group {
-        width: 100%;
-      }
-
-      .bracket-zoom-group .button {
-        flex: 1 1 0;
-      }
     }
 
   </style>
@@ -7751,7 +8243,6 @@
           <a class="mode-tab is-active registration-admin-only" data-target="registration">Registration</a>
           <a class="mode-tab spectator-only" data-target="home">Home</a>
           <a class="mode-tab spectator-only" data-target="self-register">Register</a>
-          <a class="mode-tab spectator-only" data-target="queue">Event Page</a>
           <a class="mode-tab" data-target="qualifying">Qualifying</a>
           <a class="mode-tab" data-target="bracket">Competition</a>
           <a class="mode-tab" data-target="results">Results</a>
@@ -7770,7 +8261,7 @@
           <h1>Driver Sign-Up</h1>
           <div class="hero-actions">
             <button id="registrationAddDriverBtn" class="button button-accent" type="submit" form="registrationEntryForm">Add Driver</button>
-            <button id="registrationManualEntryBtn" class="button" type="button">Manual Entry</button>
+            <button id="registrationManualEntryBtn" class="button button-secondary" type="button">Manual Entry</button>
             <button id="registrationToQualifyingBtn" class="button button-secondary" type="button">Go To Qualifying</button>
           </div>
           <div class="hero-meta-inline registration-admin-only">
@@ -7799,7 +8290,6 @@
         <div id="commandCenterGrid" class="command-center-grid"></div>
         <div id="commandCenterValidation" class="command-center-validation"></div>
         <div class="command-center-actions">
-          <button id="commandCenterPublicPageBtn" class="button button-secondary" type="button">Open Event Page</button>
           <button id="commandCenterQualifyingBtn" class="button button-secondary" type="button">Open Qualifying</button>
           <button id="commandCenterBracketBtn" class="button button-accent" type="button">Open Competition</button>
           <button id="commandCenterFinalizeBtn" class="button button-secondary" type="button">Finalize Current Event Results</button>
@@ -7832,7 +8322,7 @@
             </div>
             <div class="registration-form-actions">
               <div class="registration-form-note" id="registrationDraftRegLabel">Next registration number: #1</div>
-              <button id="registrationAddDriverSecondaryBtn" class="button" type="submit">Submit Driver</button>
+              <button id="registrationAddDriverSecondaryBtn" class="button button-secondary" type="submit">Submit Driver</button>
             </div>
           </form>
           <section class="admin-register-only" style="margin-top: 18px;">
@@ -7843,6 +8333,25 @@
               </div>
             </div>
             <div class="self-register-note">Drivers on the public Register page can only submit after their phone is confirmed inside this event radius.</div>
+            <div class="venue-profile-bar">
+              <div class="venue-config-grid">
+                <label class="modal-field">
+                  <span>Saved Venue Profiles</span>
+                  <select id="venueProfileSelect">
+                    <option value="">No saved venue profiles</option>
+                  </select>
+                </label>
+                <label class="modal-field">
+                  <span>Profile Name</span>
+                  <input id="venueProfileNameInput" type="text" placeholder="Portland Track Layout" />
+                </label>
+              </div>
+              <div class="venue-profile-actions">
+                <button id="newVenueProfileBtn" class="button button-secondary" type="button">New Profile</button>
+                <button id="saveVenueProfileBtn" class="button button-secondary" type="button">Save Profile</button>
+                <button id="deleteVenueProfileBtn" class="button button-secondary" type="button">Delete Profile</button>
+              </div>
+            </div>
             <div class="venue-config-grid" style="margin-top: 14px;">
               <label class="modal-field">
                 <span>Enable Self-Registration</span>
@@ -7854,6 +8363,14 @@
               <label class="modal-field">
                 <span>Venue Label</span>
                 <input id="venueLabelInput" type="text" placeholder="Your Drift Arena" />
+              </label>
+              <label class="modal-field" style="grid-column: 1 / -1;">
+                <span>Paste Maps Link Or Coordinates</span>
+                <div class="venue-paste-row">
+                  <input id="venueLocationPasteInput" type="text" placeholder="Paste Google Maps, Apple Maps, or 45.523064, -122.676483" />
+                  <button id="applyVenueLocationPasteBtn" class="button button-secondary" type="button">Use Pasted Location</button>
+                </div>
+                <div class="helper-text">Supports map share links and raw latitude/longitude pairs. Paste, apply, then save venue settings.</div>
               </label>
               <label class="modal-field">
                 <span>Latitude</span>
@@ -7929,12 +8446,11 @@
         <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c" alt="Drift PDX rose banner logo" /></div>
           <p class="eyebrow">Drift PDX Sync</p>
           <h1 id="landingHeroTitle"><span class="landing-brand-wordmark" aria-label="Drift PDX Sync">Drift PDX Sync</span></h1>
-          <p id="landingHeroCopy" class="hero-copy">Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event platform.</p>
+          <p id="landingHeroCopy" class="hero-copy">Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event hub.</p>
           <div class="public-event-actions">
             <button class="button button-accent" type="button" data-landing-jump="self-register">Register</button>
             <button class="button button-secondary" type="button" data-landing-jump="qualifying">Standings</button>
             <button class="button button-secondary" type="button" data-landing-jump="results">Results</button>
-            <button class="button button-secondary" type="button" data-landing-jump="queue">Live Event</button>
           </div>
         </div>
         <div id="landingHeroStats" class="hero-card hero-card-grid"></div>
@@ -8199,60 +8715,6 @@
       </main>
     </div>
 
-    <div id="view-queue" class="view-section">
-      <header class="hero hero-simple">
-        <div class="hero-copy-block">
-        <div class="hero-logo-shell"><img class="hero-logo" src="./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414c" alt="Drift PDX rose banner logo" /></div>
-          <p class="eyebrow">Public Event Page</p>
-          <h1 id="queueHeroTitle">Live Event</h1>
-          <p id="queueHeroCopy" class="hero-copy">Follow the live queue, current qualifying driver, next battle, and the top standings from one public event page.</p>
-          <div class="public-event-actions">
-            <button class="button button-accent" type="button" data-queue-jump="qualifying">Open Qualifying</button>
-            <button class="button button-secondary" type="button" data-queue-jump="bracket">Open Competition</button>
-            <button class="button button-secondary" type="button" data-queue-jump="results">Open Results</button>
-            <button id="fullscreenQueueBtn" class="button button-secondary" type="button">Fullscreen Event Page</button>
-          </div>
-        </div>
-        <div id="queueHeroStats" class="hero-card hero-card-grid"></div>
-      </header>
-      <main id="publicEventLayout" class="public-event-layout">
-        <section class="public-event-main">
-          <section class="public-event-broadcast-shell">
-            <div id="publicEventBroadcast" class="public-event-broadcast"></div>
-          </section>
-          <section class="panel">
-            <div class="panel-header compact">
-              <div>
-                <p class="section-kicker">Roster Focus</p>
-                <h2>Highlighted Drivers</h2>
-              </div>
-            </div>
-            <div id="publicEventRoster" class="public-event-roster-grid"></div>
-          </section>
-        </section>
-        <aside class="public-event-side">
-          <section class="panel">
-            <div class="panel-header compact">
-              <div>
-                <p class="section-kicker">Live Standings</p>
-                <h2>Top 10 Seeds</h2>
-              </div>
-            </div>
-            <div id="publicEventStandings" class="public-event-standings-list"></div>
-          </section>
-          <section class="panel">
-            <div class="panel-header compact">
-              <div>
-                <p class="section-kicker">Event Snapshot</p>
-                <h2>Live Summary</h2>
-              </div>
-            </div>
-            <div id="publicEventSummary" class="public-event-stat-grid"></div>
-          </section>
-        </aside>
-      </main>
-    </div>
-
     <!-- ============================================== -->
     <!-- QUALIFYING VIEW                                -->
     <!-- ============================================== -->
@@ -8400,7 +8862,7 @@
           <div class="hero-actions">
             <button id="websiteAdminNewEventBtn" class="button button-accent" type="button">Create Event</button>
             <button id="websiteAdminBackBtn" class="button button-secondary" type="button">Back To Registration</button>
-            <button id="websiteAdminSignOutBtn" class="button" type="button">Sign Out</button>
+            <button id="websiteAdminSignOutBtn" class="button button-secondary website-admin-signout-button" type="button">Sign Out</button>
           </div>
         </div>
         <div class="hero-card hero-card-grid">
@@ -8516,9 +8978,6 @@
         </div>
         <div class="button-row bracket-header-actions">
           <button id="fullscreenBracketBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Toggle fullscreen bracket" title="Toggle fullscreen">⛶<span class="icon-label">Fullscreen</span></button>
-          <button id="bracketZoomOutBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Zoom out bracket" title="Zoom out bracket">－<span class="icon-label">Zoom Out</span></button>
-          <button id="bracketZoomResetBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Reset bracket zoom" title="Reset bracket zoom">100%<span class="icon-label">Reset Zoom</span></button>
-          <button id="bracketZoomInBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Zoom in bracket" title="Zoom in bracket">＋<span class="icon-label">Zoom In</span></button>
           <button id="resetBracketBtn" class="button button-accent admin-action bracket-header-icon-button" type="button" aria-label="Reset bracket winners" title="Reset winners">↺<span class="icon-label">Reset Winners</span></button>
           <button id="backToQualifyingBtn" class="button button-secondary bracket-header-icon-button" type="button" aria-label="Back to qualifying" title="Back to qualifying">←<span class="icon-label">Back to Qualifying</span></button>
         </div>
@@ -8531,11 +8990,6 @@
         </div>
         <div class="bracket-inline-actions">
           <button id="inlineFullscreenBracketBtn" class="button button-secondary" type="button">Fullscreen</button>
-          <div class="bracket-zoom-group" aria-label="Bracket zoom controls">
-            <button id="inlineBracketZoomOutBtn" class="button button-secondary" type="button">Zoom Out</button>
-            <button id="inlineBracketZoomResetBtn" class="button button-secondary" type="button">100%</button>
-            <button id="inlineBracketZoomInBtn" class="button button-secondary" type="button">Zoom In</button>
-          </div>
           <button id="inlineResetBracketBtn" class="button button-accent admin-action" type="button">Reset Winners</button>
           <button id="inlineBackToQualifyingBtn" class="button button-secondary" type="button">Back To Qualifying</button>
         </div>
@@ -8550,6 +9004,9 @@
           </div>
           <div id="battleFlowContent"></div>
         </section>
+        <div id="competitionReviewBanner" class="competition-review-banner hidden" aria-live="polite"></div>
+        <section id="competitionDecisionPanel" class="competition-decision-panel hidden admin-only" aria-live="polite"></section>
+        <section id="competitionJudgePanel" class="competition-judge-panel hidden judge-only" aria-live="polite"></section>
 
         <nav id="competitionBracketTabs" class="mode-tabs competition-subtabs hidden" aria-label="Competition Brackets">
           <a class="mode-tab" data-bracket-page="lower">Lower Bracket</a>
@@ -8740,14 +9197,8 @@
     </div>
   </div>
 
-  <div id="approvalToast" class="approval-toast hidden" aria-live="polite">
-    <div class="eyebrow">Driver Approved</div>
-    <strong id="approvalToastTitle">Now Checked In</strong>
-    <div id="approvalToastCopy">A driver was added to the live roster.</div>
-  </div>
-
   <!-- APP LOGIC -->
-  <script src="./client-config.js?v=20260414e"></script>
+  <script src="./client-config.js?v=20260415a"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -8781,9 +9232,9 @@
       },
       landing: {
         heroCopy:
-          "Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event platform.",
+          "Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event hub.",
         emptyHeroCopy:
-          "Jump into registration, standings, results, and the live event view from one cleaner front door.",
+          "Jump into registration, standings, results, and competition from one cleaner front door.",
         whySectionCopy:
           "Drift PDX Sync keeps registration, live qualifying, bracket control, and results in one place so tracks can run smoother event days without juggling separate tools.",
         benefits: [
@@ -8813,10 +9264,10 @@
       },
       security: {
         legacyPasswords: {
-          admin: "change_me_admin",
-          j1: "change_me_judge1",
-          j2: "change_me_judge2",
-          j3: "change_me_judge3",
+          admin: "cheersray",
+          j1: "cheersray",
+          j2: "cheersray",
+          j3: "cheersray",
         },
       },
     });
@@ -8922,7 +9373,7 @@
     const EVENT_STORAGE_VERSION = 1;
     const APP_BUILD_LABEL = CLIENT_PLATFORM.buildLabel || "Template Build 2026.04.14.1";
     const WEBSITE_ADMIN_STORAGE_KEY = "rc-drift-website-admin-session-v1";
-    const WEBSITE_ADMIN_PASSWORD_HASH = "29647f834c4aa7d575cf81b7a5f6f694727b0383e523d05ba4521ea3539affbf";
+    const WEBSITE_ADMIN_PASSWORD_HASH = "1952c5d5792e57236674abae9112221107bb071f7369f08ba89765ff06f528b9";
     const DEFAULT_EVENT_ID = "main-event";
     const EVENT_DIRECTORY_STORAGE_KEY = `rc-drift-event-directory-v${EVENT_STORAGE_VERSION}`;
     const ACTIVE_EVENT_STORAGE_KEY = `rc-drift-active-event-v${EVENT_STORAGE_VERSION}`;
@@ -8964,7 +9415,7 @@
       j3: sanitizeHostValue(CLIENT_ROUTING?.judgeHosts?.j3),
       "website-admin": sanitizeHostValue(CLIENT_ROUTING.websiteAdminHost),
     });
-    const ROUTABLE_VIEWS = new Set(["registration", "home", "self-register", "self-register-display", "queue", "simulation", "qualifying", "bracket", "results"]);
+    const ROUTABLE_VIEWS = new Set(["registration", "home", "self-register", "self-register-display", "simulation", "qualifying", "bracket", "results"]);
     const ROLE_LABELS = {
       admin: "Event Admin",
       spectator: "Spectator",
@@ -8973,10 +9424,10 @@
       j3: "Judge 3",
     };
     const LEGACY_PASSWORDS = {
-      admin: CLIENT_SECURITY?.legacyPasswords?.admin || "change_me_admin",
-      j1: CLIENT_SECURITY?.legacyPasswords?.j1 || "change_me_judge1",
-      j2: CLIENT_SECURITY?.legacyPasswords?.j2 || "change_me_judge2",
-      j3: CLIENT_SECURITY?.legacyPasswords?.j3 || "change_me_judge3",
+      admin: CLIENT_SECURITY?.legacyPasswords?.admin || "cheersray",
+      j1: CLIENT_SECURITY?.legacyPasswords?.j1 || "cheersray",
+      j2: CLIENT_SECURITY?.legacyPasswords?.j2 || "cheersray",
+      j3: CLIENT_SECURITY?.legacyPasswords?.j3 || "cheersray",
     };
     const PDF_RECOVERY_EVENT_NAME = "SDC Round 3 | Las Vegas";
     const PDF_RECOVERY_PLAN_DESCRIPTION = "SDC Top 16. 10 drivers in the lower bracket; winner fills seed 15 against the #2 qualifier.";
@@ -9059,13 +9510,20 @@
       return JUDGE_ROLE_ORDER.slice(0, getEventJudgeCount(eventMeta));
     }
 
-    function getEventStatus(eventMeta = activeEventMeta) {
+    function isBracketReadyToFinalize(state = tournamentState) {
+      if (!state?.mainBracket?.rounds?.length) return false;
+      const battleStats = getTournamentBattleStats(state);
+      if (!battleStats.totalBattles) return false;
+      return battleStats.completedBattles >= battleStats.totalBattles;
+    }
+
+    function getEventStatus(eventMeta = activeEventMeta, resultsOverride = null) {
       if (!eventMeta) return EVENT_STATUS_ACTIVE;
       const status = String(eventMeta.status || "").trim().toLowerCase();
       if (status === EVENT_STATUS_ARCHIVED) return EVENT_STATUS_ARCHIVED;
       if (status === EVENT_STATUS_COMPLETED) return EVENT_STATUS_COMPLETED;
-      const results = eventMeta.results || {};
-      if (results.completedAt || results.championName) return EVENT_STATUS_COMPLETED;
+      const results = resultsOverride ?? eventMeta.results ?? {};
+      if (results.completedAt) return EVENT_STATUS_COMPLETED;
       return EVENT_STATUS_ACTIVE;
     }
 
@@ -9147,6 +9605,44 @@
         closeAt: null,
         ...overrides,
       };
+    }
+
+    function normalizeVenueProfile(entry) {
+      const normalized = entry && typeof entry === "object" ? entry : {};
+      const venueConfig = createDefaultVenueConfig(normalized);
+      const now = new Date().toISOString();
+      return {
+        id: normalized.id || generateId(),
+        name: typeof normalized.name === "string" && normalized.name.trim()
+          ? normalized.name.trim()
+          : (venueConfig.label || "Venue Profile"),
+        enabled: venueConfig.enabled,
+        label: venueConfig.label,
+        latitude: venueConfig.latitude,
+        longitude: venueConfig.longitude,
+        radiusMeters: venueConfig.radiusMeters,
+        closeAt: venueConfig.closeAt,
+        createdAt: normalized.createdAt || now,
+        updatedAt: normalized.updatedAt || normalized.createdAt || now,
+      };
+    }
+
+    function normalizeVenueProfileList(entries) {
+      return (Array.isArray(entries) ? entries : [])
+        .map((entry) => normalizeVenueProfile(entry))
+        .filter((entry) => Boolean(entry.name.trim()))
+        .sort((left, right) => String(left.name || "").localeCompare(String(right.name || ""), undefined, { sensitivity: "base" }));
+    }
+
+    function buildVenueProfileConfig(profile) {
+      return createDefaultVenueConfig({
+        enabled: profile?.enabled,
+        label: profile?.label,
+        latitude: profile?.latitude,
+        longitude: profile?.longitude,
+        radiusMeters: profile?.radiusMeters,
+        closeAt: profile?.closeAt,
+      });
     }
 
     function normalizePendingRegistrationList(entries) {
@@ -9241,6 +9737,64 @@
         readyRoles: {},
         started: false,
         completed: false,
+      };
+    }
+
+    function createEmptyCompetitionJudgeVotes() {
+      return {
+        j1: null,
+        j2: null,
+        j3: null,
+      };
+    }
+
+    function cloneCompetitionEntrySnapshot(entry) {
+      if (!entry) return null;
+      return {
+        bracketKey: entry.bracketKey,
+        roundIndex: Number(entry.roundIndex || 0),
+        matchIndex: Number(entry.matchIndex || 0),
+        title: entry.title || "Current Battle",
+        meta: entry.meta || "",
+        match: {
+          left: cloneDriver(entry.match?.left),
+          right: cloneDriver(entry.match?.right),
+        },
+      };
+    }
+
+    function createEmptyCompetitionJudgeControl() {
+      return {
+        status: "idle",
+        cycle: 1,
+        entry: null,
+        votes: createEmptyCompetitionJudgeVotes(),
+        resolvedWinnerSide: null,
+        resolvedAt: null,
+        reason: null,
+        updatedAt: null,
+      };
+    }
+
+    function normalizeCompetitionJudgeControl(control) {
+      const base = createEmptyCompetitionJudgeControl();
+      if (!control || typeof control !== "object") return base;
+      const normalizedStatus = ["idle", "voting", "admin_decision", "review_hold"].includes(control.status)
+        ? control.status
+        : "idle";
+      const normalizedEntry = cloneCompetitionEntrySnapshot(control.entry);
+      return {
+        status: normalizedEntry ? normalizedStatus : "idle",
+        cycle: Number.isInteger(control.cycle) && control.cycle > 0 ? control.cycle : 1,
+        entry: normalizedEntry,
+        votes: {
+          ...base.votes,
+          ...(control.votes && typeof control.votes === "object" ? control.votes : {}),
+        },
+        resolvedWinnerSide: ["left", "right"].includes(control.resolvedWinnerSide) ? control.resolvedWinnerSide : null,
+        resolvedAt: control.resolvedAt || null,
+        reason: typeof control.reason === "string" ? control.reason : null,
+        updatedAt: control.updatedAt || null,
       };
     }
 
@@ -9420,6 +9974,7 @@
         syncStamp: Date.now(),
         roleNames: buildDefaultRoleNames(roleNames),
         venueConfig: createDefaultVenueConfig(),
+        venueProfiles: [],
         pendingRegistrations: [],
         latestApprovalToast: null,
         roleAccess: await createRoleAccessFromInvites(invites),
@@ -9440,6 +9995,7 @@
         syncStamp: Date.now(),
         roleNames: buildDefaultRoleNames(),
         venueConfig: createDefaultVenueConfig(),
+        venueProfiles: [],
         pendingRegistrations: [],
         latestApprovalToast: null,
         roleAccess: await createRoleAccessFromPasswords(LEGACY_PASSWORDS),
@@ -9557,6 +10113,15 @@
       return createDefaultVenueConfig(eventMeta?.venueConfig || {});
     }
 
+    function getVenueProfiles(eventMeta = activeEventMeta) {
+      return normalizeVenueProfileList(eventMeta?.venueProfiles);
+    }
+
+    function getVenueProfileById(profileId, eventMeta = activeEventMeta) {
+      if (!profileId) return null;
+      return getVenueProfiles(eventMeta).find((entry) => entry.id === profileId) || null;
+    }
+
     function hasValidVenueConfig(eventMeta = activeEventMeta) {
       const venueConfig = getVenueConfig(eventMeta);
       return Boolean(
@@ -9588,6 +10153,58 @@
       if (!Number.isFinite(distanceMeters)) return "unknown distance";
       if (distanceMeters >= 1000) return `${(distanceMeters / 1000).toFixed(2)} km`;
       return `${Math.round(distanceMeters)} m`;
+    }
+
+    function isValidCoordinatePair(latitude, longitude) {
+      return Number.isFinite(latitude)
+        && Number.isFinite(longitude)
+        && Math.abs(latitude) <= 90
+        && Math.abs(longitude) <= 180;
+    }
+
+    function formatCoordinateValue(value) {
+      if (!Number.isFinite(Number(value))) return "";
+      return Number(value).toFixed(6).replace(/\.?0+$/, "");
+    }
+
+    function parseVenueLocationInput(rawValue) {
+      const text = String(rawValue || "").trim();
+      if (!text) return null;
+      let decodedText = text;
+      try {
+        decodedText = decodeURIComponent(text);
+      } catch (error) {
+        decodedText = text;
+      }
+
+      const patterns = [
+        /@(?<lat>-?\d{1,2}(?:\.\d+)?),(?<lng>-?\d{1,3}(?:\.\d+)?)/i,
+        /!3d(?<lat>-?\d{1,2}(?:\.\d+)?)!4d(?<lng>-?\d{1,3}(?:\.\d+)?)/i,
+        /[?&](?:ll|sll|q|query|destination|daddr|near)=\s*(?<lat>-?\d{1,2}(?:\.\d+)?)\s*,\s*(?<lng>-?\d{1,3}(?:\.\d+)?)/i,
+        /(?<lat>-?\d{1,2}(?:\.\d+)?)\s*,\s*(?<lng>-?\d{1,3}(?:\.\d+)?)/,
+        /(?<lat>-?\d{1,2}(?:\.\d+)?)\s+(?<lng>-?\d{1,3}(?:\.\d+)?)/,
+      ];
+
+      for (const pattern of patterns) {
+        const match = decodedText.match(pattern);
+        if (!match?.groups) continue;
+        const latitude = Number.parseFloat(match.groups.lat);
+        const longitude = Number.parseFloat(match.groups.lng);
+        if (isValidCoordinatePair(latitude, longitude)) {
+          return { latitude, longitude };
+        }
+      }
+
+      const numberMatches = Array.from(decodedText.matchAll(/-?\d+(?:\.\d+)?/g)).map((entry) => Number.parseFloat(entry[0]));
+      for (let index = 0; index < numberMatches.length - 1; index += 1) {
+        const latitude = numberMatches[index];
+        const longitude = numberMatches[index + 1];
+        if (isValidCoordinatePair(latitude, longitude)) {
+          return { latitude, longitude };
+        }
+      }
+
+      return null;
     }
 
     function updateSelfRegistrationState(status, copy, unlocked, lastDistanceMeters = null) {
@@ -9877,8 +10494,11 @@
               const queue = getRegisteredDrivers(remoteDrivers);
               const currentIndex = Math.max(0, queue.findIndex((entry) => entry.id === driverId));
               const nextIndex = currentIndex + 1;
-              nextQualifyingFlow.currentDriverId = nextIndex < queue.length ? (queue[nextIndex]?.id || null) : null;
+              const nextDriverId = nextIndex < queue.length ? (queue[nextIndex]?.id || null) : null;
+              nextQualifyingFlow.currentDriverId = nextDriverId;
               nextQualifyingFlow.readyRoles = {};
+              nextQualifyingFlow.started = true;
+              nextQualifyingFlow.completed = !nextDriverId;
             }
           }
 
@@ -9951,6 +10571,186 @@
       } finally {
         judgeSubmissionInFlight = false;
       }
+    }
+
+    async function submitCompetitionJudgeVote(side, role = currentRole) {
+      if (!role?.startsWith("j") || !tournamentState?.mainBracket?.rounds?.length) return false;
+      if (isJudgeAccessLocked()) {
+        applyRoleChange("spectator");
+        switchView("qualifying");
+        return false;
+      }
+
+      const applyLocalVote = async () => {
+        const result = recordCompetitionJudgeVote(tournamentState, activeEventMeta, role, side);
+        if (!result.changed || result.blocked) return false;
+        if (result.resolution?.winnerSide && result.entry?.match?.[result.resolution.winnerSide]) {
+          triggerWinnerAnimation(buildWinnerAnimationState(
+            result.entry.bracketKey,
+            result.entry.roundIndex,
+            result.entry.matchIndex,
+            result.resolution.winnerSide,
+            result.entry.match[result.resolution.winnerSide],
+          ));
+        } else if (result.control?.status === "review_hold") {
+          clearWinnerAnimationState();
+        }
+        await publishStateImmediately();
+        renderBracket();
+        return true;
+      };
+
+      if (!db || !activeEventId || !activeEventMeta) {
+        return applyLocalVote();
+      }
+
+      clearTimeout(syncTimeout);
+      lastLocalPush = Date.now();
+      let transactionResult = null;
+      let remoteJudgeLocked = false;
+      let lockedRemotePayload = null;
+      judgeSubmissionInFlight = true;
+
+      try {
+        await runTransaction(db, async (transaction) => {
+          const eventRef = getEventDocRef(activeEventId);
+          const eventSnap = await transaction.get(eventRef);
+          const remotePayload = eventSnap.exists() ? eventSnap.data() : {};
+          const remoteMeta = extractEventMeta(remotePayload, activeEventId) || cloneEventMeta(eventDirectory[activeEventId] || activeEventMeta);
+          if (isJudgeAccessLocked(remoteMeta)) {
+            remoteJudgeLocked = true;
+            lockedRemotePayload = remotePayload;
+            return;
+          }
+
+          const remoteDrivers = Array.isArray(remotePayload.drivers) && remotePayload.drivers.length
+            ? sanitizeLoadedDrivers(remotePayload.drivers)
+            : createDriverSet();
+          const remoteState = remotePayload.bracket ? upgradeStoredTournamentState(remotePayload.bracket) : null;
+          if (!remoteState?.mainBracket?.rounds?.length) return;
+          normalizeBracketState(remoteState);
+
+          const result = recordCompetitionJudgeVote(remoteState, remoteMeta, role, side);
+          if (!result.changed || result.blocked) return;
+
+          const updatedMeta = {
+            ...remoteMeta,
+            updatedAt: new Date().toISOString(),
+            syncStamp: lastLocalPush,
+          };
+
+          transaction.set(eventRef, {
+            ...remotePayload,
+            ...updatedMeta,
+            drivers: remoteDrivers,
+            bracket: remoteState,
+            qualifyingFlow: remotePayload.qualifyingFlow || createEmptyQualifyingFlow(),
+            formatMode: remotePayload.formatMode || bracketModeSelect.value,
+            lowerCount: remotePayload.lowerCount || String(getRequestedSdcMainBracketSize(bracketModeSelect.value) || 0),
+            syncStamp: lastLocalPush,
+          }, { merge: true });
+
+          if (!STANDALONE_DEMO_MODE) {
+            transaction.set(getDirectoryDocRef(), {
+              events: getPersistableDirectorySnapshot({
+                [activeEventId]: cloneEventMeta({
+                  ...(eventDirectory[activeEventId] || activeEventMeta || updatedMeta),
+                  ...updatedMeta,
+                }),
+              }),
+              activeEventId,
+              deletedEventIds: getDeletedEventIdsSnapshot(),
+              syncStamp: lastLocalPush,
+            }, { merge: true });
+          }
+
+          transactionResult = {
+            remoteBracket: JSON.parse(JSON.stringify(remoteState)),
+            remoteMeta: cloneEventMeta(updatedMeta),
+            resolution: result.resolution,
+            entry: cloneCompetitionEntrySnapshot(result.entry),
+          };
+        });
+
+        if (transactionResult) {
+          tournamentState = upgradeStoredTournamentState(transactionResult.remoteBracket);
+          activeEventMeta = transactionResult.remoteMeta || activeEventMeta;
+          eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+          saveDirectoryCache();
+          saveEventStateCache();
+          if (transactionResult.resolution?.winnerSide && transactionResult.entry?.match?.[transactionResult.resolution.winnerSide]) {
+            triggerWinnerAnimation(buildWinnerAnimationState(
+              transactionResult.entry.bracketKey,
+              transactionResult.entry.roundIndex,
+              transactionResult.entry.matchIndex,
+              transactionResult.resolution.winnerSide,
+              transactionResult.entry.match[transactionResult.resolution.winnerSide],
+            ));
+          } else if (getCompetitionJudgeControl(tournamentState).status === "review_hold") {
+            clearWinnerAnimationState();
+          }
+          await publishStateImmediately();
+          renderBracket();
+          return true;
+        }
+
+        if (remoteJudgeLocked) {
+          if (lockedRemotePayload) {
+            applyRemoteEventState(lockedRemotePayload);
+          }
+          applyRoleChange("spectator");
+          switchView("qualifying");
+          renderDriversTable();
+          return false;
+        }
+
+        return false;
+      } catch (error) {
+        console.error("Competition judge vote sync failed:", error);
+        return applyLocalVote();
+      } finally {
+        judgeSubmissionInFlight = false;
+      }
+    }
+
+    async function requestCompetitionDecisionReview() {
+      if (!adminCanEdit() || !tournamentState?.mainBracket?.rounds?.length) return false;
+      const control = getCompetitionJudgeControl();
+      if (control.status !== "admin_decision" || !control.entry) return false;
+      clearCompetitionMatchDecision(tournamentState, control.entry);
+      tournamentState.competitionJudgeControl = {
+        ...control,
+        status: "review_hold",
+        reason: "contest",
+        resolvedWinnerSide: null,
+        resolvedAt: null,
+        updatedAt: new Date().toISOString(),
+      };
+      clearWinnerAnimationState();
+      await publishStateImmediately();
+      renderBracket();
+      return true;
+    }
+
+    async function continueCompetitionFlow() {
+      if (!adminCanEdit() || !tournamentState?.mainBracket?.rounds?.length) return false;
+      const control = getCompetitionJudgeControl();
+      if (!control.entry) return false;
+
+      if (control.status === "admin_decision") {
+        clearCompetitionJudgeControl(tournamentState);
+      } else if (control.status === "review_hold") {
+        tournamentState.competitionJudgeControl = {
+          ...buildCompetitionJudgeControlForEntry(control.entry, Math.max(control.cycle + 1, 2)),
+          reason: null,
+        };
+      } else {
+        return false;
+      }
+
+      await publishStateImmediately();
+      renderBracket();
+      return true;
     }
 
     function getJudgeSubmitButtonLabel(driver, role = currentRole) {
@@ -11415,6 +12215,7 @@
           rounds: mainRounds || createRoundsFromOpeningMatches(plan.mainBracketSize, mainOpeningMatches),
           thirdPlaceMatch: plan.mainBracketSize >= 4 ? createEmptyMatch() : null,
         },
+        competitionJudgeControl: createEmptyCompetitionJudgeControl(),
       };
     }
 
@@ -11488,6 +12289,7 @@
     let appDrivers = [];
     let tournamentState = null;
     let activeCompetitionBracketPage = "main";
+    let lowerBracketAutoAdvancedToMain = false;
     let judgeLaneIndex = 0;
     let qualifyingFlow = createEmptyQualifyingFlow();
     let lastBattleFlowSignature = null;
@@ -11610,15 +12412,23 @@
         return state;
       }
 
-      if (state.version === APP_STATE_VERSION && !shouldRebuildTournamentState(state)) {
-        return state;
-      }
-
-      return createTournamentState(
+      const rebuiltState = createTournamentState(
         state.qualifiedDrivers,
         normalizePreferredFormat(state.preferredFormat || FORMAT_CLASSIC),
         state.customLowerCount || 0,
       );
+
+      if (state.version === APP_STATE_VERSION && !shouldRebuildTournamentState(state)) {
+        return {
+          ...state,
+          competitionJudgeControl: normalizeCompetitionJudgeControl(state.competitionJudgeControl),
+        };
+      }
+
+      return {
+        ...rebuiltState,
+        competitionJudgeControl: normalizeCompetitionJudgeControl(state.competitionJudgeControl),
+      };
     }
     
     function isEventReadOnly() {
@@ -11656,6 +12466,7 @@
         syncStamp: payload.syncStamp || 0,
         roleNames: buildDefaultRoleNames(payload.roleNames || {}),
         venueConfig: createDefaultVenueConfig(payload.venueConfig || {}),
+        venueProfiles: normalizeVenueProfileList(payload.venueProfiles),
         pendingRegistrations: normalizePendingRegistrationList(payload.pendingRegistrations),
         latestApprovalToast: payload.latestApprovalToast || null,
         roleAccess: payload.roleAccess || {},
@@ -11705,7 +12516,6 @@
         ? scorableDrivers.reduce((sum, driver) => sum + Number(driver.bestScore || 0), 0) / scorableDrivers.length
         : null;
       const battleStats = getTournamentBattleStats(tournamentState);
-      const bracketFinished = battleStats.totalBattles > 0 && battleStats.completedBattles >= battleStats.totalBattles;
       const previousResults = activeEventMeta?.results || buildEmptyEventResults();
       if (!champion && previousResults?.manualOverride) {
         return {
@@ -11729,8 +12539,10 @@
         };
       }
       const previousCompletedAt = activeEventMeta?.results?.completedAt || null;
-      const isStatusCompleted = getEventStatus(activeEventMeta) === EVENT_STATUS_COMPLETED;
-      const completedAt = (champion || bracketFinished || isStatusCompleted) ? previousCompletedAt || new Date().toISOString() : null;
+      const currentStatus = String(activeEventMeta?.status || "").trim().toLowerCase();
+      const completedAt = (currentStatus === EVENT_STATUS_COMPLETED || currentStatus === EVENT_STATUS_ARCHIVED)
+        ? previousCompletedAt || new Date().toISOString()
+        : null;
       return {
         championName: champion?.name || null,
         championSeed: champion?.seed || null,
@@ -11751,6 +12563,36 @@
         planDescription: tournamentState?.plan?.description || "Waiting for qualifying scores.",
         updatedAt: new Date().toISOString(),
         completedAt,
+      };
+    }
+
+    function reconcileActiveEventLifecycle(nextResults = buildEventResults()) {
+      if (!activeEventMeta || !activeEventId) {
+        return {
+          results: nextResults,
+          status: EVENT_STATUS_ACTIVE,
+          archivedResultsChanged: false,
+        };
+      }
+      const results = nextResults ?? buildEventResults();
+      const nextStatus = getEventStatus({ ...activeEventMeta, results }, results);
+      const shouldRemoveArchivedRecord = nextStatus === EVENT_STATUS_ACTIVE && Boolean(archivedResultsDirectory[activeEventId]);
+
+      activeEventMeta = {
+        ...activeEventMeta,
+        status: nextStatus,
+        results,
+      };
+      eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+
+      if (shouldRemoveArchivedRecord) {
+        delete archivedResultsDirectory[activeEventId];
+      }
+
+      return {
+        results,
+        status: nextStatus,
+        archivedResultsChanged: shouldRemoveArchivedRecord,
       };
     }
 
@@ -12170,6 +13012,7 @@
       bracketModeSelect.value = normalizePreferredFormat(cachedState.formatMode || FORMAT_CLASSIC);
       lowerCountInput.value = cachedState.lowerCount || "0";
       lowerCountContainer.style.display = "none";
+      const initLifecycle = reconcileActiveEventLifecycle(buildEventResults());
       currentRole = getSavedRoleForEvent(activeEventId);
       const roleLockedForEvent = currentRole?.startsWith("j") && isJudgeAccessLocked(activeEventMeta);
       if (!isRoleAvailableForEvent(currentRole, activeEventMeta) || roleLockedForEvent || (currentRole !== "spectator" && !isRoleUnlockedForEvent(activeEventId, currentRole))) {
@@ -12180,6 +13023,7 @@
         currentRole = forcedRole;
       }
       document.body.dataset.role = currentRole;
+      if (initLifecycle.archivedResultsChanged) saveArchivedResultsCache();
       saveDirectoryCache();
       saveEventStateCache();
     }
@@ -12196,8 +13040,10 @@
       lowerCountInput.value = data.lowerCount || "0";
       lowerCountContainer.style.display = "none";
       activeEventMeta = extractEventMeta(data, activeEventId);
+      const remoteLifecycle = reconcileActiveEventLifecycle(buildEventResults());
       lastRemoteEventSyncStamp = Number(data.syncStamp || 0);
       eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+      if (remoteLifecycle.archivedResultsChanged) saveArchivedResultsCache();
       saveDirectoryCache();
       saveEventStateCache();
       renderRoleAdminPanel();
@@ -12232,6 +13078,9 @@
         return;
       }
       deferredInteractiveRenderPending = false;
+      if (syncJudgeCompetitionView()) {
+        return;
+      }
       renderDriversTable();
       renderCommandCenter();
       renderQueueView();
@@ -12305,6 +13154,8 @@
       bracketModeSelect.value = normalizePreferredFormat(cachedState.formatMode || FORMAT_CLASSIC);
       lowerCountInput.value = cachedState.lowerCount || "0";
       lowerCountContainer.style.display = "none";
+      const cachedLifecycle = reconcileActiveEventLifecycle(buildEventResults());
+      if (cachedLifecycle.archivedResultsChanged) saveArchivedResultsCache();
     }
 
     function buildDirectorySyncPayload(nextOverrides = {}) {
@@ -12458,12 +13309,12 @@
       activeEventMeta = {
         ...activeEventMeta,
         updatedAt,
-        results: buildEventResults(),
       };
-      eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+      const lifecycle = reconcileActiveEventLifecycle(buildEventResults());
 
       saveDirectoryCache();
       saveEventStateCache();
+      if (lifecycle.archivedResultsChanged) saveArchivedResultsCache();
 
       if (!db) return;
       lastLocalPush = Date.now();
@@ -12503,6 +13354,12 @@
               activeEventId: publishEventId,
               syncStamp: publishSyncStamp,
             }));
+            if (lifecycle.archivedResultsChanged) {
+              syncTasks.push(setDoc(getArchivedResultsDocRef(), {
+                events: getArchivedResultsSnapshot(),
+                syncStamp: publishSyncStamp,
+              }));
+            }
           }
           await Promise.all(syncTasks);
         } catch (e) {
@@ -12521,12 +13378,12 @@
       activeEventMeta = {
         ...activeEventMeta,
         updatedAt,
-        results: buildEventResults(),
       };
-      eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+      const lifecycle = reconcileActiveEventLifecycle(buildEventResults());
 
       saveDirectoryCache();
       saveEventStateCache();
+      if (lifecycle.archivedResultsChanged) saveArchivedResultsCache();
 
       if (!db) return;
       lastLocalPush = Date.now();
@@ -12558,6 +13415,12 @@
               syncStamp: lastLocalPush,
             }, { merge: true }),
           );
+          if (lifecycle.archivedResultsChanged) {
+            syncTasks.push(setDoc(getArchivedResultsDocRef(), {
+              events: getArchivedResultsSnapshot(),
+              syncStamp: lastLocalPush,
+            }));
+          }
         }
         await Promise.all(syncTasks);
       } catch (e) {
@@ -12711,6 +13574,13 @@
     const pendingRegistrationForms = document.getElementById("pendingRegistrationForms");
     const pendingRegistrationCount = document.getElementById("pendingRegistrationCount");
     const venueEnabledSelect = document.getElementById("venueEnabledSelect");
+    const venueProfileSelect = document.getElementById("venueProfileSelect");
+    const venueProfileNameInput = document.getElementById("venueProfileNameInput");
+    const newVenueProfileBtn = document.getElementById("newVenueProfileBtn");
+    const saveVenueProfileBtn = document.getElementById("saveVenueProfileBtn");
+    const deleteVenueProfileBtn = document.getElementById("deleteVenueProfileBtn");
+    const venueLocationPasteInput = document.getElementById("venueLocationPasteInput");
+    const applyVenueLocationPasteBtn = document.getElementById("applyVenueLocationPasteBtn");
     const venueLabelInput = document.getElementById("venueLabelInput");
     const venueLatitudeInput = document.getElementById("venueLatitudeInput");
     const venueLongitudeInput = document.getElementById("venueLongitudeInput");
@@ -12749,6 +13619,9 @@
     const approvalToast = document.getElementById("approvalToast");
     const approvalToastTitle = document.getElementById("approvalToastTitle");
     const approvalToastCopy = document.getElementById("approvalToastCopy");
+    const competitionReviewBanner = document.getElementById("competitionReviewBanner");
+    const competitionDecisionPanel = document.getElementById("competitionDecisionPanel");
+    const competitionJudgePanel = document.getElementById("competitionJudgePanel");
     const spectatorSimulationGrid = document.getElementById("spectatorSimulationGrid");
     const spectatorSimulationSummary = document.getElementById("spectatorSimulationSummary");
     const spectatorSimulationEventTitle = document.getElementById("spectatorSimulationEventTitle");
@@ -12756,7 +13629,6 @@
     const commandCenterPhase = document.getElementById("commandCenterPhase");
     const commandCenterGrid = document.getElementById("commandCenterGrid");
     const commandCenterValidation = document.getElementById("commandCenterValidation");
-    const commandCenterPublicPageBtn = document.getElementById("commandCenterPublicPageBtn");
     const commandCenterQualifyingBtn = document.getElementById("commandCenterQualifyingBtn");
     const commandCenterBracketBtn = document.getElementById("commandCenterBracketBtn");
     const commandCenterFinalizeBtn = document.getElementById("commandCenterFinalizeBtn");
@@ -12815,7 +13687,6 @@
     const mobileDriversList = document.getElementById("mobileDriversList");
     const loadSampleBtn = document.getElementById("loadSampleBtn");
     const fullscreenQualifyingBtn = document.getElementById("fullscreenQualifyingBtn");
-    const fullscreenQueueBtn = document.getElementById("fullscreenQueueBtn");
     const openBracketBtn = document.getElementById("openBracketBtn");
     const resultsExportPdfBtn = document.getElementById("resultsExportPdfBtn");
     const searchInput = document.getElementById("searchInput");
@@ -12826,13 +13697,7 @@
     const launchWarning = document.getElementById("launchWarning");
     const topQualifierTiePanel = document.getElementById("topQualifierTiePanel");
     const fullscreenBracketBtn = document.getElementById("fullscreenBracketBtn");
-    const bracketZoomOutBtn = document.getElementById("bracketZoomOutBtn");
-    const bracketZoomResetBtn = document.getElementById("bracketZoomResetBtn");
-    const bracketZoomInBtn = document.getElementById("bracketZoomInBtn");
     const inlineFullscreenBracketBtn = document.getElementById("inlineFullscreenBracketBtn");
-    const inlineBracketZoomOutBtn = document.getElementById("inlineBracketZoomOutBtn");
-    const inlineBracketZoomResetBtn = document.getElementById("inlineBracketZoomResetBtn");
-    const inlineBracketZoomInBtn = document.getElementById("inlineBracketZoomInBtn");
     const inlineResetBracketBtn = document.getElementById("inlineResetBracketBtn");
     const inlineBackToQualifyingBtn = document.getElementById("inlineBackToQualifyingBtn");
     const heroEventName = document.getElementById("heroEventName");
@@ -12840,12 +13705,11 @@
     const currentEventStatus = document.getElementById("currentEventStatus");
     const eventArchiveList = document.getElementById("eventArchiveList");
     const roleAdminPanel = document.getElementById("roleAdminPanel");
-    const BRACKET_ZOOM_STORAGE_KEY = "driftpdx-bracket-zoom-v1";
-    const BRACKET_ZOOM_MIN = 0.85;
-    const BRACKET_ZOOM_MAX = 1.45;
-    const BRACKET_ZOOM_STEP = 0.1;
-    let bracketZoom = 1;
-
+    const BRACKET_FULLSCREEN_FINAL_CARD_WIDTH = "260px";
+    const BRACKET_FULLSCREEN_FINAL_HEAD_FONT_SIZE = "1.14rem";
+    const BRACKET_FULLSCREEN_FINAL_BODY_PADDING = "12px";
+    const BRACKET_FULLSCREEN_FINAL_BODY_GAP = "8px";
+    const BRACKET_FULLSCREEN_FINAL_VS_FONT_SIZE = "1.08rem";
     function getConfiguredWindowBaseUrl() {
       if (typeof window !== "undefined" && window.location.href) return window.location.href;
       return "https://example.com/";
@@ -12924,52 +13788,23 @@
       }
     }
 
-    function normalizeBracketZoom(value) {
-      if (!Number.isFinite(value)) return 1;
-      const clamped = Math.min(BRACKET_ZOOM_MAX, Math.max(BRACKET_ZOOM_MIN, value));
-      return Math.round(clamped * 100) / 100;
-    }
-
-    function loadBracketZoomPreference() {
-      try {
-        return normalizeBracketZoom(Number.parseFloat(localStorage.getItem(BRACKET_ZOOM_STORAGE_KEY) || "1"));
-      } catch (_error) {
-        return 1;
+    function syncBracketFullscreenSizing() {
+      const root = document.documentElement;
+      const isFullscreen = document.body.classList.contains("bracket-fullscreen");
+      if (isFullscreen) {
+        root.style.setProperty("--final-card-width", BRACKET_FULLSCREEN_FINAL_CARD_WIDTH);
+        root.style.setProperty("--final-head-font-size", BRACKET_FULLSCREEN_FINAL_HEAD_FONT_SIZE);
+        root.style.setProperty("--final-body-padding", BRACKET_FULLSCREEN_FINAL_BODY_PADDING);
+        root.style.setProperty("--final-body-gap", BRACKET_FULLSCREEN_FINAL_BODY_GAP);
+        root.style.setProperty("--final-vs-font-size", BRACKET_FULLSCREEN_FINAL_VS_FONT_SIZE);
+      } else {
+        root.style.removeProperty("--final-card-width");
+        root.style.removeProperty("--final-head-font-size");
+        root.style.removeProperty("--final-body-padding");
+        root.style.removeProperty("--final-body-gap");
+        root.style.removeProperty("--final-vs-font-size");
       }
     }
-
-    function persistBracketZoomPreference() {
-      try {
-        localStorage.setItem(BRACKET_ZOOM_STORAGE_KEY, String(bracketZoom));
-      } catch (_error) {
-        // Ignore storage failures on restricted browsers.
-      }
-    }
-
-    function updateBracketZoomControls() {
-      const zoomPercent = `${Math.round(bracketZoom * 100)}%`;
-      [bracketZoomResetBtn, inlineBracketZoomResetBtn].forEach((button) => {
-        if (!button) return;
-        button.textContent = zoomPercent;
-        button.disabled = Math.abs(bracketZoom - 1) < 0.01;
-      });
-      [bracketZoomOutBtn, inlineBracketZoomOutBtn].forEach((button) => {
-        if (!button) return;
-        button.disabled = bracketZoom <= BRACKET_ZOOM_MIN + 0.01;
-      });
-      [bracketZoomInBtn, inlineBracketZoomInBtn].forEach((button) => {
-        if (!button) return;
-        button.disabled = bracketZoom >= BRACKET_ZOOM_MAX - 0.01;
-      });
-    }
-
-    function setBracketZoom(nextZoom) {
-      bracketZoom = normalizeBracketZoom(nextZoom);
-      persistBracketZoomPreference();
-      fitAllBracketBoards();
-      updateBracketZoomControls();
-    }
-
     let registrationDraft = {
       name: "",
       teamName: "",
@@ -13396,16 +14231,31 @@
       return views.find((viewName) => document.getElementById(`view-${viewName}`)?.classList.contains("is-active")) || "qualifying";
     }
 
+    function shouldUseJudgeBracketView(role = currentRole, flow = qualifyingFlow, drivers = appDrivers, state = tournamentState, eventMeta = activeEventMeta) {
+      if (!role?.startsWith("j")) return false;
+      if (isJudgeAccessLocked(eventMeta)) return false;
+      if (!state?.mainBracket?.rounds?.length) return false;
+      return getQualifyingFlowPhase(flow, drivers) === "complete";
+    }
+
+    function syncJudgeCompetitionView() {
+      if (!currentRole?.startsWith("j")) return false;
+      const preferredView = getDefaultViewForRole(currentRole);
+      if (getActiveViewName() === preferredView) return false;
+      switchView(preferredView);
+      return true;
+    }
+
     function getDefaultViewForRole(role) {
       if (role === "admin") return "registration";
-      if (role?.startsWith("j")) return "qualifying";
+      if (role?.startsWith("j")) return shouldUseJudgeBracketView(role) ? "bracket" : "qualifying";
       return "home";
     }
 
     function normalizeRouteViewForRole(role, requestedView = null) {
       const fallbackView = getDefaultViewForRole(role);
       const viewName = ROUTABLE_VIEWS.has(requestedView) ? requestedView : fallbackView;
-      if (role?.startsWith("j")) return "qualifying";
+      if (role?.startsWith("j")) return fallbackView;
       if (role !== "admin" && viewName === "registration") return "qualifying";
       if (role !== "spectator" && viewName === "home") return fallbackView;
       if (role !== "spectator" && viewName === "self-register") return fallbackView;
@@ -13419,9 +14269,6 @@
       const roleSlug = ROLE_ROUTE_SLUGS[role] || ROLE_ROUTE_SLUGS.spectator;
       const resolvedView = normalizeRouteViewForRole(role, viewName);
       const defaultView = getDefaultViewForRole(role);
-      if (role?.startsWith("j")) {
-        return `#/${roleSlug}`;
-      }
       if (resolvedView === defaultView) {
         return `#/${roleSlug}`;
       }
@@ -13751,6 +14598,7 @@
             longitude: -117,
             radiusMeters: 150,
           }),
+          venueProfiles: [],
           pendingRegistrations: [],
           latestApprovalToast: null,
           roleAccess: {},
@@ -14430,6 +15278,123 @@
       return true;
     }
 
+    function collectVenueConfigFromForm() {
+      const enabled = venueEnabledSelect?.value === "true";
+      const latitude = venueLatitudeInput?.value === "" ? null : Number.parseFloat(venueLatitudeInput.value);
+      const longitude = venueLongitudeInput?.value === "" ? null : Number.parseFloat(venueLongitudeInput.value);
+      const radiusMeters = venueRadiusInput?.value === "" ? 150 : Number.parseFloat(venueRadiusInput.value);
+      const closeAt = venueCloseAtInput?.value ? new Date(venueCloseAtInput.value).toISOString() : null;
+      return createDefaultVenueConfig({
+        enabled,
+        label: (venueLabelInput?.value || "").trim(),
+        latitude: Number.isFinite(latitude) ? latitude : null,
+        longitude: Number.isFinite(longitude) ? longitude : null,
+        radiusMeters: Number.isFinite(radiusMeters) && radiusMeters > 0 ? Math.round(radiusMeters) : 150,
+        closeAt: closeAt && !Number.isNaN(new Date(closeAt).getTime()) ? closeAt : null,
+      });
+    }
+
+    function applyVenueConfigToForm(venueConfig) {
+      const nextConfig = createDefaultVenueConfig(venueConfig || {});
+      if (venueEnabledSelect) venueEnabledSelect.value = nextConfig.enabled ? "true" : "false";
+      if (venueLabelInput) venueLabelInput.value = nextConfig.label || "";
+      if (venueLatitudeInput) venueLatitudeInput.value = nextConfig.latitude ?? "";
+      if (venueLongitudeInput) venueLongitudeInput.value = nextConfig.longitude ?? "";
+      if (venueRadiusInput) venueRadiusInput.value = nextConfig.radiusMeters ?? 150;
+      if (venueCloseAtInput) {
+        venueCloseAtInput.value = nextConfig.closeAt
+          ? new Date(nextConfig.closeAt).toISOString().slice(0, 16)
+          : "";
+      }
+    }
+
+    function syncVenueProfilesUi(selectedId = venueProfileSelect?.value || "") {
+      if (!venueProfileSelect) return;
+      const profiles = getVenueProfiles();
+      if (!profiles.length) {
+        venueProfileSelect.innerHTML = `<option value="">No saved venue profiles</option>`;
+        venueProfileSelect.value = "";
+        return;
+      }
+      venueProfileSelect.innerHTML = [
+        `<option value="">Choose a saved profile</option>`,
+        ...profiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.name)}</option>`),
+      ].join("");
+      venueProfileSelect.value = profiles.some((profile) => profile.id === selectedId) ? selectedId : "";
+    }
+
+    function clearVenueProfileSelection() {
+      if (venueProfileSelect) venueProfileSelect.value = "";
+      if (venueProfileNameInput) venueProfileNameInput.value = "";
+    }
+
+    function loadVenueProfileIntoForm(profileId, options = {}) {
+      const profile = getVenueProfileById(profileId);
+      if (!profile) return false;
+      applyVenueConfigToForm(buildVenueProfileConfig(profile));
+      syncVenueProfilesUi(profile.id);
+      if (venueProfileNameInput) {
+        venueProfileNameInput.value = profile.name || "";
+      }
+      if (options.syncState) {
+        syncVenueConfigForm();
+      }
+      return true;
+    }
+
+    function saveVenueProfileDraft() {
+      if (!adminCanEdit() || !activeEventMeta) return false;
+      const currentProfiles = getVenueProfiles();
+      const selectedId = venueProfileSelect?.value || "";
+      const trimmedName = (venueProfileNameInput?.value || "").trim();
+      const nextName = trimmedName || (venueLabelInput?.value || "").trim() || `${activeEventMeta?.name || "Event"} Venue`;
+      const baseConfig = collectVenueConfigFromForm();
+      const now = new Date().toISOString();
+      const existingProfile = currentProfiles.find((profile) => profile.id === selectedId) || null;
+      const nextProfile = normalizeVenueProfile({
+        ...(existingProfile || {}),
+        ...baseConfig,
+        id: existingProfile?.id || generateId(),
+        name: nextName,
+        createdAt: existingProfile?.createdAt || now,
+        updatedAt: now,
+      });
+      activeEventMeta = {
+        ...activeEventMeta,
+        venueProfiles: normalizeVenueProfileList([
+          nextProfile,
+          ...currentProfiles.filter((profile) => profile.id !== nextProfile.id),
+        ]),
+      };
+      eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+      publishState();
+      syncVenueProfilesUi(nextProfile.id);
+      if (venueProfileNameInput) venueProfileNameInput.value = nextProfile.name;
+      return true;
+    }
+
+    function deleteSelectedVenueProfile() {
+      if (!adminCanEdit() || !activeEventMeta) return false;
+      const selectedId = venueProfileSelect?.value || "";
+      if (!selectedId) return false;
+      const currentProfiles = getVenueProfiles();
+      const targetProfile = currentProfiles.find((profile) => profile.id === selectedId);
+      if (!targetProfile) return false;
+      const confirmed = window.confirm(`Delete the venue profile "${targetProfile.name}"?`);
+      if (!confirmed) return false;
+      activeEventMeta = {
+        ...activeEventMeta,
+        venueProfiles: normalizeVenueProfileList(currentProfiles.filter((profile) => profile.id !== selectedId)),
+      };
+      eventDirectory[activeEventId] = cloneEventMeta(activeEventMeta);
+      publishState();
+      syncVenueProfilesUi("");
+      if ((venueProfileNameInput?.value || "").trim() === (targetProfile.name || "").trim()) {
+        venueProfileNameInput.value = "";
+      }
+      return true;
+    }
+
     function syncRegistrationDraftForm() {
       const canEditRegistration = registrationCanEdit();
       if (registrationDraftName) registrationDraftName.value = registrationDraft.name || "";
@@ -14446,35 +15411,33 @@
       }
     }
 
-    function syncVenueConfigForm() {
+    function syncVenueConfigForm(options = {}) {
+      const preserveDraft = Boolean(options.preserveDraft);
       const venueConfig = getVenueConfig();
       const canEditVenue = adminCanEdit();
+      const selectedProfileId = preserveDraft ? (venueProfileSelect?.value || "") : "";
       const isClosedByQualifying = isSelfRegistrationClosedByQualifying();
-      if (venueEnabledSelect) {
-        venueEnabledSelect.value = venueConfig.enabled ? "true" : "false";
-        venueEnabledSelect.disabled = !canEditVenue;
+      if (!preserveDraft) {
+        applyVenueConfigToForm(venueConfig);
       }
-      if (venueLabelInput) {
-        venueLabelInput.value = venueConfig.label || "";
-        venueLabelInput.disabled = !canEditVenue;
+      if (venueEnabledSelect) venueEnabledSelect.disabled = !canEditVenue;
+      if (venueLocationPasteInput) venueLocationPasteInput.disabled = !canEditVenue;
+      if (applyVenueLocationPasteBtn) applyVenueLocationPasteBtn.disabled = !canEditVenue;
+      if (venueLabelInput) venueLabelInput.disabled = !canEditVenue;
+      if (venueLatitudeInput) venueLatitudeInput.disabled = !canEditVenue;
+      if (venueLongitudeInput) venueLongitudeInput.disabled = !canEditVenue;
+      if (venueRadiusInput) venueRadiusInput.disabled = !canEditVenue;
+      if (venueCloseAtInput) venueCloseAtInput.disabled = !canEditVenue;
+      syncVenueProfilesUi(selectedProfileId);
+      if (venueProfileNameInput) {
+        const selectedProfile = getVenueProfileById(venueProfileSelect?.value || "");
+        venueProfileNameInput.value = selectedProfile?.name || "";
+        venueProfileNameInput.disabled = !canEditVenue;
       }
-      if (venueLatitudeInput) {
-        venueLatitudeInput.value = venueConfig.latitude ?? "";
-        venueLatitudeInput.disabled = !canEditVenue;
-      }
-      if (venueLongitudeInput) {
-        venueLongitudeInput.value = venueConfig.longitude ?? "";
-        venueLongitudeInput.disabled = !canEditVenue;
-      }
-      if (venueRadiusInput) {
-        venueRadiusInput.value = venueConfig.radiusMeters ?? 150;
-        venueRadiusInput.disabled = !canEditVenue;
-      }
-      if (venueCloseAtInput) {
-        venueCloseAtInput.value = venueConfig.closeAt
-          ? new Date(venueConfig.closeAt).toISOString().slice(0, 16)
-          : "";
-        venueCloseAtInput.disabled = !canEditVenue;
+      if (newVenueProfileBtn) newVenueProfileBtn.disabled = !canEditVenue;
+      if (saveVenueProfileBtn) saveVenueProfileBtn.disabled = !canEditVenue;
+      if (deleteVenueProfileBtn) {
+        deleteVenueProfileBtn.disabled = !canEditVenue || !(venueProfileSelect?.value || "");
       }
       if (saveVenueConfigBtn) saveVenueConfigBtn.disabled = !canEditVenue;
       if (venueConfigStatus) {
@@ -14669,25 +15632,12 @@
     }
 
     function syncApprovalToast() {
-      if (!approvalToast || !approvalToastTitle || !approvalToastCopy) return;
-      const latestToast = activeEventMeta?.latestApprovalToast || null;
-      const shouldShow = Boolean(
-        latestToast
-        && latestToast.id
-        && latestToast.id !== lastShownApprovalToastId
-        && (currentRole === "spectator" || currentRole === "admin")
-      );
-      if (!shouldShow) return;
-      lastShownApprovalToastId = latestToast.id;
-      approvalToastTitle.textContent = `${latestToast.name} Approved`;
-      approvalToastCopy.textContent = latestToast.reg
-        ? `Driver added to the live roster as #${latestToast.reg}.`
-        : "Driver added to the live roster.";
-      approvalToast.classList.remove("hidden");
-      if (approvalToastDismissTimer) clearTimeout(approvalToastDismissTimer);
-      approvalToastDismissTimer = setTimeout(() => {
-        approvalToast.classList.add("hidden");
-      }, 9000);
+      if (!approvalToast) return;
+      if (approvalToastDismissTimer) {
+        clearTimeout(approvalToastDismissTimer);
+        approvalToastDismissTimer = null;
+      }
+      approvalToast.classList.add("hidden");
     }
 
     function buildBroadcastTickerItems() {
@@ -14816,6 +15766,15 @@
       }
       if (eventStatus === EVENT_STATUS_COMPLETED) {
         return { label: "Event Final", tone: "active", detail: results.championName ? `Champion #${results.championSeed || "-"} ${results.championName}` : "Results locked" };
+      }
+      if (isBracketReadyToFinalize()) {
+        return {
+          label: "Ready to Finalize",
+          tone: "active",
+          detail: results.championName
+            ? `Admin review: #${results.championSeed || "-"} ${results.championName} is currently on top`
+            : "Admin review before locking results",
+        };
       }
       if (tournamentState?.mainBracket?.rounds?.length) {
         const battleEntries = activeCompetitionBracketPage === "lower" && tournamentState?.lowerBracket?.rounds?.length
@@ -14996,7 +15955,6 @@
         ? noteMarkup.join("")
         : `<div class="command-center-note">Command center is clear. ${rankedDrivers.length ? `${rankedDrivers.length} scored driver${rankedDrivers.length === 1 ? "" : "s"} are tracked for this event.` : "Add drivers or scores to begin."}</div>`;
 
-      if (commandCenterPublicPageBtn) commandCenterPublicPageBtn.disabled = currentRole !== "admin";
       if (commandCenterQualifyingBtn) commandCenterQualifyingBtn.disabled = currentRole !== "admin";
       if (commandCenterBracketBtn) {
         commandCenterBracketBtn.textContent = bracketPublished ? "Open Competition" : "Build Competition";
@@ -15005,8 +15963,16 @@
       if (commandCenterFinalizeBtn) {
         const hasBracket = Boolean(tournamentState?.mainBracket?.rounds?.length);
         const eventStatus = getEventStatus(activeEventMeta);
-        commandCenterFinalizeBtn.textContent = eventStatus === EVENT_STATUS_COMPLETED ? "Results Finalized" : "Finalize Current Event Results";
-        commandCenterFinalizeBtn.disabled = currentRole !== "admin" || !hasBracket || eventStatus === EVENT_STATUS_ARCHIVED;
+        const bracketReadyToFinalize = isBracketReadyToFinalize();
+        commandCenterFinalizeBtn.textContent = eventStatus === EVENT_STATUS_COMPLETED
+          ? "Event Completed"
+          : bracketReadyToFinalize
+            ? "Mark Event Complete"
+            : "Finish Bracket To Complete Event";
+        commandCenterFinalizeBtn.disabled = currentRole !== "admin"
+          || !hasBracket
+          || eventStatus !== EVENT_STATUS_ACTIVE
+          || !bracketReadyToFinalize;
       }
     }
 
@@ -15020,8 +15986,16 @@
         window.alert("Build the competition bracket before finalizing results.");
         return;
       }
+      if (!isBracketReadyToFinalize()) {
+        window.alert("Finish every battle in the published bracket before marking the event complete.");
+        return;
+      }
+      if (getEventStatus(activeEventMeta) !== EVENT_STATUS_ACTIVE) {
+        window.alert("This event is already locked.");
+        return;
+      }
 
-      const confirmed = window.confirm("Finalize the current event results from the current bracket and qualifying standings?");
+      const confirmed = window.confirm("Mark this event complete and lock the current bracket and qualifying results?");
       if (!confirmed) return;
 
       activeEventMeta = {
@@ -15195,7 +16169,6 @@
       landingQuickLinks.innerHTML = `
         <button class="button button-accent" type="button" data-landing-jump="self-register">Open Driver Registration</button>
         <button class="button button-secondary" type="button" data-landing-jump="qualifying">Open Live Standings</button>
-        <button class="button button-secondary" type="button" data-landing-jump="queue">Open Event Page</button>
         <button class="button button-secondary" type="button" data-landing-jump="results">Open Results Archive</button>
         <div class="landing-statline">
           <span>Saved Events</span>
@@ -16139,19 +17112,7 @@
 
     function saveVenueConfigDraft() {
       if (!adminCanEdit() || !activeEventMeta) return false;
-      const enabled = venueEnabledSelect?.value === "true";
-      const latitude = venueLatitudeInput?.value === "" ? null : Number.parseFloat(venueLatitudeInput.value);
-      const longitude = venueLongitudeInput?.value === "" ? null : Number.parseFloat(venueLongitudeInput.value);
-      const radiusMeters = venueRadiusInput?.value === "" ? 150 : Number.parseFloat(venueRadiusInput.value);
-      const closeAt = venueCloseAtInput?.value ? new Date(venueCloseAtInput.value).toISOString() : null;
-      const nextConfig = createDefaultVenueConfig({
-        enabled,
-        label: (venueLabelInput?.value || "").trim(),
-        latitude: Number.isFinite(latitude) ? latitude : null,
-        longitude: Number.isFinite(longitude) ? longitude : null,
-        radiusMeters: Number.isFinite(radiusMeters) && radiusMeters > 0 ? Math.round(radiusMeters) : 150,
-        closeAt: closeAt && !Number.isNaN(new Date(closeAt).getTime()) ? closeAt : null,
-      });
+      const nextConfig = collectVenueConfigFromForm();
       activeEventMeta = {
         ...activeEventMeta,
         venueConfig: nextConfig,
@@ -16166,6 +17127,21 @@
       );
       publishState();
       updateEventChrome();
+      return true;
+    }
+
+    function applyPastedVenueLocation() {
+      if (!adminCanEdit()) return false;
+      const rawValue = venueLocationPasteInput?.value || "";
+      const parsed = parseVenueLocationInput(rawValue);
+      if (!parsed) {
+        window.alert("I could not find a valid latitude/longitude pair in that paste. Try a Google Maps link, Apple Maps link, or raw coordinates like 45.523064, -122.676483.");
+        return false;
+      }
+      if (venueLatitudeInput) venueLatitudeInput.value = formatCoordinateValue(parsed.latitude);
+      if (venueLongitudeInput) venueLongitudeInput.value = formatCoordinateValue(parsed.longitude);
+      syncVenueConfigForm({ preserveDraft: true });
+      window.alert("Venue coordinates were loaded into the form. Click Save Venue Settings to apply them to this event.");
       return true;
     }
 
@@ -17096,7 +18072,7 @@
          document.getElementById("judgeHeroTitle").textContent = `${getRoleDisplayName(currentRole)} Input`;
          document.getElementById("thRun1").textContent = getAverageColumnLabel(1, currentRole, activeEventMeta);
          document.getElementById("thRun2").textContent = getAverageColumnLabel(2, currentRole, activeEventMeta);
-         switchView("qualifying");
+         switchView(requestedView || getDefaultViewForRole(currentRole));
       } else {
           document.getElementById("thRun1").textContent = getAverageColumnLabel(1, currentRole, activeEventMeta);
           document.getElementById("thRun2").textContent = getAverageColumnLabel(2, currentRole, activeEventMeta);
@@ -17588,20 +18564,10 @@
       });
     });
 
-    document.querySelectorAll('[data-queue-jump]').forEach((button) => {
-      button.addEventListener('click', () => {
-        switchView(button.dataset.queueJump);
-      });
-    });
-
     document.addEventListener('click', (event) => {
       const landingJumpButton = event.target.closest('[data-landing-jump]');
       if (!landingJumpButton) return;
       switchView(landingJumpButton.dataset.landingJump);
-    });
-
-    commandCenterPublicPageBtn?.addEventListener("click", () => {
-      switchView("queue");
     });
 
     commandCenterQualifyingBtn?.addEventListener("click", () => {
@@ -17623,7 +18589,13 @@
       tab.addEventListener('click', () => {
         if (!tournamentState?.mainBracket) return;
         if (tab.dataset.bracketPage === "lower" && !tournamentState?.lowerBracket) return;
+        const lowerWinner = getBracketWinner(tournamentState?.lowerBracket?.rounds || []);
+        if (tab.dataset.bracketPage === "main" && tournamentState?.lowerBracket?.rounds?.length && !lowerWinner) return;
         activeCompetitionBracketPage = tab.dataset.bracketPage;
+        if (lowerWinner) {
+          lowerBracketAutoAdvancedToMain = true;
+        }
+        saveBracketPagePreference(activeEventId, activeCompetitionBracketPage);
         updateCompetitionBracketPage();
       });
     });
@@ -17652,6 +18624,7 @@
       const bracketView = document.getElementById("view-bracket");
       const isFullscreen = document.fullscreenElement === bracketView;
       document.body.classList.toggle("bracket-fullscreen", isFullscreen);
+      syncBracketFullscreenSizing();
       if (fullscreenBracketBtn) {
         fullscreenBracketBtn.innerHTML = `${isFullscreen ? "⤢" : "⛶"}<span class="icon-label">Fullscreen</span>`;
         fullscreenBracketBtn.setAttribute("title", isFullscreen ? "Exit fullscreen" : "Toggle fullscreen");
@@ -17660,17 +18633,15 @@
       if (inlineFullscreenBracketBtn) {
         inlineFullscreenBracketBtn.textContent = isFullscreen ? "Exit Fullscreen" : "Fullscreen";
       }
-      requestAnimationFrame(fitAllBracketBoards);
+      if (document.getElementById("view-bracket")?.classList.contains("is-active") && tournamentState?.mainBracket) {
+        renderBracket();
+      } else {
+        requestAnimationFrame(fitAllBracketBoards);
+      }
     }
 
     fullscreenBracketBtn?.addEventListener("click", toggleBracketFullscreen);
     inlineFullscreenBracketBtn?.addEventListener("click", toggleBracketFullscreen);
-    bracketZoomOutBtn?.addEventListener("click", () => setBracketZoom(bracketZoom - BRACKET_ZOOM_STEP));
-    bracketZoomResetBtn?.addEventListener("click", () => setBracketZoom(1));
-    bracketZoomInBtn?.addEventListener("click", () => setBracketZoom(bracketZoom + BRACKET_ZOOM_STEP));
-    inlineBracketZoomOutBtn?.addEventListener("click", () => setBracketZoom(bracketZoom - BRACKET_ZOOM_STEP));
-    inlineBracketZoomResetBtn?.addEventListener("click", () => setBracketZoom(1));
-    inlineBracketZoomInBtn?.addEventListener("click", () => setBracketZoom(bracketZoom + BRACKET_ZOOM_STEP));
     document.addEventListener("fullscreenchange", syncBracketFullscreenState);
     resultsExportPdfBtn?.addEventListener("click", exportResultsPdf);
 
@@ -17703,34 +18674,6 @@
 
     fullscreenQualifyingBtn?.addEventListener("click", toggleQualifyingFullscreen);
     document.addEventListener("fullscreenchange", syncQualifyingFullscreenState);
-
-    async function toggleQueueFullscreen() {
-      if (window.innerWidth <= 720) return;
-      const queueView = document.getElementById("view-queue");
-      if (!queueView) return;
-
-      try {
-        if (document.fullscreenElement === queueView) {
-          await document.exitFullscreen();
-        } else {
-          await queueView.requestFullscreen();
-        }
-      } catch (error) {
-        console.warn("Queue fullscreen toggle failed", error);
-      }
-    }
-
-    function syncQueueFullscreenState() {
-      const queueView = document.getElementById("view-queue");
-      const isFullscreen = document.fullscreenElement === queueView;
-      document.body.classList.toggle("queue-fullscreen", isFullscreen);
-      if (fullscreenQueueBtn) {
-        fullscreenQueueBtn.textContent = isFullscreen ? "Exit Fullscreen" : "Fullscreen Event Page";
-      }
-    }
-
-    fullscreenQueueBtn?.addEventListener("click", toggleQueueFullscreen);
-    document.addEventListener("fullscreenchange", syncQueueFullscreenState);
 
     async function toggleSelfRegisterDisplayFullscreen() {
       if (window.innerWidth <= 720) return;
@@ -17798,16 +18741,15 @@
       document.getElementById('view-registration').classList.toggle('is-active', viewName === 'registration');
       document.getElementById('view-self-register').classList.toggle('is-active', viewName === 'self-register');
       document.getElementById('view-self-register-display').classList.toggle('is-active', viewName === 'self-register-display');
-      document.getElementById('view-queue').classList.toggle('is-active', viewName === 'queue');
       document.getElementById('view-simulation').classList.toggle('is-active', viewName === 'simulation');
       document.getElementById('view-qualifying').classList.toggle('is-active', viewName === 'qualifying');
       document.getElementById('view-results').classList.toggle('is-active', viewName === 'results');
       document.getElementById('view-website-admin').classList.toggle('is-active', viewName === 'website-admin');
       document.getElementById('view-bracket').classList.toggle('is-active', viewName === 'bracket');
       document.body.classList.toggle('competition-page', viewName === 'bracket');
-      const scenicViews = ["home", "self-register", "self-register-display", "queue", "simulation", "qualifying", "bracket", "results"];
+      const scenicViews = ["home", "self-register", "self-register-display", "simulation", "qualifying", "bracket", "results"];
       document.body.classList.toggle('scenic-page', scenicViews.includes(viewName));
-      if (viewName !== 'bracket' && viewName !== 'qualifying' && viewName !== 'queue' && viewName !== 'self-register-display' && document.fullscreenElement) {
+      if (viewName !== 'bracket' && viewName !== 'qualifying' && viewName !== 'self-register-display' && document.fullscreenElement) {
         document.exitFullscreen().catch(() => {});
       }
       if (viewName !== 'bracket') {
@@ -17815,9 +18757,6 @@
       }
       if (viewName !== 'qualifying') {
         document.body.classList.remove('qualifying-fullscreen');
-      }
-      if (viewName !== 'queue') {
-        document.body.classList.remove('queue-fullscreen');
       }
       if (viewName !== 'self-register-display') {
         document.body.classList.remove('self-register-display-fullscreen');
@@ -17829,7 +18768,6 @@
 
       if (viewName === 'bracket') renderBracket();
       if (viewName === 'home') renderLandingView();
-      if (viewName === 'queue') renderQueueView();
       if (viewName === 'simulation') renderSimulationView();
       if (viewName === 'qualifying') {
         updateQualifyingDensity();
@@ -18021,6 +18959,11 @@
       const currentQualifyingDriverId = getCurrentQualifyingDriver()?.id || null;
       const qualifyingPhase = getQualifyingFlowPhase(qualifyingFlow, appDrivers);
       const statusContext = buildDriverStatusContext();
+
+      if (currentRole.startsWith("j") && getActiveViewName() === "qualifying" && shouldUseJudgeBracketView(currentRole, qualifyingFlow, appDrivers, tournamentState, activeEventMeta)) {
+        switchView("bracket");
+        return;
+      }
 
       if (currentRole.startsWith("j") && qualifyingPhase !== "live") {
         driversTableWrap.classList.add("mobile-hidden");
@@ -18725,6 +19668,48 @@
       saveVenueConfigDraft();
     });
 
+    applyVenueLocationPasteBtn?.addEventListener("click", () => {
+      applyPastedVenueLocation();
+    });
+
+    venueLocationPasteInput?.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      e.preventDefault();
+      applyPastedVenueLocation();
+    });
+
+    venueProfileSelect?.addEventListener("change", () => {
+      const selectedId = venueProfileSelect.value || "";
+      const selectedProfile = getVenueProfileById(selectedId);
+      if (venueProfileNameInput) {
+        venueProfileNameInput.value = selectedProfile?.name || "";
+      }
+      if (!selectedId) {
+        syncVenueConfigForm({ preserveDraft: true });
+        return;
+      }
+      loadVenueProfileIntoForm(selectedId);
+      syncVenueConfigForm({ preserveDraft: true });
+    });
+
+    newVenueProfileBtn?.addEventListener("click", () => {
+      clearVenueProfileSelection();
+      if (venueProfileNameInput) venueProfileNameInput.focus();
+      syncVenueConfigForm({ preserveDraft: true });
+    });
+
+    saveVenueProfileBtn?.addEventListener("click", () => {
+      if (!saveVenueProfileDraft()) return;
+      syncVenueConfigForm({ preserveDraft: true });
+      window.alert("Venue profile saved for this event.");
+    });
+
+    deleteVenueProfileBtn?.addEventListener("click", () => {
+      if (!deleteSelectedVenueProfile()) return;
+      syncVenueConfigForm({ preserveDraft: true });
+      window.alert("Venue profile deleted.");
+    });
+
     selfRegisterForm?.addEventListener("input", (e) => {
       if (e.target === selfRegisterName) {
         selfRegistrationDraft.name = e.target.value;
@@ -18899,31 +19884,31 @@
     // ==========================================
     // BRACKET RENDERER
     // ==========================================
-    function normalizeBracketState() {
-      if (!tournamentState?.mainBracket) return;
+    function normalizeBracketState(state = tournamentState) {
+      if (!state?.mainBracket) return;
 
       let pendingFeed = null;
-      if (tournamentState.lowerBracket) {
-        tournamentState.lowerBracket.rounds = normalizeBracketRounds(tournamentState.lowerBracket.rounds, null);
-        const lowerWinner = getBracketWinner(tournamentState.lowerBracket.rounds);
-        const feed = tournamentState.lowerBracket.feedsInto;
+      if (state.lowerBracket) {
+        state.lowerBracket.rounds = normalizeBracketRounds(state.lowerBracket.rounds, null);
+        const lowerWinner = getBracketWinner(state.lowerBracket.rounds);
+        const feed = state.lowerBracket.feedsInto;
         if (lowerWinner) {
-            tournamentState.mainBracket.rounds[0].matches[feed.matchIndex][feed.side] = cloneDriver({
+            state.mainBracket.rounds[0].matches[feed.matchIndex][feed.side] = cloneDriver({
               ...lowerWinner,
-              seed: tournamentState.plan?.resolvedFormat === FORMAT_SDC
-                ? getSdcPlayInSeed(tournamentState.plan.mainBracketSize)
+              seed: state.plan?.resolvedFormat === FORMAT_SDC
+                ? getSdcPlayInSeed(state.plan.mainBracketSize)
                 : lowerWinner.seed,
             });
         } else {
-            tournamentState.mainBracket.rounds[0].matches[feed.matchIndex][feed.side] = null;
+            state.mainBracket.rounds[0].matches[feed.matchIndex][feed.side] = null;
             pendingFeed = feed;
         }
       }
       
-      tournamentState.mainBracket.rounds = normalizeBracketRounds(tournamentState.mainBracket.rounds, pendingFeed);
-      tournamentState.mainBracket.thirdPlaceMatch = normalizeThirdPlaceMatch(
-        tournamentState.mainBracket.rounds,
-        tournamentState.mainBracket.thirdPlaceMatch,
+      state.mainBracket.rounds = normalizeBracketRounds(state.mainBracket.rounds, pendingFeed);
+      state.mainBracket.thirdPlaceMatch = normalizeThirdPlaceMatch(
+        state.mainBracket.rounds,
+        state.mainBracket.thirdPlaceMatch,
       );
     }
 
@@ -19033,6 +20018,202 @@
       return entries;
     }
 
+    function buildCompetitionJudgeEntryKey(entry) {
+      return entry ? `${entry.bracketKey}:${entry.roundIndex}:${entry.matchIndex}` : "";
+    }
+
+    function getCompetitionFlowEntriesForState(state = tournamentState) {
+      if (!state?.mainBracket?.rounds?.length) {
+        return {
+          lowerEntries: [],
+          mainEntries: [],
+          resolvedPage: "main",
+          currentEntry: null,
+          nextEntry: null,
+        };
+      }
+
+      const lowerEntries = getLowerBattleFlowEntries(state.lowerBracket?.rounds || []);
+      const mainEntries = getMainBattleFlowEntries(
+        state.mainBracket.rounds,
+        state.mainBracket.thirdPlaceMatch,
+      );
+      const resolvedPage = lowerEntries.length ? "lower" : "main";
+      const visibleEntries = resolvedPage === "lower" ? lowerEntries : mainEntries;
+      return {
+        lowerEntries,
+        mainEntries,
+        resolvedPage,
+        currentEntry: visibleEntries[0] || null,
+        nextEntry: visibleEntries[1] || null,
+      };
+    }
+
+    function getCompetitionJudgeControl(state = tournamentState) {
+      if (!state) return createEmptyCompetitionJudgeControl();
+      const normalized = normalizeCompetitionJudgeControl(state.competitionJudgeControl);
+      state.competitionJudgeControl = normalized;
+      return normalized;
+    }
+
+    function buildCompetitionJudgeControlForEntry(entry, cycle = 1) {
+      return {
+        ...createEmptyCompetitionJudgeControl(),
+        status: entry ? "voting" : "idle",
+        cycle: Number.isInteger(cycle) && cycle > 0 ? cycle : 1,
+        entry: cloneCompetitionEntrySnapshot(entry),
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    function clearCompetitionJudgeControl(state = tournamentState) {
+      if (!state) return createEmptyCompetitionJudgeControl();
+      const cleared = createEmptyCompetitionJudgeControl();
+      state.competitionJudgeControl = cleared;
+      return cleared;
+    }
+
+    function getCompetitionEntryFromControlOrFlow(state = tournamentState) {
+      const control = getCompetitionJudgeControl(state);
+      if (control.entry) return cloneCompetitionEntrySnapshot(control.entry);
+      return cloneCompetitionEntrySnapshot(getCompetitionFlowEntriesForState(state).currentEntry);
+    }
+
+    function getCompetitionMatchRef(bracketKey, roundIndex, matchIndex, state = tournamentState) {
+      if (!state?.mainBracket) return null;
+      if (bracketKey === "lower") {
+        return state.lowerBracket?.rounds?.[roundIndex]?.matches?.[matchIndex] || null;
+      }
+      if (bracketKey === "third") {
+        return state.mainBracket?.thirdPlaceMatch || null;
+      }
+      return state.mainBracket?.rounds?.[roundIndex]?.matches?.[matchIndex] || null;
+    }
+
+    function getCompetitionVoteResolution(votes, eventMeta = activeEventMeta) {
+      const activeRoles = getActiveJudgeRoles(eventMeta);
+      const tally = { left: 0, right: 0 };
+      activeRoles.forEach((role) => {
+        if (votes?.[role] === "left") tally.left += 1;
+        if (votes?.[role] === "right") tally.right += 1;
+      });
+      const allVoted = activeRoles.length > 0 && activeRoles.every((role) => votes?.[role] === "left" || votes?.[role] === "right");
+      const winnerSide = allVoted && tally.left !== tally.right
+        ? (tally.left > tally.right ? "left" : "right")
+        : null;
+      return {
+        activeRoles,
+        submittedCount: activeRoles.filter((role) => votes?.[role] === "left" || votes?.[role] === "right").length,
+        leftVotes: tally.left,
+        rightVotes: tally.right,
+        allVoted,
+        tied: allVoted && tally.left === tally.right,
+        winnerSide,
+      };
+    }
+
+    function clearCompetitionMatchDecision(state, entry) {
+      const match = getCompetitionMatchRef(entry?.bracketKey, entry?.roundIndex, entry?.matchIndex, state);
+      if (!match) return false;
+      match.winner = null;
+      match.winnerMode = null;
+      normalizeBracketState(state);
+      return true;
+    }
+
+    function applyCompetitionMatchDecision(state, entry, winnerSide) {
+      const match = getCompetitionMatchRef(entry?.bracketKey, entry?.roundIndex, entry?.matchIndex, state);
+      const selectedDriver = match?.[winnerSide];
+      if (!match || !selectedDriver) return null;
+      match.winner = cloneDriver(selectedDriver);
+      match.winnerMode = "manual";
+      normalizeBracketState(state);
+      return cloneDriver(selectedDriver);
+    }
+
+    function handleCompetitionVoteResolution(state, eventMeta, control, resolution) {
+      if (!control?.entry || !resolution?.allVoted) return;
+      if (resolution.winnerSide) {
+        applyCompetitionMatchDecision(state, control.entry, resolution.winnerSide);
+        control.resolvedWinnerSide = resolution.winnerSide;
+        control.resolvedAt = new Date().toISOString();
+        control.reason = null;
+        if (control.cycle >= 2) {
+          state.competitionJudgeControl = createEmptyCompetitionJudgeControl();
+        } else {
+          control.status = "admin_decision";
+          control.updatedAt = control.resolvedAt;
+          state.competitionJudgeControl = control;
+        }
+        return;
+      }
+
+      clearCompetitionMatchDecision(state, control.entry);
+      control.status = "review_hold";
+      control.reason = "tie";
+      control.resolvedWinnerSide = null;
+      control.resolvedAt = null;
+      control.updatedAt = new Date().toISOString();
+      state.competitionJudgeControl = control;
+    }
+
+    function recordCompetitionJudgeVote(state, eventMeta, role, side) {
+      if (!role?.startsWith("j")) return { changed: false, blocked: true };
+      const normalizedSide = side === "right" ? "right" : "left";
+      const activeRoles = getActiveJudgeRoles(eventMeta);
+      if (!activeRoles.includes(role)) return { changed: false, blocked: true };
+
+      const flow = getCompetitionFlowEntriesForState(state);
+      const fallbackEntry = flow.currentEntry ? cloneCompetitionEntrySnapshot(flow.currentEntry) : null;
+      const existingControl = getCompetitionJudgeControl(state);
+      if (existingControl.entry && (existingControl.status === "admin_decision" || existingControl.status === "review_hold")) {
+        return { changed: false, blocked: true };
+      }
+      const existingKey = buildCompetitionJudgeEntryKey(existingControl.entry);
+      const fallbackKey = buildCompetitionJudgeEntryKey(fallbackEntry);
+
+      let control = existingControl;
+      if (!fallbackEntry && !existingControl.entry) {
+        return { changed: false, blocked: true };
+      }
+      if (
+        !existingControl.entry
+        || existingControl.status === "idle"
+        || existingControl.status === "admin_decision"
+        || existingControl.status === "review_hold"
+        || (fallbackKey && existingKey && fallbackKey !== existingKey)
+      ) {
+        const nextCycle = existingControl.status === "review_hold" && existingKey === fallbackKey
+          ? Math.max(existingControl.cycle, 2)
+          : 1;
+        control = buildCompetitionJudgeControlForEntry(fallbackEntry || existingControl.entry, nextCycle);
+      }
+
+      control.status = "voting";
+      control.votes = {
+        ...createEmptyCompetitionJudgeVotes(),
+        ...(control.votes || {}),
+        [role]: normalizedSide,
+      };
+      control.updatedAt = new Date().toISOString();
+
+      const sessionEntry = cloneCompetitionEntrySnapshot(control.entry || fallbackEntry);
+      const resolution = getCompetitionVoteResolution(control.votes, eventMeta);
+      state.competitionJudgeControl = control;
+      if (resolution.allVoted) {
+        handleCompetitionVoteResolution(state, eventMeta, control, resolution);
+      } else {
+        state.competitionJudgeControl = control;
+      }
+
+      return {
+        changed: true,
+        control: getCompetitionJudgeControl(state),
+        resolution,
+        entry: sessionEntry,
+      };
+    }
+
     function shouldShowLowerBracketRuleAlert() {
       const lowerRounds = tournamentState?.lowerBracket?.rounds || [];
       if (!lowerRounds.length) return false;
@@ -19041,6 +20222,159 @@
       const currentEntry = lowerEntries[0];
       const isLowerFinal = currentEntry.roundIndex === lowerRounds.length - 1 && currentEntry.matchIndex === 0;
       return !isLowerFinal;
+    }
+
+    function buildCompetitionVoteStatusText(control, resolution, role = currentRole) {
+      if (!control?.entry) return "Waiting for the next battle.";
+      if (control.status === "review_hold") {
+        return control.reason === "tie"
+          ? "Split decision received. Waiting for the event admin to reopen voting."
+          : "Review in progress. Waiting for the event admin to continue.";
+      }
+      if (control.status === "admin_decision") {
+        const winnerSide = control.resolvedWinnerSide === "right" ? "right" : "left";
+        const winnerDriver = control.entry.match?.[winnerSide];
+        return winnerDriver?.name
+          ? `${winnerDriver.name} is ahead ${resolution.leftVotes}-${resolution.rightVotes}. Waiting for event admin confirmation.`
+          : "Waiting for the event admin to confirm the battle result.";
+      }
+      if (!resolution.allVoted) {
+        const remaining = Math.max(0, resolution.activeRoles.length - resolution.submittedCount);
+        const myVote = control.votes?.[role];
+        return myVote
+          ? `Your vote is locked in. Waiting on ${remaining} other judge${remaining === 1 ? "" : "s"}.`
+          : "Choose the driver that should advance. The result locks after every active judge submits.";
+      }
+      return "Votes are syncing now.";
+    }
+
+    function renderCompetitionReviewBanner() {
+      if (!competitionReviewBanner) return;
+      const control = getCompetitionJudgeControl();
+      if (control.status !== "review_hold" || !control.entry) {
+        competitionReviewBanner.classList.add("hidden");
+        competitionReviewBanner.innerHTML = "";
+        return;
+      }
+      competitionReviewBanner.innerHTML = `
+        <strong>Review In Progress</strong>
+        <small>${escapeHtml(control.reason === "tie"
+          ? "The judges returned a split decision. The event admin can reopen voting on this same battle."
+          : "The last battle result is under review. The event admin can reopen judging on this same battle when ready.")}</small>
+      `;
+      competitionReviewBanner.classList.remove("hidden");
+    }
+
+    function renderCompetitionDecisionPanel() {
+      if (!competitionDecisionPanel) return;
+      const control = getCompetitionJudgeControl();
+      if (!adminCanEdit() || !control.entry || (control.status !== "admin_decision" && control.status !== "review_hold")) {
+        competitionDecisionPanel.classList.add("hidden");
+        competitionDecisionPanel.innerHTML = "";
+        return;
+      }
+
+      const resolution = getCompetitionVoteResolution(control.votes, activeEventMeta);
+      const leftDriver = control.entry.match?.left;
+      const rightDriver = control.entry.match?.right;
+      const winnerDriver = control.resolvedWinnerSide ? control.entry.match?.[control.resolvedWinnerSide] : null;
+      const headline = control.status === "admin_decision" ? "Review Decision / Contest" : "Review In Progress";
+      const copy = control.status === "admin_decision"
+        ? (winnerDriver?.name
+          ? `${winnerDriver.name} won the current battle ${resolution.leftVotes}-${resolution.rightVotes}. Continue to the next battle or hold the result for review.`
+          : "The judges have finished voting. Continue to the next battle or hold the result for review.")
+        : (control.reason === "tie"
+          ? "The judges returned a split decision. Continue to reopen voting on this same battle."
+          : "The result is being reviewed. Continue when you want judges to vote on this same battle again.");
+
+      competitionDecisionPanel.innerHTML = `
+        <article class="competition-decision-card">
+          <div class="competition-decision-head">
+            <div>
+              <p class="section-kicker">Event Admin</p>
+              <h3>${escapeHtml(headline)}</h3>
+            </div>
+            <span class="status-pill ${control.status === "review_hold" ? "warning" : "active"}">${escapeHtml(control.entry.title || "Current Battle")}</span>
+          </div>
+          <p class="competition-decision-copy">${escapeHtml(copy)}</p>
+          <div class="competition-vote-tally">
+            <span class="competition-vote-pill">Lead ${resolution.leftVotes}</span>
+            <span class="competition-vote-pill">Chase ${resolution.rightVotes}</span>
+            <span class="competition-vote-pill">${escapeHtml(leftDriver?.name || "Lead")} vs ${escapeHtml(rightDriver?.name || "Chase")}</span>
+          </div>
+          <div class="button-row competition-decision-actions">
+            ${control.status === "admin_decision"
+              ? `<button class="button button-secondary" type="button" data-action="review-competition-decision">Review Decision/Contest</button>`
+              : ""}
+            <button class="button button-accent" type="button" data-action="continue-competition-flow">Continue</button>
+          </div>
+        </article>
+      `;
+      competitionDecisionPanel.classList.remove("hidden");
+    }
+
+    function renderCompetitionJudgePanel() {
+      if (!competitionJudgePanel) return;
+      if (!currentRole?.startsWith("j") || !tournamentState?.mainBracket?.rounds?.length) {
+        competitionJudgePanel.classList.add("hidden");
+        competitionJudgePanel.innerHTML = "";
+        return;
+      }
+
+      const control = getCompetitionJudgeControl();
+      const activeJudgeRoles = getActiveJudgeRoles(activeEventMeta);
+      if (!activeJudgeRoles.includes(currentRole)) {
+        competitionJudgePanel.classList.add("hidden");
+        competitionJudgePanel.innerHTML = "";
+        return;
+      }
+      const entry = getCompetitionEntryFromControlOrFlow();
+      if (!entry?.match?.left || !entry?.match?.right) {
+        competitionJudgePanel.classList.add("hidden");
+        competitionJudgePanel.innerHTML = "";
+        return;
+      }
+
+      const resolution = getCompetitionVoteResolution(control.votes, activeEventMeta);
+      const myVote = control.votes?.[currentRole] || null;
+      const votingLocked = control.status === "admin_decision" || control.status === "review_hold";
+      const cycleLabel = control.cycle > 1 ? `Review Vote ${control.cycle}` : "Judge Vote";
+
+      competitionJudgePanel.innerHTML = `
+        <section class="judge-lane-shell competition-judge-card">
+          <div class="judge-lane-toolbar">
+            <div class="judge-lane-meta">
+              <div>
+                <div class="judge-lane-progress">${escapeHtml(cycleLabel)}</div>
+                <strong>${escapeHtml(entry.title || "Current Battle")}</strong>
+              </div>
+              <div class="mobile-driver-reg">${escapeHtml(entry.meta || "Competition")}</div>
+            </div>
+            <div class="judge-lane-status-row">
+              <span class="judge-lane-status-pill ${myVote ? "is-live" : "is-pending"}">${escapeHtml(getRoleDisplayName(currentRole))}</span>
+              <span class="judge-lane-status-pill ${resolution.allVoted ? "is-live" : "is-pending"}">${resolution.submittedCount}/${resolution.activeRoles.length || 0} Votes</span>
+            </div>
+            <div class="judge-lane-note">${escapeHtml(buildCompetitionVoteStatusText(control, resolution, currentRole))}</div>
+          </div>
+          <article class="mobile-driver-card competition-judge-battle-card">
+            <div class="competition-vote-grid">
+              <button class="button ${myVote === "left" ? "button-accent competition-vote-option selected" : "button-secondary competition-vote-option"}" type="button" data-action="judge-competition-vote" data-side="left" ${votingLocked ? "disabled" : ""}>
+                <span>Lead | #${entry.match.left.seed || "-"}</span>
+                <strong>${escapeHtml(entry.match.left.name || "Waiting")}</strong>
+              </button>
+              <button class="button ${myVote === "right" ? "button-accent competition-vote-option selected" : "button-secondary competition-vote-option"}" type="button" data-action="judge-competition-vote" data-side="right" ${votingLocked ? "disabled" : ""}>
+                <span>Chase | #${entry.match.right.seed || "-"}</span>
+                <strong>${escapeHtml(entry.match.right.name || "Waiting")}</strong>
+              </button>
+            </div>
+            <div class="competition-vote-tally">
+              <span class="competition-vote-pill">${escapeHtml(entry.match.left.name || "Lead")} ${resolution.leftVotes}</span>
+              <span class="competition-vote-pill">${escapeHtml(entry.match.right.name || "Chase")} ${resolution.rightVotes}</span>
+            </div>
+          </article>
+        </section>
+      `;
+      competitionJudgePanel.classList.remove("hidden");
     }
 
     function renderBattleFlowCard(entry, label, isCurrent = false, slotClass = "") {
@@ -19060,17 +20394,31 @@
       const leadDriver = leadSide === "left" ? leftDriver : rightDriver;
       const chaseDriver = chaseSide === "left" ? leftDriver : rightDriver;
       const actionClass = isCurrent ? "current" : "preview";
-      const canAdvance = isCurrent && (adminCanEdit() || STANDALONE_DEMO_MODE);
+      const judgeControl = getCompetitionJudgeControl();
+      const entryKey = buildCompetitionJudgeEntryKey(entry);
+      const isControlledEntry = judgeControl.entry && buildCompetitionJudgeEntryKey(judgeControl.entry) === entryKey;
+      const reviewHold = isControlledEntry && judgeControl.status === "review_hold";
+      const pendingAdminDecision = isControlledEntry && judgeControl.status === "admin_decision";
+      const canAdvance = isCurrent
+        && (adminCanEdit() || STANDALONE_DEMO_MODE)
+        && !currentRole?.startsWith("j")
+        && !isControlledEntry
+        && getActiveJudgeRoles(activeEventMeta).length === 0;
       const actionAttrs = isCurrent ? `data-flow-bracket="${entry.bracketKey}" data-flow-round="${entry.roundIndex}" data-flow-match="${entry.matchIndex}"` : "";
       const selectedSignature = winnerAnimationState?.selected?.signature || "";
       const leadSelected = selectedSignature && selectedSignature === buildSlotSignature(entry.bracketKey, entry.roundIndex, entry.matchIndex, leadSide, leadDriver);
       const chaseSelected = selectedSignature && selectedSignature === buildSlotSignature(entry.bracketKey, entry.roundIndex, entry.matchIndex, chaseSide, chaseDriver);
+      const metaText = reviewHold
+        ? "Review in progress"
+        : pendingAdminDecision
+          ? "Awaiting event admin"
+          : entry.meta;
 
       return `
         <article class="battle-flow-card ${isCurrent ? "current" : ""} ${slotClass}">
           <p class="battle-flow-label">${label}</p>
           <h4 class="battle-flow-title">${entry.title}</h4>
-          <div class="battle-flow-meta">${entry.meta}</div>
+          <div class="battle-flow-meta">${escapeHtml(metaText || "")}</div>
           <div class="battle-flow-vs">
             <button class="battle-flow-option ${actionClass} ${leadSelected ? "just-advanced" : ""}" type="button" ${actionAttrs} data-flow-side="${leadSide}" ${canAdvance ? "" : "disabled"}>
               <span>Lead | #${leadDriver.seed} ${escapeHtml(leadDriver.name)}</span>
@@ -19162,25 +20510,48 @@
         tournamentState.mainBracket.rounds,
         tournamentState.mainBracket.thirdPlaceMatch,
       );
-      const visibleEntries = activeCompetitionBracketPage === "lower" && lowerEntries.length ? lowerEntries : mainEntries;
+      const judgeControl = getCompetitionJudgeControl();
+      const lowerDisplayEntries = [...lowerEntries];
+      const mainDisplayEntries = [...mainEntries];
+      if (judgeControl.entry && judgeControl.status !== "idle") {
+        if (judgeControl.entry.bracketKey === "lower") {
+          lowerDisplayEntries[0] = cloneCompetitionEntrySnapshot(judgeControl.entry);
+        } else {
+          mainDisplayEntries[0] = cloneCompetitionEntrySnapshot(judgeControl.entry);
+        }
+      }
+      const visibleEntries = activeCompetitionBracketPage === "lower" && lowerDisplayEntries.length ? lowerDisplayEntries : mainDisplayEntries;
       const currentEntry = visibleEntries[0] || null;
-      const currentSignature = currentEntry ? `${currentEntry.bracketKey}:${currentEntry.roundIndex}:${currentEntry.matchIndex}` : "none";
+      const currentSignature = judgeControl.entry && judgeControl.status !== "idle"
+        ? buildCompetitionJudgeEntryKey(judgeControl.entry)
+        : (currentEntry ? `${currentEntry.bracketKey}:${currentEntry.roundIndex}:${currentEntry.matchIndex}` : "none");
       const shouldAnimate = lastBattleFlowSignature !== null && currentSignature !== lastBattleFlowSignature;
       lastBattleFlowSignature = currentSignature;
-      status.textContent = currentEntry?.bracketKey === "lower"
-        ? "Lower Bracket"
-        : currentEntry?.bracketKey === "third"
-          ? "3rd Place"
-          : "Main Bracket";
+      status.textContent = judgeControl.status === "review_hold"
+        ? "Review In Progress"
+        : judgeControl.status === "admin_decision"
+          ? "Decision Ready"
+          : currentEntry?.bracketKey === "lower"
+            ? "Lower Bracket"
+            : currentEntry?.bracketKey === "third"
+              ? "3rd Place"
+              : "Main Bracket";
       panel.classList.remove("hidden");
       content.innerHTML = "";
       if (lowerEntries.length) {
-        renderBattleFlowPair(lowerCurrent, lowerNext, lowerEntries, shouldAnimate && activeCompetitionBracketPage === "lower");
+        renderBattleFlowPair(lowerCurrent, lowerNext, lowerDisplayEntries, shouldAnimate && activeCompetitionBracketPage === "lower");
       } else {
         if (lowerCurrent) lowerCurrent.innerHTML = "";
         if (lowerNext) lowerNext.innerHTML = "";
       }
-      renderBattleFlowPair(mainCurrent, mainNext, mainEntries, shouldAnimate && (activeCompetitionBracketPage !== "lower" || !lowerEntries.length));
+      renderBattleFlowPair(mainCurrent, mainNext, mainDisplayEntries, shouldAnimate && (activeCompetitionBracketPage !== "lower" || !lowerEntries.length));
+      renderCompetitionReviewBanner();
+      renderCompetitionDecisionPanel();
+      renderCompetitionJudgePanel();
+    }
+
+    function bracketHasTop32Round(rounds) {
+      return Array.isArray(rounds) && rounds.some((round) => String(round?.name || "").trim() === "Top 32");
     }
 
     function renderSummary() {
@@ -19310,9 +20681,10 @@
       const button = `<button class="slot-button ${selected ? "selected" : ""} ${loser ? "loser" : ""} ${isWinnerBurst ? "winner-just-selected" : ""}" type="button" data-bracket="${bracketKey}" data-round="${roundIndex}" data-match="${matchIndex}" data-side="${side}" ${disabledHTML}><span class="slot-name">${escapeHtml(driver.name)}</span>${teamMarkup}</button>`;
       const seedChip = `<span class="seed-chip">${driver.seed}</span>`;
 
+      const slotClasses = `main-battle-slot ${selected ? "selected-slot" : ""} ${isIncomingWinner ? "incoming-winner" : ""}`.trim();
       return align === "right"
-        ? `<div class="main-battle-slot ${isIncomingWinner ? "incoming-winner" : ""}">${button}${seedChip}</div>`
-        : `<div class="main-battle-slot ${isIncomingWinner ? "incoming-winner" : ""}">${seedChip}${button}</div>`;
+        ? `<div class="${slotClasses}">${button}${seedChip}</div>`
+        : `<div class="${slotClasses}">${seedChip}${button}</div>`;
     }
 
     function renderMainBattle(bracketKey, roundIndex, matchIndex, match, align) {
@@ -19395,11 +20767,88 @@
       `;
     }
 
+    function layoutBracketCenterStage(canvas) {
+      if (!canvas) return 0;
+      const preferredCenterGap = Math.max(
+        getBracketCssMetric("--center-stage-gap", 28),
+        getBracketCssMetric("--match-stack-gap", 12),
+        12
+      );
+      let tallestCenterStage = 0;
+
+      canvas.querySelectorAll(".center-stage-stack").forEach((stack) => {
+        const finalCenter = stack.querySelector(".final-center");
+        if (!finalCenter) return;
+        const placementCenter = stack.querySelector(".placement-center");
+        const computedStackStyles = getComputedStyle(stack);
+        if (!stack.dataset.baseCenterStageMinHeight) {
+          stack.dataset.baseCenterStageMinHeight = computedStackStyles.getPropertyValue("--center-stage-min-height").trim();
+        }
+        if (!stack.dataset.baseCenterStageFinalTop) {
+          stack.dataset.baseCenterStageFinalTop = computedStackStyles.getPropertyValue("--center-stage-final-top").trim();
+        }
+        if (!stack.dataset.baseCenterStageThirdTop) {
+          stack.dataset.baseCenterStageThirdTop = computedStackStyles.getPropertyValue("--center-stage-third-top").trim();
+        }
+        const baseMinHeight = Number.parseFloat(stack.dataset.baseCenterStageMinHeight) || 0;
+        const finalTop = Number.parseFloat(stack.dataset.baseCenterStageFinalTop) || 0;
+        const preferredThirdTop = Number.parseFloat(stack.dataset.baseCenterStageThirdTop) || 0;
+        const finalHeight = finalCenter.offsetHeight || finalCenter.scrollHeight || 0;
+
+        let resolvedStackHeight = Math.max(baseMinHeight, finalTop + finalHeight);
+
+        if (placementCenter) {
+          const placementHeight = placementCenter.offsetHeight || placementCenter.scrollHeight || 0;
+          const minimumThirdTop = finalTop + finalHeight + preferredCenterGap;
+          const resolvedThirdTop = Math.max(preferredThirdTop, minimumThirdTop);
+          stack.style.setProperty("--center-stage-third-top", `${Math.ceil(resolvedThirdTop)}px`);
+          resolvedStackHeight = Math.max(resolvedStackHeight, resolvedThirdTop + placementHeight);
+        }
+
+        const roundedStackHeight = Math.ceil(resolvedStackHeight);
+        stack.style.setProperty("--center-stage-min-height", `${roundedStackHeight}px`);
+        if (stack.parentElement) {
+          stack.parentElement.style.height = `${roundedStackHeight}px`;
+        }
+        tallestCenterStage = Math.max(tallestCenterStage, roundedStackHeight);
+      });
+
+      return tallestCenterStage;
+    }
+
+    function fitTextToAvailableWidth(element, minimumPx = 10) {
+      if (!element) return;
+      const rects = element.getClientRects();
+      if (!rects.length || element.clientWidth <= 0) return;
+      element.style.removeProperty("font-size");
+      const computed = getComputedStyle(element);
+      const baseFontSize = Number.parseFloat(computed.fontSize);
+      if (!Number.isFinite(baseFontSize) || baseFontSize <= 0) return;
+      element.style.fontSize = `${baseFontSize}px`;
+      let currentSize = baseFontSize;
+      while (
+        currentSize > minimumPx &&
+        (element.scrollWidth > element.clientWidth + 1 || element.scrollHeight > element.clientHeight + 1)
+      ) {
+        currentSize -= 0.5;
+        element.style.fontSize = `${currentSize}px`;
+      }
+    }
+
+    function fitBracketSlotNames(scope = document) {
+      scope.querySelectorAll(".slot-name").forEach((element) => {
+        const minimumPx = element.closest(".main-battle.center") ? 8 : 9;
+        fitTextToAvailableWidth(element, minimumPx);
+      });
+      scope.querySelectorAll(".driver-button strong").forEach((element) => {
+        fitTextToAvailableWidth(element, 9);
+      });
+    }
+
     function fitBracketBoard(boardId) {
       const board = document.getElementById(boardId);
       if (!board) return;
       const canvas = board.querySelector(".main-board-canvas");
-      const scaleShell = board.querySelector(".main-board-scale-shell");
       if (!canvas) {
         board.style.removeProperty("minHeight");
         board.classList.remove("is-fitted");
@@ -19408,14 +20857,12 @@
 
       const naturalWidth = Number(canvas.dataset.naturalWidth);
       const naturalHeight = Number(canvas.dataset.naturalHeight);
-      const isFullscreenFit = document.body.classList.contains("bracket-fullscreen");
-      board.classList.remove("is-fitted");
+      const isVisible = board.getClientRects().length > 0;
+      const shouldAutoFit = document.body.classList.contains("bracket-fullscreen") && isVisible;
+      board.classList.toggle("is-fitted", shouldAutoFit);
       board.style.removeProperty("minHeight");
       board.style.setProperty("--board-zoom", "1");
       canvas.style.zoom = "1";
-      if (scaleShell) {
-        scaleShell.style.transform = "none";
-      }
       if (Number.isFinite(naturalWidth) && naturalWidth > 0) {
         canvas.style.width = `${naturalWidth}px`;
         canvas.style.minWidth = `${naturalWidth}px`;
@@ -19423,32 +20870,30 @@
         canvas.style.width = "max-content";
         canvas.style.minWidth = "max-content";
       }
-      if (Number.isFinite(naturalHeight) && naturalHeight > 0) {
-        canvas.style.height = `${naturalHeight}px`;
+      const requiredCenterStageHeight = layoutBracketCenterStage(canvas);
+      const resolvedHeight = Number.isFinite(naturalHeight) && naturalHeight > 0
+        ? Math.max(naturalHeight, requiredCenterStageHeight)
+        : requiredCenterStageHeight;
+      if (resolvedHeight > 0) {
+        canvas.style.height = `${resolvedHeight}px`;
+      } else if (requiredCenterStageHeight > 0) {
+        canvas.style.height = `${requiredCenterStageHeight}px`;
       } else {
         canvas.style.removeProperty("height");
       }
-
-      if (!isFullscreenFit || !scaleShell || !Number.isFinite(naturalWidth) || !Number.isFinite(naturalHeight) || naturalWidth <= 0 || naturalHeight <= 0) {
-        canvas.style.zoom = String(bracketZoom);
-        board.style.setProperty("--board-zoom", String(bracketZoom));
-        return;
+      fitBracketSlotNames(board);
+      let effectiveZoom = 1;
+      if (shouldAutoFit && Number.isFinite(naturalWidth) && naturalWidth > 0 && resolvedHeight > 0) {
+        const availableWidth = Math.max(board.clientWidth - 6, 0);
+        const availableHeight = Math.max(board.clientHeight - 6, 0);
+        if (availableWidth > 0 && availableHeight > 0) {
+          effectiveZoom = Math.min(1, availableWidth / naturalWidth, availableHeight / resolvedHeight);
+        } else {
+          effectiveZoom = 1;
+        }
       }
-
-      const availableWidth = Math.max(0, board.clientWidth - 12);
-      const availableHeight = Math.max(0, board.clientHeight - 12);
-      if (availableWidth <= 0 || availableHeight <= 0) {
-        return;
-      }
-
-      const fitScale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight);
-      const appliedScale = Math.max(0.25, fitScale * bracketZoom);
-      scaleShell.style.transform = `scale(${appliedScale})`;
-      canvas.style.width = `${Math.round(naturalWidth * appliedScale)}px`;
-      canvas.style.minWidth = `${Math.round(naturalWidth * appliedScale)}px`;
-      canvas.style.height = `${Math.round(naturalHeight * appliedScale)}px`;
-      board.style.minHeight = `${Math.round(naturalHeight * appliedScale)}px`;
-      board.classList.add("is-fitted");
+      board.style.setProperty("--board-zoom", String(effectiveZoom));
+      canvas.style.zoom = String(effectiveZoom);
     }
 
     function fitAllBracketBoards() {
@@ -19463,6 +20908,26 @@
       });
     }
 
+    function syncCompetitionBracketFlow() {
+      const lowerRounds = tournamentState?.lowerBracket?.rounds || [];
+      if (!lowerRounds.length) {
+        lowerBracketAutoAdvancedToMain = false;
+        activeCompetitionBracketPage = "main";
+        return;
+      }
+
+      const lowerWinner = getBracketWinner(lowerRounds);
+      if (!lowerWinner) {
+        lowerBracketAutoAdvancedToMain = false;
+        activeCompetitionBracketPage = "lower";
+        return;
+      }
+
+      if (!lowerBracketAutoAdvancedToMain) {
+        activeCompetitionBracketPage = "main";
+        lowerBracketAutoAdvancedToMain = true;
+      }
+    }
     function renderBracket() {
       if (!tournamentState?.mainBracket) {
         const summaryStrip = document.getElementById("summaryStrip");
@@ -19482,6 +20947,7 @@
       }
 
       normalizeBracketState();
+      syncCompetitionBracketFlow();
 
       document.getElementById("emptyBracketState").classList.add("hidden");
       renderSummary();
@@ -19495,14 +20961,17 @@
         if (activeCompetitionBracketPage !== "lower" && activeCompetitionBracketPage !== "main") {
           activeCompetitionBracketPage = "lower";
         }
+        document.getElementById("lowerBracketPage").classList.toggle("hide-header-battle-flow", bracketHasTop32Round(tournamentState.lowerBracket.rounds));
         document.getElementById("lowerBracketBoard").innerHTML = renderBracketBoard("lower", tournamentState.lowerBracket.rounds, {
           finalTitle: "Lower Bracket Final",
         });
       } else {
         document.getElementById("competitionBracketTabs").classList.add("hidden");
         document.querySelector('[data-bracket-page="lower"]').classList.add("hidden");
+        document.getElementById("lowerBracketPage").classList.remove("hide-header-battle-flow");
         activeCompetitionBracketPage = "main";
       }
+      document.getElementById("mainBracketPage").classList.toggle("hide-header-battle-flow", bracketHasTop32Round(tournamentState.mainBracket.rounds));
       document.getElementById("bracketBoard").innerHTML = renderBracketBoard("main", tournamentState.mainBracket.rounds, {
         thirdPlaceMatch: tournamentState.mainBracket.thirdPlaceMatch,
         finalTitle: "Final Battle",
@@ -19553,6 +21022,7 @@
         triggerWinnerAnimation(buildWinnerAnimationState(bracketKey, roundIndex, matchIndex, side, selectedDriver));
       }
 
+      clearCompetitionJudgeControl(tournamentState);
       publishState();
       renderBracket();
     }
@@ -19573,6 +21043,24 @@
       chooseWinner(btn.dataset.flowBracket, parseInt(btn.dataset.flowRound || "0", 10), parseInt(btn.dataset.flowMatch || "0", 10), btn.dataset.flowSide);
     });
 
+    competitionJudgePanel?.addEventListener("click", async (e) => {
+      const voteButton = e.target.closest("[data-action='judge-competition-vote']");
+      if (!voteButton) return;
+      await submitCompetitionJudgeVote(voteButton.dataset.side, currentRole);
+    });
+
+    competitionDecisionPanel?.addEventListener("click", async (e) => {
+      const reviewButton = e.target.closest("[data-action='review-competition-decision']");
+      if (reviewButton) {
+        await requestCompetitionDecisionReview();
+        return;
+      }
+      const continueButton = e.target.closest("[data-action='continue-competition-flow']");
+      if (continueButton) {
+        await continueCompetitionFlow();
+      }
+    });
+
     document.getElementById("resetBracketBtn").addEventListener("click", () => {
       if (!adminCanEdit() || !tournamentState?.qualifiedDrivers?.length) return;
       const lowerCount = getRequestedSdcMainBracketSize(bracketModeSelect.value) || 0;
@@ -19587,8 +21075,7 @@
 
     async function bootstrapApp() {
       applyClientBranding();
-      bracketZoom = loadBracketZoomPreference();
-      updateBracketZoomControls();
+      syncBracketFullscreenSizing();
       syncForcedHostContext();
       initializeTheme();
       await initLocalState();
