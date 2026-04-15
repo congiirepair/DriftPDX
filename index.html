@@ -836,13 +836,23 @@
       margin: 0;
       min-height: 0;
       gap: 14px;
-      grid-template-columns: minmax(0, 1.72fr) minmax(320px, 0.88fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: stretch;
     }
-    body.queue-fullscreen .public-event-main,
+    body.queue-fullscreen .public-event-main {
+      display: contents;
+    }
     body.queue-fullscreen .public-event-side {
       min-height: 0;
       align-content: stretch;
+      grid-column: 3;
+      grid-template-rows: minmax(0, 1fr) auto;
+    }
+    body.queue-fullscreen .public-event-broadcast-shell {
+      grid-column: 1;
+    }
+    body.queue-fullscreen .public-event-main > .panel {
+      grid-column: 2;
     }
     body.queue-fullscreen .public-event-main > .panel,
     body.queue-fullscreen .public-event-side > .panel,
@@ -851,14 +861,8 @@
       height: 100%;
     }
     body.queue-fullscreen .public-event-broadcast-grid {
-      grid-template-columns: minmax(0, 1.3fr) minmax(360px, 0.9fr);
+      grid-template-columns: minmax(0, 1fr);
       min-height: 100%;
-    }
-    body.queue-fullscreen .public-event-main {
-      grid-template-rows: minmax(0, 1.25fr) auto auto;
-    }
-    body.queue-fullscreen .public-event-side {
-      grid-template-rows: minmax(0, 1fr) auto;
     }
     body.queue-fullscreen .panel {
       padding: 14px;
@@ -890,6 +894,18 @@
     body.queue-fullscreen .public-event-spotlight-grid,
     body.queue-fullscreen .public-event-roster-grid {
       gap: 12px;
+    }
+    body.queue-fullscreen .public-event-track-layout {
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+    body.queue-fullscreen .public-event-queue-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    body.queue-fullscreen .public-event-queue-card {
+      padding: 12px;
+    }
+    body.queue-fullscreen .public-event-queue-card-title {
+      font-size: 1.05rem;
     }
     body.queue-fullscreen .public-event-card strong,
     body.queue-fullscreen .public-event-spotlight strong,
@@ -4421,9 +4437,9 @@
     }
 
     .center-stage-stack:has(.placement-center) {
-      min-height: 100%;
+      position: relative;
       align-self: stretch;
-      grid-template-rows: minmax(280px, 1.22fr) minmax(220px, 0.78fr);
+      min-height: var(--center-stage-min-height, 100%);
     }
 
     .center-stage-stack .main-battle.center {
@@ -4432,28 +4448,27 @@
     }
 
     .center-stage-stack:has(.placement-center) .final-center {
-      align-self: start;
-      min-height: 100%;
+      position: absolute;
+      inset-inline: 0;
+      top: var(--center-stage-final-top, 0px);
       align-content: start;
       align-items: start;
     }
 
     .center-stage-stack:has(.placement-center) .final-center .final-battle-card {
       width: min(100%, 380px);
-      min-height: 100%;
     }
 
     .center-stage-stack:has(.placement-center) .placement-center {
-      align-self: end;
-      min-height: 100%;
-      align-content: end;
-      align-items: end;
-      padding-top: 72px;
+      position: absolute;
+      inset-inline: 0;
+      top: var(--center-stage-third-top, 0px);
+      align-content: start;
+      align-items: start;
     }
 
     .center-stage-stack:has(.placement-center) .placement-center .third-place-card {
       width: min(100%, 330px);
-      min-height: 100%;
     }
     .main-board-side { display: grid; gap: var(--main-board-gap, 18px); }
     .main-board-side.left { grid-auto-flow: column; justify-content: start; }
@@ -6718,6 +6733,94 @@
     .public-event-track-panel .public-event-finals-grid {
       grid-template-columns: minmax(0, 1fr);
       gap: 10px;
+    }
+
+    .public-event-track-layout,
+    .public-event-queue-stack {
+      display: grid;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .public-event-queue-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .public-event-queue-head p,
+    .public-event-queue-head strong {
+      margin: 0;
+    }
+
+    .public-event-queue-head p {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .public-event-queue-head strong {
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .public-event-queue-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+      min-height: 0;
+      align-content: start;
+    }
+
+    .public-event-queue-card {
+      display: grid;
+      gap: 8px;
+      min-height: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(244,244,244,0.94)),
+        var(--panel);
+      box-shadow: 0 12px 30px rgba(5, 8, 16, 0.08);
+    }
+
+    .public-event-queue-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--text-soft);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .public-event-queue-card-title {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .public-event-queue-card-copy {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .public-event-queue-card-pills {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
     }
 
     .broadcast-match-card {
@@ -14707,6 +14810,31 @@
       `;
     }
 
+    function renderPublicEventQueueCard(entry, index) {
+      if (!entry) return "";
+      const battleTitle = buildPublicEventBattleTitle(entry);
+      return `
+        <article class="public-event-queue-card">
+          <div class="public-event-queue-card-head">
+            <span>Next ${index + 1}</span>
+            <strong>${escapeHtml(entry.title || "Queued Battle")}</strong>
+          </div>
+          <h4 class="public-event-queue-card-title">${escapeHtml(battleTitle || "Waiting for battle")}</h4>
+          <p class="public-event-queue-card-copy">${escapeHtml(entry.meta || "Waiting for bracket progress.")}</p>
+          <div class="public-event-queue-card-pills">
+            <div class="broadcast-match-pill tone-ready">
+              <small>Lead</small>
+              <strong>${escapeHtml(buildPublicEventSeedLabel(entry.match?.left))}</strong>
+            </div>
+            <div class="broadcast-match-pill tone-muted">
+              <small>Chase</small>
+              <strong>${escapeHtml(buildPublicEventSeedLabel(entry.match?.right))}</strong>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
     function buildPublicEventBroadcastState({
       context,
       lifecycle,
@@ -14726,6 +14854,7 @@
     }) {
       const activeBattle = battleQueue[0] || null;
       const queuedBattleAfterCurrent = battleQueue[1] || null;
+      const queuedBattles = activeBattle ? battleQueue.slice(1, 7) : battleQueue.slice(0, 6);
       const activeBattleTitle = buildPublicEventBattleTitle(activeBattle);
       const queuedBattleTitle = buildPublicEventBattleTitle(queuedBattleAfterCurrent);
       const mainRounds = tournamentState?.mainBracket?.rounds || [];
@@ -14860,7 +14989,7 @@
                 : registerOpen
                   ? "Registration and check-in are open. This page will switch into qualifying and bracket coverage automatically as the event advances."
                   : "The event is staged and waiting for the next live action.")}</p>
-            <div class="public-event-finals-grid">
+            <div class="public-event-track-layout">
               ${renderPublicEventStageCard({
                 label: activeBattleTitle ? "Up Now" : currentDriver?.name ? "On Course" : "Event Pulse",
                 title: activeBattleTitle || currentDriver?.name || lifecycle.label,
@@ -14888,34 +15017,57 @@
                       ],
                 emphasisClass: "championship",
               })}
-              ${renderPublicEventStageCard({
-                label: nextDriver?.name ? "On Deck" : queuedBattleTitle ? "Next Battle" : "Top Qualifier",
-                title: nextDriver?.name || queuedBattleTitle || (results.topQualifierName ? `#${results.topQualifierSeed || "-"} ${results.topQualifierName}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed} ${rankedDrivers[0].name}` : "Open"),
-                copy: nextDriver?.name
-                  ? `Stage next. ${buildPublicEventBestScoreLabel(nextDriver)}${nextDriver.chassis ? ` | ${nextDriver.chassis}` : ""}`
-                  : queuedBattleTitle
-                    ? `${queuedBattleAfterCurrent?.title || "Queued battle"} | ${queuedBattleAfterCurrent?.meta || "Waiting for bracket progress."}`
-                    : results.topQualifierScore !== null
-                      ? `Top qualifying mark is ${formatScore(results.topQualifierScore)}.`
-                      : rankedDrivers[0]
-                        ? `Current top qualifier with best score ${formatScore(rankedDrivers[0].bestScore)}.`
-                        : "The next lane assignment will appear here.",
-                pills: nextDriver?.name
-                  ? [
-                      { label: "Reg", value: `#${nextDriver.reg || nextDriver.signUpPosition || "-"}`, tone: "tone-ready" },
-                      { label: "Team", value: nextDriver.teamName || "Independent", tone: "tone-muted" },
-                    ]
-                  : queuedBattleTitle
-                    ? [
-                        { label: "Queue", value: queuedBattleAfterCurrent?.title || "Next", tone: "tone-ready" },
-                        { label: "Page", value: queuedBattleAfterCurrent?.bracketKey === "lower" ? "Lower" : "Main", tone: "tone-muted" },
-                      ]
-                    : [
-                        { label: "Seed", value: results.topQualifierName ? `#${results.topQualifierSeed || "-"}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed}` : "-", tone: rankedDrivers[0] ? "tone-ready" : "tone-muted" },
-                        { label: "Entries", value: `${registeredDrivers.length}`, tone: registeredDrivers.length ? "tone-ready" : "tone-muted" },
-                      ],
-                emphasisClass: "podium",
-              })}
+              ${activeBattleTitle
+                ? `
+                  <section class="public-event-queue-stack">
+                    <div class="public-event-queue-head">
+                      <p>Competition Queue</p>
+                      <strong>${queuedBattles.length ? `Next ${queuedBattles.length} Battles` : "Queue Waiting"}</strong>
+                    </div>
+                    <div class="public-event-queue-list">
+                      ${queuedBattles.length
+                        ? queuedBattles.map((entry, index) => renderPublicEventQueueCard(entry, index)).join("")
+                        : `
+                          <article class="public-event-queue-card">
+                            <div class="public-event-queue-card-head">
+                              <span>Queue</span>
+                              <strong>Waiting</strong>
+                            </div>
+                            <h4 class="public-event-queue-card-title">No additional battles queued yet</h4>
+                            <p class="public-event-queue-card-copy">As soon as the bracket advances, the next six battles will appear here automatically.</p>
+                          </article>
+                        `}
+                    </div>
+                  </section>
+                `
+                : renderPublicEventStageCard({
+                    label: nextDriver?.name ? "On Deck" : queuedBattleTitle ? "Next Battle" : "Top Qualifier",
+                    title: nextDriver?.name || queuedBattleTitle || (results.topQualifierName ? `#${results.topQualifierSeed || "-"} ${results.topQualifierName}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed} ${rankedDrivers[0].name}` : "Open"),
+                    copy: nextDriver?.name
+                      ? `Stage next. ${buildPublicEventBestScoreLabel(nextDriver)}${nextDriver.chassis ? ` | ${nextDriver.chassis}` : ""}`
+                      : queuedBattleTitle
+                        ? `${queuedBattleAfterCurrent?.title || "Queued battle"} | ${queuedBattleAfterCurrent?.meta || "Waiting for bracket progress."}`
+                        : results.topQualifierScore !== null
+                          ? `Top qualifying mark is ${formatScore(results.topQualifierScore)}.`
+                          : rankedDrivers[0]
+                            ? `Current top qualifier with best score ${formatScore(rankedDrivers[0].bestScore)}.`
+                            : "The next lane assignment will appear here.",
+                    pills: nextDriver?.name
+                      ? [
+                          { label: "Reg", value: `#${nextDriver.reg || nextDriver.signUpPosition || "-"}`, tone: "tone-ready" },
+                          { label: "Team", value: nextDriver.teamName || "Independent", tone: "tone-muted" },
+                        ]
+                      : queuedBattleTitle
+                        ? [
+                            { label: "Queue", value: queuedBattleAfterCurrent?.title || "Next", tone: "tone-ready" },
+                            { label: "Page", value: queuedBattleAfterCurrent?.bracketKey === "lower" ? "Lower" : "Main", tone: "tone-muted" },
+                          ]
+                        : [
+                            { label: "Seed", value: results.topQualifierName ? `#${results.topQualifierSeed || "-"}` : rankedDrivers[0] ? `#${rankedDrivers[0].seed}` : "-", tone: rankedDrivers[0] ? "tone-ready" : "tone-muted" },
+                            { label: "Entries", value: `${registeredDrivers.length}`, tone: registeredDrivers.length ? "tone-ready" : "tone-muted" },
+                          ],
+                    emphasisClass: "podium",
+                  })}
             </div>
           </article>
         `
@@ -18700,6 +18852,9 @@
       const roundWidth = getBracketCssMetric("--bracket-round-width", 218);
       const finalCardWidth = getBracketCssMetric("--final-card-width", 300);
       const thirdCardWidth = getBracketCssMetric("--third-card-width", 280);
+      const slotHeight = getBracketCssMetric("--slot-height", 56);
+      const stackGap = getBracketCssMetric("--match-stack-gap", 12);
+      const baseMatchHeight = slotHeight * 2 + stackGap;
       const centerWidth = Math.max(finalCardWidth, thirdCardWidth);
       const boardGap = getBracketCssMetric("--main-board-gap", 18);
       if (!rounds.length) return "";
@@ -18717,6 +18872,14 @@
       const gridTemplate = `${Array(sideRounds.length).fill(`${roundWidth}px`).join(" ")} ${centerWidth}px ${Array(sideRounds.length).fill(`${roundWidth}px`).join(" ")}`;
       const columnCount = sideRounds.length * 2 + 1;
       const boardWidth = sideRounds.length * roundWidth * 2 + centerWidth + Math.max(columnCount - 1, 0) * boardGap;
+      const sideMatchCount = leftRounds[0]?.length || 0;
+      const boardHeight = sideMatchCount
+        ? sideMatchCount * baseMatchHeight + Math.max(sideMatchCount - 1, 0) * (metrics[0]?.gap || 0)
+        : baseMatchHeight;
+      const eliteStageIndex = Math.max(sideRounds.length - 2, 0);
+      const eliteMetrics = metrics[eliteStageIndex] || { offset: 0, gap: metrics[0]?.gap || 0 };
+      const finalTop = eliteMetrics.offset;
+      const thirdTop = eliteMetrics.offset + baseMatchHeight + eliteMetrics.gap;
 
       const leftMarkup = leftRounds.map((matches, stageIndex) => `<section class="main-board-round" style="--round-gap: ${metrics[stageIndex].gap}px; --round-offset: ${metrics[stageIndex].offset}px;"><div class="main-board-round-matches">${matches.map((match, matchIndex) => renderMainBattle(bracketKey, stageIndex, matchIndex, match, "left")).join("")}</div></section>`).join("");
       const rightMarkup = rightRoundsReversed.map((matches, reverseIndex) => {
@@ -18730,7 +18893,7 @@
           <div class="main-board-round-labels" style="grid-template-columns: ${gridTemplate};">${labelColumns.map(label => `<div class="main-board-label">${label}</div>`).join("")}</div>
           <div class="main-board-grid" style="grid-template-columns: ${gridTemplate};">
             <div class="main-board-side left" style="grid-column: 1 / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${leftMarkup}</div>
-            <div style="grid-column: ${sideRounds.length + 1} / span 1;"><div class="center-stage-stack">${renderFinalBattle(bracketKey, rounds.length - 1, finalRound.matches[0], finalTitle)}${thirdPlaceMatch ? renderPlacementBattle("third", thirdPlaceMatch, "3rd Place Battle") : ""}</div></div>
+            <div style="grid-column: ${sideRounds.length + 1} / span 1; height: ${boardHeight}px;"><div class="center-stage-stack" style="--center-stage-min-height:${boardHeight}px; --center-stage-final-top:${finalTop}px; --center-stage-third-top:${thirdTop}px;">${renderFinalBattle(bracketKey, rounds.length - 1, finalRound.matches[0], finalTitle)}${thirdPlaceMatch ? renderPlacementBattle("third", thirdPlaceMatch, "3rd Place Battle") : ""}</div></div>
             <div class="main-board-side right" style="grid-column: ${sideRounds.length + 2} / span ${sideRounds.length}; grid-template-columns: repeat(${sideRounds.length}, ${roundWidth}px);">${rightMarkup}</div>
           </div>
         </div>
