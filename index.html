@@ -1852,13 +1852,33 @@
       opacity: 1;
     }
 
+    #view-home > .hero .hero-copy-block,
+    #view-registration > .hero .hero-copy-block,
+    #view-queue > .hero .hero-copy-block,
+    #view-results > .hero .hero-copy-block {
+      justify-items: center;
+      text-align: center;
+    }
+
     #view-home > .hero .hero-logo-shell,
     #view-registration > .hero .hero-logo-shell,
     #view-queue > .hero .hero-logo-shell,
     #view-results > .hero .hero-logo-shell {
+      display: flex;
       justify-content: center;
-      margin-left: auto;
-      margin-right: auto;
+      align-items: center;
+      width: min(640px, 100%);
+      max-width: min(640px, 100%);
+      margin: 0 auto 18px;
+    }
+
+    #view-home > .hero .hero-logo,
+    #view-registration > .hero .hero-logo,
+    #view-queue > .hero .hero-logo,
+    #view-results > .hero .hero-logo {
+      width: min(640px, 100%);
+      max-width: 100%;
+      margin-inline: auto;
     }
 
     .landing-brand-logo {
@@ -5460,9 +5480,7 @@
         min-height: 0;
         gap: 12px;
       }
-      #view-qualifying > .hero .hero-logo-shell,
-      #view-registration > .hero .hero-logo-shell,
-      #view-results > .hero .hero-logo-shell {
+      #view-qualifying > .hero .hero-logo-shell {
         display: none;
       }
       #view-self-register > .hero .hero-logo-shell,
@@ -5473,6 +5491,23 @@
         max-width: 200px;
         width: min(200px, 62vw);
         min-height: 0;
+      }
+      #view-home > .hero .hero-logo-shell,
+      #view-registration > .hero .hero-logo-shell,
+      #view-queue > .hero .hero-logo-shell,
+      #view-results > .hero .hero-logo-shell {
+        display: flex;
+        width: min(280px, 82vw);
+        max-width: min(280px, 82vw);
+        min-height: 0;
+        margin: 0 auto 12px;
+        justify-content: center;
+      }
+      #view-home > .hero .hero-logo,
+      #view-registration > .hero .hero-logo,
+      #view-queue > .hero .hero-logo,
+      #view-results > .hero .hero-logo {
+        width: 100%;
       }
       #view-qualifying > .hero .hero-copy,
       #view-qualifying > .hero #qualifyingBoardCopy,
