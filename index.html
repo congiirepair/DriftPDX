@@ -45,8 +45,8 @@
       --connector-stub: 14px;
       --connector-bridge: 20px;
       --connector-thickness: 5px;
-      --final-card-width: 300px;
-      --third-card-width: 280px;
+    --final-card-width: 360px;
+    --third-card-width: 320px;
       --radius-panel: 24px;
       --radius-card: 18px;
       --radius-button: 14px;
@@ -332,8 +332,8 @@
 
     body[data-theme="dark"] .main-bracket-panel {
       background:
-        linear-gradient(180deg, rgba(12, 14, 18, 0.72), rgba(8, 10, 14, 0.78)),
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12)),
+        linear-gradient(180deg, rgba(8, 10, 14, 0.82), rgba(5, 7, 11, 0.9)),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.16)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
@@ -4280,14 +4280,14 @@
       border: 2px solid #000;
       border-radius: calc(var(--radius-panel) + 2px);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.68), rgba(242,242,242,0.74)),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.05)),
+        linear-gradient(180deg, rgba(255,255,255,0.54), rgba(224,228,232,0.62)),
+        linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.14)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
       box-shadow: var(--panel-shadow);
       overflow: visible;
-      backdrop-filter: blur(3px);
+      backdrop-filter: blur(4px);
     }
 
     .main-bracket-panel::before {
@@ -4431,7 +4431,7 @@
     .center-stage-stack:has(.placement-center) {
       min-height: 100%;
       align-self: stretch;
-      grid-template-rows: minmax(0, 1.18fr) minmax(0, 0.82fr);
+      grid-template-rows: minmax(280px, 1.22fr) minmax(220px, 0.78fr);
     }
 
     .center-stage-stack .main-battle.center {
@@ -4443,10 +4443,11 @@
       align-self: start;
       min-height: 100%;
       align-content: start;
+      align-items: start;
     }
 
     .center-stage-stack:has(.placement-center) .final-center .final-battle-card {
-      width: min(100%, 340px);
+      width: min(100%, 380px);
       min-height: 100%;
     }
 
@@ -4454,10 +4455,11 @@
       align-self: end;
       min-height: 100%;
       align-content: end;
+      align-items: end;
     }
 
     .center-stage-stack:has(.placement-center) .placement-center .third-place-card {
-      width: min(100%, 296px);
+      width: min(100%, 330px);
       min-height: 100%;
     }
     .main-board-side { display: grid; gap: var(--main-board-gap, 18px); }
@@ -4745,6 +4747,26 @@
       gap: var(--final-body-gap, 8px);
       align-content: center;
       min-height: 100%;
+    }
+
+    .center-stage-stack:has(.placement-center) .final-center .final-battle-head {
+      font-size: clamp(1.55rem, 2vw, 1.85rem);
+      padding-block: 14px;
+    }
+
+    .center-stage-stack:has(.placement-center) .final-center .final-battle-body {
+      padding: 22px 18px 20px;
+      gap: 12px;
+    }
+
+    .center-stage-stack:has(.placement-center) .placement-center .final-battle-head {
+      font-size: clamp(1.28rem, 1.7vw, 1.5rem);
+      padding-block: 12px;
+    }
+
+    .center-stage-stack:has(.placement-center) .placement-center .final-battle-body {
+      padding: 18px 16px 16px;
+      gap: 10px;
     }
 
     .final-vs {
