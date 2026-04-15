@@ -12,7 +12,7 @@ window.RC_DRIFT_CLIENT_CONFIG = {
     logoPrimary: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414b",
     logoInverted: "./assets/Drift PDX Rose Banner Stickers-01.png?v=20260414b",
     logoAlt: "Drift PDX rose banner logo",
-    backgroundImage: "./assets/driftpdxbackground.png",
+    backgroundImage: "./assets/driftpdxbackground-custom.png",
     shopUrl: "",
     shopLabel: "Shop Drift PDX Here",
     pdfHeaderTitle: "DRIFT PDX",
