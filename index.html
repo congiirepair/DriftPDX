@@ -158,7 +158,12 @@
     body[data-theme="dark"] .role-admin-card,
     body[data-theme="dark"] .invite-code-box,
     body[data-theme="dark"] .admin-lock-note {
-      background: linear-gradient(180deg, rgba(22, 26, 37, 0.96), rgba(11, 13, 22, 0.96));
+      background:
+        linear-gradient(180deg, rgba(22, 26, 37, 0.78), rgba(11, 13, 22, 0.84)),
+        linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       color: var(--text);
     }
 
@@ -332,7 +337,11 @@
 
     body[data-theme="dark"] .main-bracket-panel {
       background:
-        linear-gradient(180deg, rgba(12, 14, 18, 0.58), rgba(6, 8, 12, 0.72));
+        linear-gradient(180deg, rgba(12, 14, 18, 0.52), rgba(6, 8, 12, 0.68)),
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     body[data-theme="dark"] .bracket-workspace {
@@ -1613,7 +1622,11 @@
     body:not([data-theme="dark"]) .invite-code-box,
     body:not([data-theme="dark"]) .admin-lock-note {
       background:
-        linear-gradient(180deg, rgba(255, 254, 251, 0.96), rgba(246, 242, 237, 0.96));
+        linear-gradient(180deg, rgba(255, 254, 251, 0.76), rgba(246, 242, 237, 0.82)),
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       color: var(--text);
     }
 
@@ -1624,7 +1637,10 @@
       background:
         radial-gradient(circle at top right, rgba(25, 191, 174, 0.16), transparent 22%),
         radial-gradient(circle at bottom left, rgba(244, 70, 166, 0.14), transparent 30%),
-        linear-gradient(135deg, rgba(252, 250, 246, 0.98), rgba(246, 241, 235, 0.98) 44%, rgba(237, 232, 226, 0.98) 100%);
+        linear-gradient(135deg, rgba(252, 250, 246, 0.76), rgba(246, 241, 235, 0.82) 44%, rgba(237, 232, 226, 0.84) 100%),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     body:not([data-theme="dark"]) .hero::before {
@@ -1691,7 +1707,11 @@
     body:not([data-theme="dark"]) .mobile-driver-card,
     body:not([data-theme="dark"]) .podium-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.99), rgba(245, 241, 235, 0.98));
+        linear-gradient(180deg, rgba(255,255,255,0.78), rgba(245, 241, 235, 0.82)),
+        linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.03)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     body:not([data-theme="dark"]) .self-register-display-panel,
@@ -1775,9 +1795,12 @@
     .hero, .panel {
       border: 1px solid var(--line);
       border-radius: var(--radius-panel);
-      background: var(--panel);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        var(--panel);
       box-shadow: var(--panel-shadow);
-      backdrop-filter: blur(14px) saturate(1.05);
+      backdrop-filter: blur(18px) saturate(1.08);
+      -webkit-backdrop-filter: blur(18px) saturate(1.08);
     }
 
     .hero {
@@ -1790,9 +1813,12 @@
       padding: 32px;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(16, 20, 31, 0.96), rgba(9, 12, 20, 0.98)),
+        linear-gradient(180deg, rgba(16, 20, 31, 0.78), rgba(9, 12, 20, 0.84)),
         radial-gradient(circle at 84% 18%, rgba(53, 242, 208, 0.12), transparent 22%),
-        radial-gradient(circle at 16% 80%, rgba(255, 79, 159, 0.14), transparent 26%);
+        radial-gradient(circle at 16% 80%, rgba(255, 79, 159, 0.14), transparent 26%),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     .hero-copy-block { position: relative; z-index: 1; }
@@ -1868,8 +1894,11 @@
     body[data-theme="dark"] .hero,
     body[data-theme="dark"] .panel {
       background:
-        linear-gradient(180deg, rgba(22, 24, 27, 0.96), rgba(14, 16, 18, 0.97)),
-        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04), transparent 22%);
+        linear-gradient(180deg, rgba(22, 24, 27, 0.76), rgba(14, 16, 18, 0.82)),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04), transparent 22%),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     body[data-theme="dark"] .hero::before {
@@ -4278,10 +4307,15 @@
       border: 2px solid #000;
       border-radius: calc(var(--radius-panel) + 2px);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.34), rgba(228,232,236,0.46));
+        linear-gradient(180deg, rgba(255,255,255,0.24), rgba(228,232,236,0.34)),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       box-shadow: var(--panel-shadow);
       overflow: visible;
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(7px) saturate(1.06);
+      -webkit-backdrop-filter: blur(7px) saturate(1.06);
     }
 
     .main-bracket-panel::before {
@@ -4292,7 +4326,7 @@
       background-repeat: no-repeat;
       background-position: center 56%;
       background-size: min(880px, 84%);
-      opacity: 0.08;
+      opacity: 0.11;
       pointer-events: none;
       z-index: 0;
       filter: grayscale(1) contrast(1.02) brightness(0.56);
@@ -6471,12 +6505,14 @@
       padding: 22px 22px 20px;
       overflow: hidden;
       box-shadow: var(--panel-shadow);
+      backdrop-filter: blur(16px) saturate(1.05);
+      -webkit-backdrop-filter: blur(16px) saturate(1.05);
     }
 
     .public-event-announcer {
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.92), rgba(247,247,247,0.76)),
-        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(0,0,0,0.08)),
+        linear-gradient(120deg, rgba(255,255,255,0.76), rgba(247,247,247,0.52)),
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
@@ -6487,8 +6523,11 @@
       display: grid;
       gap: 14px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,241,241,0.96)),
-        var(--panel);
+        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(241,241,241,0.56)),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
     }
 
     .public-event-announcer::after,
@@ -7039,8 +7078,11 @@
 
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] #view-queue > .hero {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(236,236,236,0.97)),
-        radial-gradient(circle at 88% 18%, rgba(0,0,0,0.08), transparent 22%);
+        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(236,236,236,0.66)),
+        radial-gradient(circle at 88% 18%, rgba(0,0,0,0.08), transparent 22%),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       box-shadow: var(--panel-shadow);
     }
 
@@ -7052,8 +7094,8 @@
 
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .public-event-announcer {
       background:
-        linear-gradient(120deg, rgba(255,255,255,0.92), rgba(247,247,247,0.76)),
-        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(0,0,0,0.08)),
+        linear-gradient(120deg, rgba(255,255,255,0.76), rgba(247,247,247,0.52)),
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(0,0,0,0.12)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
@@ -7063,16 +7105,19 @@
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .public-event-finals-stage,
     body.scenic-page:not([data-theme="dark"])[data-role="spectator"] .broadcast-match-card {
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,241,241,0.96)),
-        var(--panel);
+        linear-gradient(180deg, rgba(255,255,255,0.74), rgba(241,241,241,0.56)),
+        linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       border-color: rgba(0, 0, 0, 0.12);
       box-shadow: var(--panel-shadow);
     }
 
     body[data-theme="dark"] .public-event-announcer {
       background:
-        linear-gradient(118deg, rgba(8,10,12,0.9), rgba(8,10,12,0.72)),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0.16)),
+        linear-gradient(118deg, rgba(8,10,12,0.68), rgba(8,10,12,0.42)),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.18)),
         var(--brand-track-background-image);
       background-position: center center;
       background-size: cover;
@@ -7082,8 +7127,11 @@
     body[data-theme="dark"] .public-event-finals-stage,
     body[data-theme="dark"] .broadcast-match-card {
       background:
-        linear-gradient(180deg, rgba(22,24,28,0.96), rgba(10,12,14,0.98)),
-        var(--panel);
+        linear-gradient(180deg, rgba(22,24,28,0.72), rgba(10,12,14,0.82)),
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+        var(--brand-track-background-image);
+      background-position: center center;
+      background-size: cover;
       border-color: rgba(255,255,255,0.16);
       box-shadow: 0 18px 36px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.04);
     }
