@@ -12740,6 +12740,28 @@
       judgeLaneIndex = nextIndex;
     }
 
+    function completeQualifyingFlowForCompetition() {
+      const queue = getQualifyingDriverQueue();
+      if (!queue.length) {
+        qualifyingFlow = createEmptyQualifyingFlow();
+        judgeLaneIndex = 0;
+        return false;
+      }
+
+      const alreadyComplete = Boolean(qualifyingFlow?.completed)
+        && !qualifyingFlow?.currentDriverId
+        && !Object.keys(qualifyingFlow?.readyRoles || {}).length;
+
+      qualifyingFlow = {
+        currentDriverId: null,
+        readyRoles: {},
+        started: true,
+        completed: true,
+      };
+      judgeLaneIndex = Math.max(0, queue.length - 1);
+      return !alreadyComplete;
+    }
+
     function startQualifyingFlow() {
       const queue = getQualifyingDriverQueue();
       if (!queue.length) return false;
@@ -18579,6 +18601,8 @@
         openCompetitionBracket();
         return;
       }
+      completeQualifyingFlowForCompetition();
+      publishState();
       switchView("bracket");
     });
     commandCenterFinalizeBtn?.addEventListener("click", async () => {
@@ -19833,6 +19857,7 @@
       const customFormatCount = getRequestedSdcMainBracketSize(bracketModeSelect.value) || 0;
       tournamentState = createTournamentState(validation.rankedDrivers, normalizePreferredFormat(bracketModeSelect.value || FORMAT_CLASSIC), customFormatCount);
       activeCompetitionBracketPage = tournamentState.lowerBracket ? "lower" : "main";
+      completeQualifyingFlowForCompetition();
       publishState();
       switchView("bracket");
     }
