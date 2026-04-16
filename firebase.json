@@ -8,6 +8,10 @@
       "firebase.json",
       ".firebaserc",
       "DEPLOY_SUBDOMAINS.md",
+      "docs/**",
+      "**/*.mjs",
+      "index-Chuck.html",
+      "**/*-Chuck.*",
       "**/.*",
       "**/node_modules/**"
     ],

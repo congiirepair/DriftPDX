@@ -58,6 +58,11 @@
       --brand-watermark-image: url("./assets/driftpdx-rose-banner.png?v=20260414e");
       --font-graffiti: 'Ethnocentric', 'Orbitron', 'Inter', sans-serif;
       --font-sans: 'Inter', sans-serif;
+      --brand-home-hero-image: url("./assets/pdxtrack.png?v=20260415b");
+      --accent-rgb: 255, 79, 159;
+      --accent-cyan-rgb: 53, 242, 208;
+      --accent-green-rgb: 42, 209, 107;
+      --landing-wordmark-color: #1b2127;
     }
 
     * { box-sizing: border-box; }
@@ -71,8 +76,8 @@
       background-color: var(--bg);
       background-image:
         linear-gradient(180deg, rgba(6, 8, 13, 0.78), rgba(4, 6, 12, 0.93)),
-        radial-gradient(circle at 16% 12%, rgba(255, 79, 159, 0.18), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(53, 242, 208, 0.14), transparent 26%),
+        radial-gradient(circle at 16% 12%, rgba(var(--accent-rgb), 0.18), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(var(--accent-cyan-rgb), 0.14), transparent 26%),
         linear-gradient(135deg, rgba(255,255,255,0.035), transparent 34%),
         var(--brand-track-background-image);
       background-size: cover, auto, auto, cover;
@@ -105,8 +110,8 @@
       background-color: var(--bg);
       background-image:
         linear-gradient(180deg, rgba(248, 246, 242, 0.92), rgba(241, 238, 233, 0.92)),
-        radial-gradient(circle at 14% 10%, rgba(244, 70, 166, 0.13), transparent 24%),
-        radial-gradient(circle at 84% 16%, rgba(25, 191, 174, 0.13), transparent 24%),
+        radial-gradient(circle at 14% 10%, rgba(var(--accent-rgb), 0.13), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(var(--accent-cyan-rgb), 0.13), transparent 24%),
         linear-gradient(135deg, rgba(255,255,255,0.24), transparent 32%),
         var(--brand-track-background-image);
       background-size: cover, auto, auto, cover;
@@ -136,8 +141,8 @@
       background-color: var(--bg);
       background-image:
         linear-gradient(180deg, rgba(6, 8, 13, 0.68), rgba(4, 6, 12, 0.92)),
-        radial-gradient(circle at 16% 12%, rgba(255, 79, 159, 0.16), transparent 24%),
-        radial-gradient(circle at 82% 18%, rgba(53, 242, 208, 0.12), transparent 26%),
+        radial-gradient(circle at 16% 12%, rgba(var(--accent-rgb), 0.16), transparent 24%),
+        radial-gradient(circle at 82% 18%, rgba(var(--accent-cyan-rgb), 0.12), transparent 26%),
         linear-gradient(135deg, rgba(255,255,255,0.035), transparent 34%),
         var(--brand-track-background-image);
       background-size: cover, auto, auto, cover;
@@ -1119,28 +1124,38 @@
       font-size: 1.72rem;
     }
     body.qualifying-fullscreen .qualifying-results-simple {
-      font-size: 2rem;
+      gap: 4px;
+      font-size: 1.4rem;
       line-height: 1.08;
     }
     body.qualifying-fullscreen .qualifying-results-simple li {
-      padding: 10px 6px;
-      min-height: 72px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px;
+      min-height: 52px;
     }
     body.qualifying-fullscreen .standings-row-main {
-      gap: 18px;
+      gap: 10px;
     }
     body.qualifying-fullscreen .standings-rank {
-      min-width: 58px;
-      font-size: 1.4em;
+      min-width: 42px;
+      font-size: 1.08em;
     }
     body.qualifying-fullscreen .standings-trophy {
-      font-size: 1.24em;
+      font-size: 0.98em;
     }
     body.qualifying-fullscreen .standings-driver-name {
-      font-size: 1.02em;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.9em;
     }
     body.qualifying-fullscreen .standings-score {
-      font-size: 1.02em;
+      font-size: 0.76em;
+      text-align: right;
     }
     body.qualifying-fullscreen .qualifying-live-driver {
       font-size: clamp(3.2rem, 5.8vw, 5.4rem);
@@ -1179,12 +1194,13 @@
       font-size: 0.82rem;
     }
     body.qualifying-fullscreen[data-qualifying-density="compact"] .qualifying-results-simple {
-      font-size: 1.56rem;
-      line-height: 1.12;
+      font-size: 1.18rem;
+      line-height: 1.1;
     }
     body.qualifying-fullscreen[data-qualifying-density="compact"] .qualifying-results-simple li {
-      min-height: 58px;
-      padding: 8px 4px;
+      min-height: 44px;
+      gap: 8px;
+      padding: 6px 2px;
     }
     body.qualifying-fullscreen[data-qualifying-density="ultra"] th,
     body.qualifying-fullscreen[data-qualifying-density="ultra"] td {
@@ -1209,12 +1225,29 @@
       font-size: 0.76rem;
     }
     body.qualifying-fullscreen[data-qualifying-density="ultra"] .qualifying-results-simple {
-      font-size: 1.28rem;
+      font-size: 1.04rem;
       line-height: 1.1;
     }
     body.qualifying-fullscreen[data-qualifying-density="ultra"] .qualifying-results-simple li {
-      min-height: 46px;
-      padding: 5px 2px;
+      min-height: 38px;
+      gap: 6px;
+      padding: 4px 0;
+    }
+    body.qualifying-fullscreen[data-qualifying-density="compact"] .standings-rank,
+    body.qualifying-fullscreen[data-qualifying-density="ultra"] .standings-rank {
+      min-width: 34px;
+    }
+    body.qualifying-fullscreen[data-qualifying-density="compact"] .standings-trophy,
+    body.qualifying-fullscreen[data-qualifying-density="ultra"] .standings-trophy {
+      font-size: 0.9em;
+    }
+    body.qualifying-fullscreen[data-qualifying-density="compact"] .standings-driver-name,
+    body.qualifying-fullscreen[data-qualifying-density="ultra"] .standings-driver-name {
+      font-size: 0.84em;
+    }
+    body.qualifying-fullscreen[data-qualifying-density="compact"] .standings-score,
+    body.qualifying-fullscreen[data-qualifying-density="ultra"] .standings-score {
+      font-size: 0.7em;
     }
 
     body[data-role="spectator"] #view-qualifying > .hero {
@@ -2038,9 +2071,11 @@
     }
 
     #view-home > .hero .public-event-actions {
-      width: min(920px, 100%);
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      align-self: stretch;
+      width: min(620px, 100%);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      justify-content: center;
+      align-self: center;
+      margin-inline: auto;
     }
 
     #view-home > .hero .public-event-actions .button {
@@ -2051,7 +2086,7 @@
       background:
         linear-gradient(180deg, rgba(248, 246, 241, 0.78), rgba(241, 237, 230, 0.86)),
         linear-gradient(135deg, rgba(255,255,255,0.56), rgba(255,255,255,0.2) 46%, rgba(255,255,255,0.08)),
-        url("./assets/pdxtrack.png?v=20260415b") center center / cover no-repeat;
+        var(--brand-home-hero-image) center center / cover no-repeat;
     }
 
     #view-home > .hero::before {
@@ -2081,7 +2116,7 @@
       letter-spacing: 0.04em;
       line-height: 0.94;
       text-transform: uppercase;
-      color: #1b2127;
+      color: var(--landing-wordmark-color);
       white-space: nowrap;
     }
 
@@ -2090,7 +2125,21 @@
     }
 
     body[data-theme="dark"] .landing-brand-wordmark {
-      color: #f7f7f7;
+      color: var(--landing-wordmark-color);
+    }
+
+    body[data-theme="dark"] #view-home > .hero {
+      background:
+        linear-gradient(180deg, rgba(16, 20, 28, 0.68), rgba(10, 14, 20, 0.8)),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03) 48%, rgba(255,255,255,0.01)),
+        var(--brand-home-hero-image) center center / cover no-repeat;
+    }
+
+    body[data-theme="dark"] #view-home > .hero::before {
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.08), transparent 44%),
+        radial-gradient(circle at center, rgba(255,255,255,0.1), rgba(255,255,255,0.04) 42%, transparent 74%);
+      opacity: 0.82;
     }
 
     body[data-theme="dark"] #view-home > .hero {
@@ -5603,6 +5652,19 @@
       gap: 24px;
     }
 
+    #view-home .panel-header > div,
+    #view-home .panel-header.compact > div {
+      flex: 1 1 auto;
+      text-align: left;
+    }
+
+    #view-home .panel-header .section-kicker,
+    #view-home .panel-header h2,
+    #view-home .panel-header.compact .section-kicker,
+    #view-home .panel-header.compact h2 {
+      text-align: left;
+    }
+
     #view-home .panel {
       position: relative;
       overflow: hidden;
@@ -6006,6 +6068,16 @@
       }
       .page-shell { width: min(100% - 20px, 100%); padding-top: 16px; }
       .topbar, .hero, .panel { padding: 16px; }
+      #view-qualifying > .hero,
+      #view-registration > .hero,
+      #view-results > .hero,
+      #view-self-register > .hero,
+      #view-self-register-display > .hero,
+      #view-queue > .hero,
+      #view-simulation > .hero,
+      #view-website-admin > .hero {
+        overflow: hidden;
+      }
       .panel-header, .toolbar, .competition-header {
         align-items: stretch; flex-direction: column;
       }
@@ -6221,6 +6293,27 @@
       #view-simulation > .hero .hero-copy-block,
       #view-website-admin > .hero .hero-copy-block {
         gap: 10px;
+        width: 100%;
+        min-width: 0;
+      }
+      body[data-role="spectator"] #view-qualifying > .hero .hero-copy-block {
+        justify-items: stretch;
+      }
+      .spectator-qualifying-title {
+        width: 100%;
+        min-width: 0;
+        justify-items: start;
+        text-align: left;
+        gap: 6px;
+      }
+      .spectator-qualifying-title h1 {
+        max-width: 100%;
+        margin-left: 0;
+        font-size: clamp(1.35rem, 9vw, 2rem);
+        line-height: 0.96;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
       }
       #view-qualifying > .hero h1,
       #view-registration > .hero h1,
@@ -6261,6 +6354,74 @@
         margin-top: 8px;
         font-size: 0.9rem;
         line-height: 1.5;
+      }
+      #view-home > .hero .public-event-actions {
+        width: min(100%, 440px);
+        margin-inline: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      #view-home > .hero .public-event-actions .button {
+        min-height: 54px;
+        padding: 10px 8px;
+        font-size: clamp(0.82rem, 3.5vw, 0.96rem);
+        line-height: 1.05;
+        letter-spacing: 0.02em;
+        white-space: normal;
+        text-align: center;
+      }
+      #view-home > .hero .public-event-actions .button:last-child {
+        grid-column: 1 / -1;
+      }
+      .landing-brand-wordmark {
+        white-space: normal;
+        text-wrap: balance;
+        font-size: clamp(2rem, 12vw, 3.2rem);
+        line-height: 0.96;
+      }
+      .qualifying-live-shell {
+        margin: 0 0 14px;
+        padding-inline: 2px;
+      }
+      .qualifying-live-card {
+        width: 100%;
+        padding: 14px;
+        gap: 12px;
+      }
+      .qualifying-live-head {
+        grid-template-columns: 1fr;
+        align-items: start;
+        gap: 10px;
+      }
+      .qualifying-live-driver {
+        font-size: clamp(1.5rem, 10vw, 2.35rem);
+        line-height: 0.98;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-wrap: balance;
+      }
+      .qualifying-live-meta {
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+        overflow-wrap: anywhere;
+      }
+      .qualifying-live-progress {
+        min-width: 0;
+        width: fit-content;
+        max-width: 100%;
+        padding: 8px 10px;
+        font-size: 0.92rem;
+      }
+      .broadcast-ticker-track {
+        gap: 22px;
+        padding: 10px 0;
+      }
+      .broadcast-ticker-item {
+        gap: 10px;
+        font-size: 0.78rem;
+      }
+      .broadcast-ticker-item strong {
+        font-size: 0.92rem;
       }
       #view-self-register > .hero .hero-card,
       #view-self-register-display > .hero .hero-card,
@@ -8215,7 +8376,7 @@
 
   </style>
 </head>
-  <body data-role="spectator" data-site-admin="false" data-theme="light">
+  <body data-role="spectator" data-site-admin="false" data-theme="dark">
   <div class="page-shell">
     <a class="spectator-shop-button spectator-only" href="#" target="_blank" rel="noopener noreferrer">Visit Track Store</a>
     
@@ -8223,7 +8384,7 @@
     <div class="topbar main-topbar">
       <div class="topbar-left">
         <div id="syncStatus" class="sync-status">Offline Sync</div>
-        <button id="themeToggleBtn" class="micro-button" type="button">Dark Mode</button>
+        <button id="themeToggleBtn" class="micro-button" type="button">Light Mode</button>
         <button id="websiteAdminBtn" class="micro-button" type="button">Website Admin</button>
       </div>
       <div class="topbar-center">
@@ -8495,7 +8656,7 @@
             <section class="panel">
               <div class="panel-header compact">
                 <div>
-                  <p class="section-kicker">Why Drift PDX Sync</p>
+                  <p class="section-kicker" id="landingWhySectionKicker">Why Drift PDX Sync</p>
                   <h2>Built For Live RC Drift Events</h2>
                 </div>
               </div>
@@ -9216,10 +9377,11 @@
         venueName: "Your Drift Arena",
         venueLabelPlaceholder: "Your Drift Arena",
         eventNamePlaceholder: "Spring Drift Championship",
-    logoPrimary: "./assets/driftpdx-rose-banner.png?v=20260414e",
-    logoInverted: "./assets/driftpdx-rose-banner.png?v=20260414e",
-    logoAlt: "Drift PDX rose banner logo",
+        logoPrimary: "./assets/driftpdx-rose-banner.png?v=20260414e",
+        logoInverted: "./assets/driftpdx-rose-banner.png?v=20260414e",
+        logoAlt: "Drift PDX rose banner logo",
         backgroundImage: "./assets/driftpdxbackground-custom.png",
+        homeHeroImage: "./assets/pdxtrack.png?v=20260415b",
         shopUrl: "",
         shopLabel: "Visit Track Store",
         pdfHeaderTitle: "YOUR DRIFT ARENA",
@@ -9230,7 +9392,28 @@
         displayFont: "'Ethnocentric', 'Orbitron', 'Inter', sans-serif",
         bodyFont: "'Inter', sans-serif",
       },
+      theme: {
+        light: {
+          accent: "#f446a6",
+          accentDark: "#7f43ff",
+          accentCyan: "#19bfae",
+          accentGreen: "#1fb95f",
+          accentGreenDark: "#0e6a3c",
+          accentWarm: "#ffaf42",
+          wordmarkColor: "#1b2127",
+        },
+        dark: {
+          accent: "#ff4f9f",
+          accentDark: "#9b38ff",
+          accentCyan: "#37e8d0",
+          accentGreen: "#27d56c",
+          accentGreenDark: "#0d6b3c",
+          accentWarm: "#ffb343",
+          wordmarkColor: "#f7f7f7",
+        },
+      },
       landing: {
+        whySectionKicker: "Why Drift PDX Sync",
         heroCopy:
           "Follow the next event, jump into qualifying and competition, and keep drivers, judges, and spectators synced from one live event hub.",
         emptyHeroCopy:
@@ -9353,6 +9536,7 @@
     const CLIENT_PLATFORM = CLIENT_CONFIG.platform || {};
     const CLIENT_BRANDING = CLIENT_CONFIG.branding || {};
     const CLIENT_TYPOGRAPHY = CLIENT_CONFIG.typography || {};
+    const CLIENT_THEME = CLIENT_CONFIG.theme || {};
     const CLIENT_LANDING = CLIENT_CONFIG.landing || {};
     const CLIENT_ROUTING = CLIENT_CONFIG.routing || {};
     const CLIENT_FIREBASE = CLIENT_CONFIG.firebase || {};
@@ -13670,6 +13854,7 @@
     const landingUpcomingEvent = document.getElementById("landingUpcomingEvent");
     const landingFeaturedDrivers = document.getElementById("landingFeaturedDrivers");
     const landingLatestPodium = document.getElementById("landingLatestPodium");
+    const landingWhySectionKicker = document.getElementById("landingWhySectionKicker");
     const landingWhySectionCopy = document.getElementById("landingWhySectionCopy");
     const landingWhyFeatures = document.getElementById("landingWhyFeatures");
     const landingQuickLinks = document.getElementById("landingQuickLinks");
@@ -13767,19 +13952,113 @@
       return `<span class="landing-brand-wordmark" aria-label="${escapeAttributeValue(productName)}">${escapeHtml(productName)}</span>`;
     }
 
+    function normalizeHexColor(value, fallback) {
+      const normalized = String(value || "").trim();
+      if (!/^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(normalized)) return fallback;
+      if (normalized.length === 4) {
+        return `#${normalized[1]}${normalized[1]}${normalized[2]}${normalized[2]}${normalized[3]}${normalized[3]}`.toLowerCase();
+      }
+      return normalized.toLowerCase();
+    }
+
+    function hexToRgbChannels(hexColor) {
+      const normalized = normalizeHexColor(hexColor, "#000000").slice(1);
+      const channels = [0, 2, 4].map((index) => parseInt(normalized.slice(index, index + 2), 16));
+      return channels.join(", ");
+    }
+
+    function getDefaultClientTheme(themeName) {
+      if (themeName === "dark") {
+        return {
+          accent: "#ff4f9f",
+          accentDark: "#9b38ff",
+          accentCyan: "#37e8d0",
+          accentGreen: "#27d56c",
+          accentGreenDark: "#0d6b3c",
+          accentWarm: "#ffb343",
+          wordmarkColor: "#f7f7f7",
+        };
+      }
+      return {
+        accent: "#f446a6",
+        accentDark: "#7f43ff",
+        accentCyan: "#19bfae",
+        accentGreen: "#1fb95f",
+        accentGreenDark: "#0e6a3c",
+        accentWarm: "#ffaf42",
+        wordmarkColor: "#1b2127",
+      };
+    }
+
+    function getClientThemePalette(themeName) {
+      const defaults = getDefaultClientTheme(themeName);
+      const configured = isPlainObject(CLIENT_THEME?.[themeName]) ? CLIENT_THEME[themeName] : {};
+      return {
+        accent: normalizeHexColor(configured.accent, defaults.accent),
+        accentDark: normalizeHexColor(configured.accentDark, defaults.accentDark),
+        accentCyan: normalizeHexColor(configured.accentCyan, defaults.accentCyan),
+        accentGreen: normalizeHexColor(configured.accentGreen, defaults.accentGreen),
+        accentGreenDark: normalizeHexColor(configured.accentGreenDark, defaults.accentGreenDark),
+        accentWarm: normalizeHexColor(configured.accentWarm, defaults.accentWarm),
+        wordmarkColor: normalizeHexColor(configured.wordmarkColor, defaults.wordmarkColor),
+      };
+    }
+
+    function buildAccentGlow(accentHex, accentDarkHex, isDarkMode) {
+      const accentRgb = hexToRgbChannels(accentHex);
+      const accentDarkRgb = hexToRgbChannels(accentDarkHex);
+      return isDarkMode
+        ? `0 0 0 1px rgba(${accentRgb}, 0.36), 0 0 24px rgba(${accentRgb}, 0.20), 0 0 52px rgba(${accentDarkRgb}, 0.12)`
+        : `0 0 0 1px rgba(${accentRgb}, 0.24), 0 12px 28px rgba(${accentDarkRgb}, 0.18)`;
+    }
+
+    function buildAccentGreenGlow(accentGreenHex, isDarkMode) {
+      const accentGreenRgb = hexToRgbChannels(accentGreenHex);
+      return isDarkMode
+        ? `0 0 0 1px rgba(${accentGreenRgb}, 0.34), 0 0 20px rgba(${accentGreenRgb}, 0.18)`
+        : `0 0 0 1px rgba(${accentGreenRgb}, 0.24), 0 10px 22px rgba(${accentGreenRgb}, 0.16)`;
+    }
+
+    function buildBracketAdvanceGlow(accentGreenHex) {
+      const accentGreenRgb = hexToRgbChannels(accentGreenHex);
+      return `0 0 0 1px rgba(${accentGreenRgb}, 0.94), 0 0 16px rgba(${accentGreenRgb}, 0.74), 0 0 34px rgba(${accentGreenRgb}, 0.5), 0 16px 28px rgba(0, 0, 0, 0.24)`;
+    }
+
+    function syncClientThemeTokens() {
+      const target = document.body || document.documentElement;
+      const themeName = document.body?.dataset?.theme === "dark" ? "dark" : "light";
+      const palette = getClientThemePalette(themeName);
+      target.style.setProperty("--accent", palette.accent);
+      target.style.setProperty("--accent-dark", palette.accentDark);
+      target.style.setProperty("--accent-cyan", palette.accentCyan);
+      target.style.setProperty("--accent-green", palette.accentGreen);
+      target.style.setProperty("--accent-green-dark", palette.accentGreenDark);
+      target.style.setProperty("--accent-warm", palette.accentWarm);
+      target.style.setProperty("--accent-rgb", hexToRgbChannels(palette.accent));
+      target.style.setProperty("--accent-cyan-rgb", hexToRgbChannels(palette.accentCyan));
+      target.style.setProperty("--accent-green-rgb", hexToRgbChannels(palette.accentGreen));
+      target.style.setProperty("--accent-glow", buildAccentGlow(palette.accent, palette.accentDark, themeName === "dark"));
+      target.style.setProperty("--accent-green-glow", buildAccentGreenGlow(palette.accentGreen, themeName === "dark"));
+      target.style.setProperty("--bracket-advance-glow", buildBracketAdvanceGlow(palette.accentGreen));
+      target.style.setProperty("--landing-wordmark-color", palette.wordmarkColor);
+    }
+
     function applyClientBranding() {
       const root = document.documentElement;
       const primaryLogo = CLIENT_BRANDING.logoPrimary || "./assets/driftpdx-rose-banner.png?v=20260414e";
       const invertedLogo = CLIENT_BRANDING.logoInverted || primaryLogo;
       const logoAlt = CLIENT_BRANDING.logoAlt || CLIENT_BRANDING.venueName || "Track logo";
       const backgroundImage = CLIENT_BRANDING.backgroundImage || "./assets/driftpdxbackground.png";
+      const homeHeroImage = CLIENT_BRANDING.homeHeroImage || backgroundImage;
       const browserTitle = CLIENT_PLATFORM.browserTitle || CLIENT_PLATFORM.productName || "Drift PDX Competition Control";
 
       document.title = browserTitle;
       root.style.setProperty("--brand-track-background-image", `url("${backgroundImage}")`);
       root.style.setProperty("--brand-watermark-image", `url("${invertedLogo}")`);
+      root.style.setProperty("--brand-home-hero-image", `url("${homeHeroImage}")`);
       root.style.setProperty("--font-graffiti", CLIENT_TYPOGRAPHY.displayFont || "'Ethnocentric', 'Orbitron', 'Inter', sans-serif");
       root.style.setProperty("--font-sans", CLIENT_TYPOGRAPHY.bodyFont || "'Inter', sans-serif");
+      syncClientThemeTokens();
 
       document.querySelectorAll(".hero-logo, .bracket-stage-logo, .bracket-header-logo").forEach((logoEl) => {
         logoEl.setAttribute("src", primaryLogo);
@@ -13796,6 +14075,10 @@
 
       if (landingWhySectionCopy) {
         landingWhySectionCopy.textContent = CLIENT_LANDING.whySectionCopy || landingWhySectionCopy.textContent;
+      }
+      if (landingWhySectionKicker) {
+        landingWhySectionKicker.textContent = CLIENT_LANDING.whySectionKicker
+          || `Why ${CLIENT_PLATFORM.productName || CLIENT_BRANDING.venueName || "RCDriftSync"}`;
       }
 
       if (venueLabelInput) {
@@ -13946,9 +14229,10 @@
 
     function syncThemeState() {
       const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-      const preferredTheme = storedTheme === "dark" ? "dark" : "light";
+      const preferredTheme = storedTheme === "light" ? "light" : "dark";
       const effectiveTheme = isJudgeThemeLocked() ? "light" : preferredTheme;
       document.body.dataset.theme = effectiveTheme;
+      syncClientThemeTokens();
       if (themeToggleBtn) {
         themeToggleBtn.textContent = preferredTheme === "dark" ? "Light Mode" : "Dark Mode";
         themeToggleBtn.setAttribute("aria-pressed", preferredTheme === "dark" ? "true" : "false");
@@ -13959,6 +14243,9 @@
     }
 
     function initializeTheme() {
+      if (!localStorage.getItem(THEME_STORAGE_KEY)) {
+        localStorage.setItem(THEME_STORAGE_KEY, "dark");
+      }
       syncThemeState();
     }
 
